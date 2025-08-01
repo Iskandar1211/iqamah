@@ -21,8 +21,8 @@ import {
 import { CALCULATION_METHODS } from '../utils/prayerTimes';
 
 interface SettingsScreenProps {
-  onClose: () => void;
-  onSettingsChanged: () => void;
+  onClose?: () => void;
+  onSettingsChanged?: () => void;
 }
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
@@ -61,7 +61,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     try {
       await saveCalculationMethod(method);
       setCalculationMethod(method);
-      onSettingsChanged();
+      onSettingsChanged?.();
       Alert.alert('Успешно', 'Метод расчета изменен');
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось сохранить метод расчета');
@@ -72,7 +72,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     try {
       await saveNotificationsEnabled(enabled);
       setNotificationsEnabled(enabled);
-      onSettingsChanged();
+      onSettingsChanged?.();
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось сохранить настройки уведомлений');
     }
@@ -82,7 +82,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     try {
       await saveTheme(theme);
       setSelectedTheme(theme);
-      onSettingsChanged();
+      onSettingsChanged?.();
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось сохранить тему');
     }
@@ -113,14 +113,16 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.onBackground }]}>
-          Настройки
-        </Text>
-        <Button mode="text" onPress={onClose} icon="close">
-          Закрыть
-        </Button>
-      </View>
+      {onClose && (
+        <View style={styles.header}>
+          <Text style={[styles.title, { color: theme.colors.onBackground }]}>
+            Настройки
+          </Text>
+          <Button mode="text" onPress={onClose} icon="close">
+            Закрыть
+          </Button>
+        </View>
+      )}
 
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Метод расчета */}

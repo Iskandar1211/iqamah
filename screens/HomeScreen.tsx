@@ -1,22 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, StyleSheet, Alert, Modal } from 'react-native';
-import { Text, ActivityIndicator, Button, useTheme } from 'react-native-paper';
+import { Alert, Modal, ScrollView, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Button, Text, useTheme } from 'react-native-paper';
+import { HadithCard } from '../components/HadithCard';
 import { Header } from '../components/Header';
 import { PrayerCard } from '../components/PrayerCard';
-import { HadithCard } from '../components/HadithCard';
-import { QiblaDirection } from '../components/QiblaDirection';
-import { CitySelectionScreen } from './CitySelectionScreen';
-import { SettingsScreen } from './SettingsScreen';
+import citiesData from '../data/cities.json';
 import { usePrayerTimes } from '../hooks/usePrayerTimes';
-import { saveSelectedCity, saveCalculationMethod } from '../utils/storage';
 import { getCurrentCity } from '../utils/location';
 import { sendTestNotification } from '../utils/notifications';
-import citiesData from '../data/cities.json';
+import { saveSelectedCity } from '../utils/storage';
+import { CitySelectionScreen } from './CitySelectionScreen';
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
   const [showCitySelection, setShowCitySelection] = useState(false);
-  const [showSettings, setShowSettings] = useState(false);
   
   const {
     prayerTimes,
@@ -50,19 +47,6 @@ export const HomeScreen: React.FC = () => {
 
   const handleCloseCitySelection = () => {
     setShowCitySelection(false);
-  };
-
-  const handleSettingsPress = () => {
-    setShowSettings(true);
-  };
-
-  const handleCloseSettings = () => {
-    setShowSettings(false);
-  };
-
-  const handleSettingsChanged = () => {
-    // Перезагружаем настройки
-    updateCalculationMethod(calculationMethod);
   };
 
   const handleLocationPress = async () => {
@@ -141,8 +125,7 @@ export const HomeScreen: React.FC = () => {
         {/* Хадис дня */}
         <HadithCard />
 
-        {/* Направление Киблы */}
-        <QiblaDirection />
+
 
         {/* Список всех намазов */}
         <View style={styles.prayerListSection}>
@@ -174,23 +157,8 @@ export const HomeScreen: React.FC = () => {
             Определить местоположение
           </Button>
           
-          <Button
-            mode="outlined"
-            onPress={handleSettingsPress}
-            style={styles.button}
-            icon="cog"
-          >
-            Настройки
-          </Button>
+
           
-          <Button
-            mode="outlined"
-            onPress={handleTestNotification}
-            style={styles.button}
-            icon="bell"
-          >
-            Тест уведомления
-          </Button>
         </View>
       </ScrollView>
 
@@ -206,17 +174,7 @@ export const HomeScreen: React.FC = () => {
         />
       </Modal>
 
-      {/* Модальное окно настроек */}
-      <Modal
-        visible={showSettings}
-        animationType="slide"
-        presentationStyle="pageSheet"
-      >
-        <SettingsScreen
-          onClose={handleCloseSettings}
-          onSettingsChanged={handleSettingsChanged}
-        />
-      </Modal>
+
     </View>
   );
 };
