@@ -407,22 +407,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 descriptionStyle={[styles.listItemDescription, { color: theme.colors.onSurfaceVariant }]}
                 style={styles.listItem}
               />
-
-              <List.Item
-                title={t('developer')}
-                description={t('developerName')}
-                left={props => (
-                  <List.Icon
-                    {...props}
-                    icon="account"
-                    color={theme.colors.primary}
-                    style={styles.listIcon}
-                  />
-                )}
-                titleStyle={[styles.listItemTitle, { color: theme.colors.onSurface }]}
-                descriptionStyle={[styles.listItemDescription, { color: theme.colors.onSurfaceVariant }]}
-                style={styles.listItem}
-              />
             </Card.Content>
           </Card>
 
