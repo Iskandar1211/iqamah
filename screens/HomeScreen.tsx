@@ -11,7 +11,8 @@ import { usePrayerTimes } from '../hooks/usePrayerTimes';
 import { getCurrentCity } from '../utils/location';
 import { sendTestNotification } from '../utils/notifications';
 import { saveSelectedCity } from '../utils/storage';
-import { CitySelectionScreen } from './CitySelectionScreen';
+import { CitySelectionScreen } from '@/components/CitySelectionScreen';
+
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
@@ -20,10 +21,8 @@ export const HomeScreen: React.FC = () => {
   const {
     prayerTimes,
     selectedCity,
-    calculationMethod,
     loading,
     updateCity,
-    updateCalculationMethod,
     getNextPrayer,
     getTimeUntilNextPrayer,
   } = usePrayerTimes();
@@ -63,15 +62,6 @@ export const HomeScreen: React.FC = () => {
       }
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось получить местоположение');
-    }
-  };
-
-  const handleTestNotification = async () => {
-    try {
-      await sendTestNotification();
-      Alert.alert('Успешно', 'Тестовое уведомление отправлено');
-    } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось отправить уведомление');
     }
   };
 

@@ -16,14 +16,6 @@ export const Header: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString('ru-RU', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-  };
-
   return (
     <LinearGradient
       colors={[theme.colors.primary, theme.colors.primaryContainer]}
@@ -32,12 +24,6 @@ export const Header: React.FC = () => {
       style={styles.container}
     >
       <View style={styles.content}>
-        <View style={styles.timeContainer}>
-          <Text style={[styles.currentTime, { color: theme.colors.onPrimary }]}>
-            {formatTime(currentTime)}
-          </Text>
-        </View>
-        
         <View style={styles.dateContainer}>
           <Text style={[styles.gregorianDate, { color: theme.colors.onPrimary }]}>
             {formatDate(currentTime)}
