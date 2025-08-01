@@ -8,7 +8,31 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "lint:fix": "expo lint --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "expo r -c",
+    "clean:full": "node ./scripts/clean.js",
+    "clear-cache": "expo start --clear",
+    "check-deps": "node ./scripts/check-deps.js",
+    "build:android": "expo build:android",
+    "build:ios": "expo build:ios",
+    "build:web": "expo build:web",
+    "eject": "expo eject",
+    "prebuild": "expo prebuild",
+    "publish": "expo publish",
+    "doctor": "expo doctor",
+    "install": "npm install",
+    "update": "expo update",
+    "upgrade": "expo upgrade",
+    "test": "echo \"No tests specified\" && exit 0",
+    "dev": "expo start --dev-client",
+    "tunnel": "expo start --tunnel",
+    "local": "expo start --localhost",
+    "analyze": "expo start --analyze",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@expo/vector-icons": "^14.1.0",
@@ -49,7 +73,10 @@
     "@types/react": "~19.0.10",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~9.2.0",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "prettier": "^3.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^15.0.0"
   },
   "private": true
 }
