@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import { Alert, Animated, ScrollView, StyleSheet, View } from 'react-native';
 import {
+  ActivityIndicator,
   Card,
-  Divider,
   List,
   RadioButton,
   Switch,
   Text,
-  useTheme,
+  useTheme
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CALCULATION_METHODS } from '../utils/prayerTimes';
@@ -35,10 +35,21 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     'auto'
   );
   const [loading, setLoading] = useState(true);
+  const fadeAnim = new Animated.Value(0);
 
   useEffect(() => {
     loadSettings();
   }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [loading]);
 
   const loadSettings = async () => {
     try {
@@ -110,6 +121,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           { backgroundColor: theme.colors.background },
         ]}
       >
+        <ActivityIndicator size="large" color={theme.colors.primary} />
         <Text
           style={[styles.loadingText, { color: theme.colors.onBackground }]}
         >
@@ -123,156 +135,237 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      <ScrollView
-        style={styles.scrollView}
-        showsVerticalScrollIndicator={false}
-      >
-        {/* Метод расчета */}
-        <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-          <Card.Content>
-            <Text
-              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
-            >
-              Метод расчета времени намаза
+      <Animated.View style={{ flex: 1, opacity: fadeAnim }}>
+        <ScrollView
+          style={styles.scrollView}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {/* Заголовок */}
+          <View style={styles.header}>
+            <Text style={[styles.headerTitle, { color: theme.colors.onBackground }]}>
+              Настройки
             </Text>
-            <Text
-              style={[
-                styles.sectionDescription,
-                { color: theme.colors.onSurfaceVariant },
-              ]}
-            >
-              Выберите метод расчета, соответствующий вашему мазхабу
+            <Text style={[styles.headerSubtitle, { color: theme.colors.onSurfaceVariant }]}>
+              Персонализируйте ваше приложение
             </Text>
+          </View>
 
-            <RadioButton.Group
-              onValueChange={handleMethodChange}
-              value={calculationMethod}
-            >
-              {Object.entries(CALCULATION_METHODS).map(([key, value]) => (
-                <RadioButton.Item
-                  key={key}
-                  label={getMethodDisplayName(value)}
-                  value={value}
-                  color={theme.colors.primary}
-                  labelStyle={{ color: theme.colors.onSurface }}
-                />
-              ))}
-            </RadioButton.Group>
-          </Card.Content>
-        </Card>
+          {/* Метод расчета */}
+          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
+                    🕌
+                  </Text>
+                </View>
+                <View style={styles.sectionTextContainer}>
+                  <Text
+                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+                  >
+                    Метод расчета
+                  </Text>
+                  <Text
+                    style={[
+                      styles.sectionDescription,
+                      { color: theme.colors.onSurfaceVariant },
+                    ]}
+                  >
+                    Выберите метод расчета, соответствующий вашему мазхабу
+                  </Text>
+                </View>
+              </View>
 
-        <Divider style={styles.divider} />
+              <RadioButton.Group
+                onValueChange={handleMethodChange}
+                value={calculationMethod}
+              >
+                {Object.entries(CALCULATION_METHODS).map(([key, value]) => (
+                  <View key={key} style={styles.radioItem}>
+                    <RadioButton.Item
+                      label={getMethodDisplayName(value)}
+                      value={value}
+                      color={theme.colors.primary}
+                      labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
+                      style={styles.radioButton}
+                    />
+                  </View>
+                ))}
+              </RadioButton.Group>
+            </Card.Content>
+          </Card>
 
-        {/* Уведомления */}
-        <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-          <Card.Content>
-            <Text
-              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
-            >
-              Уведомления
-            </Text>
-            <Text
-              style={[
-                styles.sectionDescription,
-                { color: theme.colors.onSurfaceVariant },
-              ]}
-            >
-              Получать уведомления за 10 минут до намаза
-            </Text>
+          {/* Уведомления */}
+          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
+                    🔔
+                  </Text>
+                </View>
+                <View style={styles.sectionTextContainer}>
+                  <Text
+                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+                  >
+                    Уведомления
+                  </Text>
+                  <Text
+                    style={[
+                      styles.sectionDescription,
+                      { color: theme.colors.onSurfaceVariant },
+                    ]}
+                  >
+                    Получать уведомления за 10 минут до намаза
+                  </Text>
+                </View>
+              </View>
 
-            <List.Item
-              title="Уведомления о намазе"
-              description="Уведомления за 10 минут до каждого намаза"
-              left={props => <List.Icon {...props} icon="bell" />}
-              right={() => (
-                <Switch
-                  value={notificationsEnabled}
-                  onValueChange={handleNotificationsChange}
-                  color={theme.colors.primary}
-                />
-              )}
-              titleStyle={{ color: theme.colors.onSurface }}
-              descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
-            />
-          </Card.Content>
-        </Card>
-
-        <Divider style={styles.divider} />
-
-        {/* Тема */}
-        <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-          <Card.Content>
-            <Text
-              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
-            >
-              Внешний вид
-            </Text>
-            <Text
-              style={[
-                styles.sectionDescription,
-                { color: theme.colors.onSurfaceVariant },
-              ]}
-            >
-              Выберите тему приложения
-            </Text>
-
-            <RadioButton.Group
-              onValueChange={value =>
-                handleThemeChange(value as 'light' | 'dark' | 'auto')
-              }
-              value={selectedTheme}
-            >
-              <RadioButton.Item
-                label="Автоматически"
-                value="auto"
-                color={theme.colors.primary}
-                labelStyle={{ color: theme.colors.onSurface }}
+              <List.Item
+                title="Уведомления о намазе"
+                description="Уведомления за 10 минут до каждого намаза"
+                left={props => (
+                  <List.Icon 
+                    {...props} 
+                    icon="bell" 
+                    color={theme.colors.primary}
+                    style={styles.listIcon}
+                  />
+                )}
+                right={() => (
+                  <Switch
+                    value={notificationsEnabled}
+                    onValueChange={handleNotificationsChange}
+                    color={theme.colors.primary}
+                    style={styles.switch}
+                  />
+                )}
+                titleStyle={[styles.listItemTitle, { color: theme.colors.onSurface }]}
+                descriptionStyle={[styles.listItemDescription, { color: theme.colors.onSurfaceVariant }]}
+                style={styles.listItem}
               />
-              <RadioButton.Item
-                label="Светлая тема"
-                value="light"
-                color={theme.colors.primary}
-                labelStyle={{ color: theme.colors.onSurface }}
+            </Card.Content>
+          </Card>
+
+          {/* Тема */}
+          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
+                    🎨
+                  </Text>
+                </View>
+                <View style={styles.sectionTextContainer}>
+                  <Text
+                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+                  >
+                    Внешний вид
+                  </Text>
+                  <Text
+                    style={[
+                      styles.sectionDescription,
+                      { color: theme.colors.onSurfaceVariant },
+                    ]}
+                  >
+                    Выберите тему приложения
+                  </Text>
+                </View>
+              </View>
+
+              <RadioButton.Group
+                onValueChange={value =>
+                  handleThemeChange(value as 'light' | 'dark' | 'auto')
+                }
+                value={selectedTheme}
+              >
+                <View style={styles.radioItem}>
+                  <RadioButton.Item
+                    label="Автоматически"
+                    value="auto"
+                    color={theme.colors.primary}
+                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
+                    style={styles.radioButton}
+                  />
+                </View>
+                <View style={styles.radioItem}>
+                  <RadioButton.Item
+                    label="Светлая тема"
+                    value="light"
+                    color={theme.colors.primary}
+                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
+                    style={styles.radioButton}
+                  />
+                </View>
+                <View style={styles.radioItem}>
+                  <RadioButton.Item
+                    label="Темная тема"
+                    value="dark"
+                    color={theme.colors.primary}
+                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
+                    style={styles.radioButton}
+                  />
+                </View>
+              </RadioButton.Group>
+            </Card.Content>
+          </Card>
+
+          {/* Информация */}
+          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
+                    ℹ️
+                  </Text>
+                </View>
+                <View style={styles.sectionTextContainer}>
+                  <Text
+                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+                  >
+                    О приложении
+                  </Text>
+                </View>
+              </View>
+
+              <List.Item
+                title="Версия"
+                description="1.0.0"
+                left={props => (
+                  <List.Icon 
+                    {...props} 
+                    icon="information" 
+                    color={theme.colors.primary}
+                    style={styles.listIcon}
+                  />
+                )}
+                titleStyle={[styles.listItemTitle, { color: theme.colors.onSurface }]}
+                descriptionStyle={[styles.listItemDescription, { color: theme.colors.onSurfaceVariant }]}
+                style={styles.listItem}
               />
-              <RadioButton.Item
-                label="Темная тема"
-                value="dark"
-                color={theme.colors.primary}
-                labelStyle={{ color: theme.colors.onSurface }}
+
+              <List.Item
+                title="Разработчик"
+                description="Iqamah Team"
+                left={props => (
+                  <List.Icon 
+                    {...props} 
+                    icon="account" 
+                    color={theme.colors.primary}
+                    style={styles.listIcon}
+                  />
+                )}
+                titleStyle={[styles.listItemTitle, { color: theme.colors.onSurface }]}
+                descriptionStyle={[styles.listItemDescription, { color: theme.colors.onSurfaceVariant }]}
+                style={styles.listItem}
               />
-            </RadioButton.Group>
-          </Card.Content>
-        </Card>
+            </Card.Content>
+          </Card>
 
-        <Divider style={styles.divider} />
-
-        {/* Информация */}
-        <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-          <Card.Content>
-            <Text
-              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
-            >
-              О приложении
-            </Text>
-
-            <List.Item
-              title="Версия"
-              description="1.0.0"
-              left={props => <List.Icon {...props} icon="information" />}
-              titleStyle={{ color: theme.colors.onSurface }}
-              descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
-            />
-
-            <List.Item
-              title="Разработчик"
-              description="Iqamah Team"
-              left={props => <List.Icon {...props} icon="account" />}
-              titleStyle={{ color: theme.colors.onSurface }}
-              descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
-            />
-          </Card.Content>
-        </Card>
-      </ScrollView>
+          <View style={styles.bottomSpacer} />
+        </ScrollView>
+      </Animated.View>
     </SafeAreaView>
   );
 };
@@ -285,27 +378,96 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 16,
   },
   loadingText: {
     fontSize: 16,
+    marginTop: 16,
   },
   scrollView: {
     flex: 1,
   },
-  card: {
-    margin: 16,
+  scrollContent: {
+    paddingBottom: 20,
+  },
+  header: {
+    paddingHorizontal: 20,
+    paddingVertical: 24,
+    alignItems: 'center',
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '700',
     marginBottom: 8,
   },
+  headerSubtitle: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  card: {
+    marginHorizontal: 16,
+    marginBottom: 16,
+    borderRadius: 16,
+  },
+  cardContent: {
+    paddingVertical: 8,
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  iconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 16,
+  },
+  sectionIcon: {
+    fontSize: 24,
+  },
+  sectionTextContainer: {
+    flex: 1,
+  },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   sectionDescription: {
     fontSize: 14,
-    marginBottom: 16,
+    lineHeight: 20,
   },
-  divider: {
-    marginHorizontal: 16,
+  radioItem: {
+    marginVertical: 4,
+  },
+  radioButton: {
+    paddingVertical: 8,
+  },
+  radioLabel: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  listItem: {
+    paddingVertical: 8,
+  },
+  listIcon: {
+    marginRight: 8,
+  },
+  listItemTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  listItemDescription: {
+    fontSize: 14,
+    marginTop: 2,
+  },
+  switch: {
+    marginLeft: 8,
+  },
+  bottomSpacer: {
+    height: 20,
   },
 });
