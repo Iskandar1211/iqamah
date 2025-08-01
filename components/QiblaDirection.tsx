@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Card, useTheme, Button } from 'react-native-paper';
 
-export const QiblaDirectionScreen: React.FC = () => {
+export const QiblaDirection: React.FC = () => {
   const theme = useTheme();
 
   const handleQiblaPress = () => {

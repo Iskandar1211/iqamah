@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Animated, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 import {
   Card,
   MD3LightTheme,
@@ -9,27 +9,34 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSelectedCity } from '../../utils/storage';
 
-// const { width, height } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const QiblaScreen: React.FC = () => {
   const theme = useTheme();
   const [selectedCity, setSelectedCity] = useState<any>(null);
   const [qiblaDirection, setQiblaDirection] = useState('Юго-Запад');
-  const [qiblaAngle, setQiblaAngle] = useState(225); // Угол в градусах
+  const [qiblaAngle, setQiblaAngle] = useState(225);
+  const [rotationAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
     loadCityData();
+    animateCompass();
   }, []);
+
+  const animateCompass = () => {
+    Animated.timing(rotationAnim, {
+      toValue: 1,
+      duration: 2000,
+      useNativeDriver: true,
+    }).start();
+  };
 
   const loadCityData = async () => {
     try {
       const city = await getSelectedCity();
       setSelectedCity(city);
 
-      // Простой расчет направления Киблы для Таджикистана
-      // В реальном приложении здесь будет точный расчет
       if (city) {
-        // Примерный расчет для Таджикистана
         setQiblaDirection('Юго-Запад');
         setQiblaAngle(225);
       }
@@ -38,192 +45,138 @@ const QiblaScreen: React.FC = () => {
     }
   };
 
-  // const calculateQiblaDirection = (lat: number, lng: number) => {
-  //   // Координаты Каабы в Мекке
-  //   const kaabaLat = 21.4225;
-  //   const kaabaLng = 39.8262;
-
-  //   // Расчет направления Киблы
-  //   const deltaLng = kaabaLng - lng;
-  //   const y = Math.sin(deltaLng) * Math.cos(kaabaLat);
-  //   const x =
-  //     Math.cos(lat) * Math.sin(kaabaLat) -
-  //     Math.sin(lat) * Math.cos(kaabaLat) * Math.cos(deltaLng);
-  //   const qiblaAngle = (Math.atan2(y, x) * 180) / Math.PI;
-
-  //   return (qiblaAngle + 360) % 360;
-  // };
-
-  // const getDirectionName = (angle: number): string => {
-  //   const directions = [
-  //     'Север',
-  //     'Северо-Восток',
-  //     'Восток',
-  //     'Юго-Восток',
-  //     'Юг',
-  //     'Юго-Запад',
-  //     'Запад',
-  //     'Северо-Запад',
-  //   ];
-  //   const index = Math.round(angle / 45) % 8;
-  //   return directions[index];
-  // };
+  const spin = rotationAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0deg', '360deg'],
+  });
 
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
     >
-      {/* Заголовок */}
-      <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.colors.onBackground }]}>
-          🕋 Направление Киблы
-        </Text>
-        <Text
-          style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}
-        >
-          Направление к Каабе в Мекке
-        </Text>
-      </View>
-
-      {/* Компас */}
-      <Card
-        style={[styles.compassCard, { backgroundColor: theme.colors.surface }]}
-      >
-        <Card.Content style={styles.compassContent}>
-          <View style={styles.compassContainer}>
-            <View
-              style={[styles.compass, { borderColor: theme.colors.primary }]}
-            >
-              <View
-                style={[
-                  styles.compassNeedle,
-                  { transform: [{ rotate: `${qiblaAngle}deg` }] },
-                ]}
-              >
-                <Text
-                  style={[styles.compassArrow, { color: theme.colors.primary }]}
-                >
-                  🕋
-                </Text>
-              </View>
-
-              {/* Маркеры направлений */}
-              <Text
-                style={[
-                  styles.directionMarker,
-                  styles.north,
-                  { color: theme.colors.onSurfaceVariant },
-                ]}
-              >
-                С
-              </Text>
-              <Text
-                style={[
-                  styles.directionMarker,
-                  styles.east,
-                  { color: theme.colors.onSurfaceVariant },
-                ]}
-              >
-                В
-              </Text>
-              <Text
-                style={[
-                  styles.directionMarker,
-                  styles.south,
-                  { color: theme.colors.onSurfaceVariant },
-                ]}
-              >
-                Ю
-              </Text>
-              <Text
-                style={[
-                  styles.directionMarker,
-                  styles.west,
-                  { color: theme.colors.onSurfaceVariant },
-                ]}
-              >
-                З
-              </Text>
-            </View>
+      <ScrollView>
+        {/* Gradient Header */}
+        <View style={styles.headerContainer}>
+          <View style={styles.headerGradient}>
+            <Text style={styles.headerTitle}>🕋</Text>
+            <Text style={styles.headerSubtitle}>Направление Киблы</Text>
+            <Text style={styles.headerDescription}>
+              Направление к Каабе в Мекке
+            </Text>
           </View>
+        </View>
 
-          <Text
-            style={[styles.directionText, { color: theme.colors.onSurface }]}
-          >
-            {qiblaDirection}
-          </Text>
-          <Text
-            style={[styles.angleText, { color: theme.colors.onSurfaceVariant }]}
-          >
-            {qiblaAngle}° от севера
-          </Text>
-        </Card.Content>
-      </Card>
+        {/* Main Compass Card */}
+        <Card style={styles.mainCompassCard}>
+          <Card.Content style={styles.compassContent}>
+            <View style={styles.compassOuterRing}>
+              <Animated.View
+                style={[
+                  styles.compassInnerRing,
+                  { transform: [{ rotate: spin }] },
+                ]}
+              >
+                <View style={styles.compassCenter}>
+                  <View
+                    style={[
+                      styles.compassNeedle,
+                      { transform: [{ rotate: `${qiblaAngle}deg` }] },
+                    ]}
+                  >
+                    <Text style={styles.compassArrow}>🕋</Text>
+                  </View>
+                </View>
 
-      {/* Информация о городе */}
-      {selectedCity && (
-        <Card
-          style={[styles.infoCard, { backgroundColor: theme.colors.surface }]}
-        >
-          <Card.Content>
-            <Text style={[styles.infoTitle, { color: theme.colors.onSurface }]}>
-              Ваше местоположение
-            </Text>
-            <Text style={[styles.cityText, { color: theme.colors.onSurface }]}>
-              {selectedCity.name}, {selectedCity.country}
-            </Text>
-            <Text
-              style={[
-                styles.coordinatesText,
-                { color: theme.colors.onSurfaceVariant },
-              ]}
-            >
-              Координаты: {selectedCity.latitude.toFixed(4)},{' '}
-              {selectedCity.longitude.toFixed(4)}
-            </Text>
+                {/* Direction Markers */}
+                <Text style={[styles.directionMarker, styles.north]}>С</Text>
+                <Text style={[styles.directionMarker, styles.northeast]}>
+                  СВ
+                </Text>
+                <Text style={[styles.directionMarker, styles.east]}>В</Text>
+                <Text style={[styles.directionMarker, styles.southeast]}>
+                  ЮВ
+                </Text>
+                <Text style={[styles.directionMarker, styles.south]}>Ю</Text>
+                <Text style={[styles.directionMarker, styles.southwest]}>
+                  ЮЗ
+                </Text>
+                <Text style={[styles.directionMarker, styles.west]}>З</Text>
+                <Text style={[styles.directionMarker, styles.northwest]}>
+                  СЗ
+                </Text>
+              </Animated.View>
+            </View>
+
+            <View style={styles.directionInfo}>
+              <Text style={styles.directionText}>{qiblaDirection}</Text>
+              <Text style={styles.angleText}>{qiblaAngle}° от севера</Text>
+            </View>
           </Card.Content>
         </Card>
-      )}
 
-      {/* Инструкции */}
-      <Card
-        style={[
-          styles.instructionsCard,
-          { backgroundColor: theme.colors.surface },
-        ]}
-      >
-        <Card.Content>
-          <Text
-            style={[
-              styles.instructionsTitle,
-              { color: theme.colors.onSurface },
-            ]}
-          >
-            Как определить направление Киблы
-          </Text>
-          <Text
-            style={[
-              styles.instructionText,
-              { color: theme.colors.onSurfaceVariant },
-            ]}
-          >
-            1. Встаньте лицом к северу{'\n'}
-            2. Повернитесь в направлении стрелки{'\n'}
-            3. Теперь вы смотрите в сторону Каабы{'\n'}
-            4. Это направление для совершения намаза
-          </Text>
-        </Card.Content>
-      </Card>
+        {/* Location Info Card */}
+        {selectedCity && (
+          <Card style={styles.infoCard}>
+            <Card.Content style={styles.infoContent}>
+              <View style={styles.infoHeader}>
+                <Text style={styles.infoIcon}>📍</Text>
+                <Text style={styles.infoTitle}>Ваше местоположение</Text>
+              </View>
+              <Text style={styles.cityText}>
+                {selectedCity.name}, {selectedCity.country}
+              </Text>
+              <Text style={styles.coordinatesText}>
+                {selectedCity.latitude.toFixed(4)},{' '}
+                {selectedCity.longitude.toFixed(4)}
+              </Text>
+            </Card.Content>
+          </Card>
+        )}
 
-      {/* Примечание */}
-      <View style={styles.noteContainer}>
-        <Text
-          style={[styles.noteText, { color: theme.colors.onSurfaceVariant }]}
-        >
-          💡 Для более точного определения направления используйте компас или
-          GPS
-        </Text>
-      </View>
+        {/* Instructions Card */}
+        <Card style={styles.instructionsCard}>
+          <Card.Content>
+            <View style={styles.instructionsHeader}>
+              <Text style={styles.instructionsIcon}>📋</Text>
+              <Text style={styles.instructionsTitle}>
+                Как определить направление Киблы
+              </Text>
+            </View>
+            <View style={styles.instructionSteps}>
+              <View style={styles.instructionStep}>
+                <Text style={styles.stepNumber}>1</Text>
+                <Text style={styles.stepText}>Встаньте лицом к северу</Text>
+              </View>
+              <View style={styles.instructionStep}>
+                <Text style={styles.stepNumber}>2</Text>
+                <Text style={styles.stepText}>
+                  Повернитесь в направлении стрелки
+                </Text>
+              </View>
+              <View style={styles.instructionStep}>
+                <Text style={styles.stepNumber}>3</Text>
+                <Text style={styles.stepText}>
+                  Теперь вы смотрите в сторону Каабы
+                </Text>
+              </View>
+              <View style={styles.instructionStep}>
+                <Text style={styles.stepNumber}>4</Text>
+                <Text style={styles.stepText}>
+                  Это направление для совершения намаза
+                </Text>
+              </View>
+            </View>
+          </Card.Content>
+        </Card>
+
+        {/* Note */}
+        <View style={styles.noteContainer}>
+          <Text style={styles.noteText}>
+            💡 Для более точного определения направления используйте компас или
+            GPS
+          </Text>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -231,112 +184,221 @@ const QiblaScreen: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#f8f9fa',
   },
-  header: {
-    alignItems: 'center',
-    marginBottom: 24,
+  headerContainer: {
+    backgroundColor: '#1E88E5',
     paddingTop: 20,
+    paddingBottom: 30,
+    borderBottomLeftRadius: 30,
+    borderBottomRightRadius: 30,
+    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: '700',
+  headerGradient: {
+    alignItems: 'center',
+    paddingHorizontal: 20,
+  },
+  headerTitle: {
+    fontSize: 48,
     marginBottom: 8,
   },
-  subtitle: {
+  headerSubtitle: {
+    fontSize: 28,
+    fontWeight: '700',
+    color: '#ffffff',
+    marginBottom: 4,
+  },
+  headerDescription: {
     fontSize: 16,
+    color: '#e3f2fd',
     textAlign: 'center',
   },
-  compassCard: {
-    marginBottom: 16,
-    borderRadius: 16,
-    elevation: 4,
+  mainCompassCard: {
+    margin: 20,
+    marginTop: -15,
+    borderRadius: 20,
+    elevation: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    backgroundColor: '#ffffff',
   },
   compassContent: {
     alignItems: 'center',
-    padding: 24,
+    padding: 30,
   },
-  compassContainer: {
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  compass: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    borderWidth: 4,
+  compassOuterRing: {
+    width: 280,
+    height: 280,
+    borderRadius: 140,
+    borderWidth: 8,
+    borderColor: '#e3f2fd',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f8f9fa',
+    marginBottom: 20,
+  },
+  compassInnerRing: {
+    width: 240,
+    height: 240,
+    borderRadius: 120,
+    borderWidth: 6,
+    borderColor: '#1E88E5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
     position: 'relative',
+  },
+  compassCenter: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#1E88E5',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
   },
   compassNeedle: {
     position: 'absolute',
     alignItems: 'center',
   },
   compassArrow: {
-    fontSize: 40,
+    fontSize: 32,
   },
   directionMarker: {
     position: 'absolute',
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
+    color: '#1E88E5',
   },
-  north: {
-    top: 10,
-  },
-  east: {
-    right: 10,
-  },
-  south: {
-    bottom: 10,
-  },
-  west: {
-    left: 10,
+  north: { top: 15 },
+  northeast: { top: 45, right: 45 },
+  east: { right: 15 },
+  southeast: { bottom: 45, right: 45 },
+  south: { bottom: 15 },
+  southwest: { bottom: 45, left: 45 },
+  west: { left: 15 },
+  northwest: { top: 45, left: 45 },
+  directionInfo: {
+    alignItems: 'center',
   },
   directionText: {
-    fontSize: 20,
-    fontWeight: '600',
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#1E88E5',
     marginBottom: 4,
   },
   angleText: {
-    fontSize: 14,
+    fontSize: 16,
+    color: '#666666',
   },
   infoCard: {
-    marginBottom: 16,
-    borderRadius: 12,
+    margin: 20,
+    marginTop: 0,
+    borderRadius: 16,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  infoContent: {
+    padding: 20,
+  },
+  infoHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  infoIcon: {
+    fontSize: 20,
+    marginRight: 8,
   },
   infoTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
-    marginBottom: 8,
+    color: '#333333',
   },
   cityText: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '500',
+    color: '#1E88E5',
     marginBottom: 4,
   },
   coordinatesText: {
     fontSize: 14,
+    color: '#666666',
   },
   instructionsCard: {
+    margin: 20,
+    marginTop: 0,
+    borderRadius: 16,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+  },
+  instructionsHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 16,
-    borderRadius: 12,
+  },
+  instructionsIcon: {
+    fontSize: 20,
+    marginRight: 8,
   },
   instructionsTitle: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '600',
-    marginBottom: 12,
+    color: '#333333',
   },
-  instructionText: {
+  instructionSteps: {
+    gap: 12,
+  },
+  instructionStep: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  stepNumber: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: '#1E88E5',
+    color: '#ffffff',
     fontSize: 14,
+    fontWeight: '600',
+    textAlign: 'center',
+    lineHeight: 24,
+    marginRight: 12,
+  },
+  stepText: {
+    fontSize: 14,
+    color: '#666666',
+    flex: 1,
     lineHeight: 20,
   },
   noteContainer: {
-    alignItems: 'center',
-    paddingHorizontal: 16,
+    margin: 20,
+    marginTop: 0,
+    padding: 16,
+    backgroundColor: '#fff3cd',
+    borderRadius: 12,
+    borderLeftWidth: 4,
+    borderLeftColor: '#ffc107',
   },
   noteText: {
     fontSize: 14,
+    color: '#856404',
     textAlign: 'center',
     fontStyle: 'italic',
   },
