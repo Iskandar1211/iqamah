@@ -1,3 +1,4 @@
+import { CitySelectionScreen } from '@/components/CitySelectionScreen';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { Alert, Modal, ScrollView, StyleSheet, View } from 'react-native';
@@ -8,14 +9,13 @@ import { Header } from '../components/Header';
 import { PrayerCard } from '../components/PrayerCard';
 import citiesData from '../data/cities.json';
 import { usePrayerTimes } from '../hooks/usePrayerTimes';
+import { useTranslation } from '../utils/i18n';
 import { getCurrentCity } from '../utils/location';
-import { sendTestNotification } from '../utils/notifications';
 import { saveSelectedCity } from '../utils/storage';
-import { CitySelectionScreen } from '@/components/CitySelectionScreen';
-
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [showCitySelection, setShowCitySelection] = useState(false);
 
   const {
@@ -56,12 +56,12 @@ export const HomeScreen: React.FC = () => {
       if (currentCity) {
         updateCity(currentCity);
         await saveSelectedCity(currentCity);
-        Alert.alert('Успешно', `Определен город: ${currentCity.name}`);
+        Alert.alert(t('success'), `${t('locationDetected')}: ${currentCity.name}`);
       } else {
-        Alert.alert('Ошибка', 'Не удалось определить местоположение');
+        Alert.alert(t('error'), t('locationError'));
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось получить местоположение');
+      Alert.alert(t('error'), t('locationError'));
     }
   };
 
@@ -77,7 +77,7 @@ export const HomeScreen: React.FC = () => {
         <Text
           style={[styles.loadingText, { color: theme.colors.onBackground }]}
         >
-          Загрузка времени намаза...
+          {t('loadingPrayerTimes')}
         </Text>
       </View>
     );
@@ -111,7 +111,7 @@ export const HomeScreen: React.FC = () => {
                 { color: theme.colors.onSurfaceVariant },
               ]}
             >
-              Метод расчета: Ханафийский (Muslim World League)
+              {t('calculationMethod')}: {t('hanafiMethod')}
             </Text>
           </View>
         </View>
@@ -132,7 +132,7 @@ export const HomeScreen: React.FC = () => {
                     { color: theme.colors.onPrimary },
                   ]}
                 >
-                  Следующий намаз
+                  {t('nextPrayer')}
                 </Text>
                 <Text
                   style={[
@@ -158,7 +158,7 @@ export const HomeScreen: React.FC = () => {
                         { color: theme.colors.onPrimary },
                       ]}
                     >
-                      Через {timeUntilNext}
+                      {t('through')} {timeUntilNext}
                     </Text>
                   </View>
                 )}
@@ -175,7 +175,7 @@ export const HomeScreen: React.FC = () => {
           <Text
             style={[styles.sectionTitle, { color: theme.colors.onBackground }]}
           >
-            Время намазов на сегодня
+            {t('prayerTimesToday')}
           </Text>
           {prayerTimes.map((prayer, index) => (
             <PrayerCard key={index} prayer={prayer} />
@@ -192,7 +192,7 @@ export const HomeScreen: React.FC = () => {
             labelStyle={styles.buttonLabel}
             icon="city"
           >
-            Выбрать город
+            {t('selectCity')}
           </Button>
 
           <Button
@@ -203,7 +203,7 @@ export const HomeScreen: React.FC = () => {
             labelStyle={[styles.buttonLabel, { color: theme.colors.primary }]}
             icon="crosshairs-gps"
           >
-            Определить местоположение
+            {t('detectLocation')}
           </Button>
         </View>
       </ScrollView>

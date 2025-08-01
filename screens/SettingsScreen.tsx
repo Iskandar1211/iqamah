@@ -10,6 +10,7 @@ import {
   useTheme
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from '../utils/i18n';
 import { CALCULATION_METHODS } from '../utils/prayerTimes';
 import {
   getCalculationMethod,
@@ -28,6 +29,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   onSettingsChanged,
 }) => {
   const theme = useTheme();
+  const { t, language, setLanguage, availableLanguages } = useTranslation();
   const [calculationMethod, setCalculationMethod] =
     useState('MuslimWorldLeague');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -74,9 +76,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       await saveCalculationMethod(method);
       setCalculationMethod(method);
       onSettingsChanged?.();
-      Alert.alert('Успешно', 'Метод расчета изменен');
+      Alert.alert(t('success'), t('methodChanged'));
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось сохранить метод расчета');
+      Alert.alert(t('error'), t('methodChangeError'));
     }
   };
 
@@ -86,7 +88,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       setNotificationsEnabled(enabled);
       onSettingsChanged?.();
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось сохранить настройки уведомлений');
+      Alert.alert(t('error'), t('notificationsSaveError'));
     }
   };
 
@@ -96,19 +98,28 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       setSelectedTheme(theme);
       onSettingsChanged?.();
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось сохранить тему');
+      Alert.alert(t('error'), t('themeSaveError'));
+    }
+  };
+
+  const handleLanguageChange = async (newLanguage: string) => {
+    try {
+      await setLanguage(newLanguage as any);
+      onSettingsChanged?.();
+    } catch (error) {
+      Alert.alert(t('error'), 'Не удалось изменить язык');
     }
   };
 
   const getMethodDisplayName = (method: string): string => {
     const methodNames: { [key: string]: string } = {
-      MuslimWorldLeague: 'Ханафийский (Muslim World League)',
-      ISNA: 'ISNA (Islamic Society of North America)',
-      Egyptian: 'Египетский',
-      Makkah: 'Мекканский',
-      Karachi: 'Карачинский',
-      Tehran: 'Тегеранский',
-      Jafari: 'Джафари',
+      MuslimWorldLeague: t('hanafiMethod'),
+      ISNA: t('isnaMethod'),
+      Egyptian: t('egyptianMethod'),
+      Makkah: t('makkahMethod'),
+      Karachi: t('karachiMethod'),
+      Tehran: t('tehranMethod'),
+      Jafari: t('jafariMethod'),
     };
     return methodNames[method] || method;
   };
@@ -125,7 +136,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         <Text
           style={[styles.loadingText, { color: theme.colors.onBackground }]}
         >
-          Загрузка настроек...
+          {t('loading')}
         </Text>
       </View>
     );
@@ -144,12 +155,57 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           {/* Заголовок */}
           <View style={styles.header}>
             <Text style={[styles.headerTitle, { color: theme.colors.onBackground }]}>
-              Настройки
+              {t('settingsTitle')}
             </Text>
             <Text style={[styles.headerSubtitle, { color: theme.colors.onSurfaceVariant }]}>
-              Персонализируйте ваше приложение
+              {t('settingsSubtitle')}
             </Text>
           </View>
+
+          {/* Язык */}
+          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
+            <Card.Content style={styles.cardContent}>
+              <View style={styles.sectionHeader}>
+                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
+                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
+                    🌐
+                  </Text>
+                </View>
+                <View style={styles.sectionTextContainer}>
+                  <Text
+                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+                  >
+                    {t('language')}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.sectionDescription,
+                      { color: theme.colors.onSurfaceVariant },
+                    ]}
+                  >
+                    {t('languageDescription')}
+                  </Text>
+                </View>
+              </View>
+
+              <RadioButton.Group
+                onValueChange={handleLanguageChange}
+                value={language}
+              >
+                {availableLanguages.map((lang) => (
+                  <View key={lang.code} style={styles.radioItem}>
+                    <RadioButton.Item
+                      label={`${lang.nativeName} (${lang.name})`}
+                      value={lang.code}
+                      color={theme.colors.primary}
+                      labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
+                      style={styles.radioButton}
+                    />
+                  </View>
+                ))}
+              </RadioButton.Group>
+            </Card.Content>
+          </Card>
 
           {/* Метод расчета */}
           <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
@@ -164,7 +220,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   <Text
                     style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
                   >
-                    Метод расчета
+                    {t('calculationMethod')}
                   </Text>
                   <Text
                     style={[
@@ -209,7 +265,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   <Text
                     style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
                   >
-                    Уведомления
+                    {t('notifications')}
                   </Text>
                   <Text
                     style={[
@@ -217,14 +273,14 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                       { color: theme.colors.onSurfaceVariant },
                     ]}
                   >
-                    Получать уведомления за 10 минут до намаза
+                    {t('notificationsDescription')}
                   </Text>
                 </View>
               </View>
 
               <List.Item
-                title="Уведомления о намазе"
-                description="Уведомления за 10 минут до каждого намаза"
+                title={t('prayerNotifications')}
+                description={t('prayerNotificationsDescription')}
                 left={props => (
                   <List.Icon 
                     {...props} 
@@ -261,7 +317,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   <Text
                     style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
                   >
-                    Внешний вид
+                    {t('appearance')}
                   </Text>
                   <Text
                     style={[
@@ -269,7 +325,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                       { color: theme.colors.onSurfaceVariant },
                     ]}
                   >
-                    Выберите тему приложения
+                    {t('appearanceDescription')}
                   </Text>
                 </View>
               </View>
@@ -282,7 +338,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               >
                 <View style={styles.radioItem}>
                   <RadioButton.Item
-                    label="Автоматически"
+                    label={t('autoTheme')}
                     value="auto"
                     color={theme.colors.primary}
                     labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
@@ -291,7 +347,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 </View>
                 <View style={styles.radioItem}>
                   <RadioButton.Item
-                    label="Светлая тема"
+                    label={t('lightTheme')}
                     value="light"
                     color={theme.colors.primary}
                     labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
@@ -300,7 +356,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 </View>
                 <View style={styles.radioItem}>
                   <RadioButton.Item
-                    label="Темная тема"
+                    label={t('darkTheme')}
                     value="dark"
                     color={theme.colors.primary}
                     labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
@@ -324,13 +380,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                   <Text
                     style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
                   >
-                    О приложении
+                    {t('about')}
                   </Text>
                 </View>
               </View>
 
               <List.Item
-                title="Версия"
+                title={t('version')}
                 description="1.0.0"
                 left={props => (
                   <List.Icon 
@@ -346,8 +402,8 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               />
 
               <List.Item
-                title="Разработчик"
-                description="Iqamah Team"
+                title={t('developer')}
+                description={t('developerName')}
                 left={props => (
                   <List.Icon 
                     {...props} 

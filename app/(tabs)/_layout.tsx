@@ -7,9 +7,11 @@ import { HapticTab } from '@/components/HapticTab';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
+import { useTranslation } from '@/utils/i18n';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const { t } = useTranslation();
 
   return (
     <Tabs
@@ -83,7 +85,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Намаз',
+          title: t('home'),
           tabBarIcon: ({ color, focused }) => (
             <AnimatedTabIcon 
               name="namaz.fill" 
@@ -97,7 +99,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="qibla"
         options={{
-          title: 'Кибла',
+          title: t('qibla'),
           tabBarIcon: ({ color, focused }) => (
             <AnimatedTabIcon 
               name="location.north.fill" 
@@ -111,7 +113,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          title: 'Настройки',
+          title: t('settings'),
           tabBarIcon: ({ color, focused }) => (
             <AnimatedTabIcon 
               name="gearshape.fill" 

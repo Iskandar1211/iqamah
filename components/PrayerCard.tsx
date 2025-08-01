@@ -1,7 +1,8 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Card, useTheme } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { Card, useTheme } from 'react-native-paper';
+import { useTranslation } from '../utils/i18n';
 import { PrayerTime } from '../utils/prayerTimes';
 
 interface PrayerCardProps {
@@ -12,24 +13,70 @@ interface PrayerCardProps {
 const getPrayerIcon = (prayerName: string): string => {
   switch (prayerName) {
     case 'Фаджр':
+    case 'Fajr':
+    case 'Фаҷр':
       return '🌅';
     case 'Восход':
+    case 'Sunrise':
+    case 'Тулуъ':
       return '☀️';
     case 'Зухр':
+    case 'Dhuhr':
+    case 'Зуҳр':
       return '🌞';
+    case 'Аср':
+    case 'Asr':
     case 'Аср':
       return '🌤️';
     case 'Магриб':
+    case 'Maghrib':
+    case 'Мағриб':
       return '🌅';
     case 'Иша':
+    case 'Isha':
+    case 'Ишо':
       return '🌙';
     default:
       return '🕌';
   }
 };
 
+const getTranslatedPrayerName = (prayerName: string, t: any): string => {
+  switch (prayerName) {
+    case 'Фаджр':
+    case 'Fajr':
+    case 'Фаҷр':
+      return t('fajr');
+    case 'Восход':
+    case 'Sunrise':
+    case 'Тулуъ':
+      return t('sunrise');
+    case 'Зухр':
+    case 'Dhuhr':
+    case 'Зуҳр':
+      return t('dhuhr');
+    case 'Аср':
+    case 'Asr':
+    case 'Аср':
+      return t('asr');
+    case 'Магриб':
+    case 'Maghrib':
+    case 'Мағриб':
+      return t('maghrib');
+    case 'Иша':
+    case 'Isha':
+    case 'Ишо':
+      return t('isha');
+    default:
+      return prayerName;
+  }
+};
+
 export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
+
+  const translatedPrayerName = getTranslatedPrayerName(prayer.name, t);
 
   if (prayer.isNext) {
     return (
@@ -45,7 +92,7 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
               <Text style={styles.icon}>{getPrayerIcon(prayer.name)}</Text>
               <View style={styles.textContainer}>
                 <Text style={[styles.prayerName, { color: theme.colors.onPrimary }]}>
-                  {prayer.name}
+                  {translatedPrayerName}
                 </Text>
                 {prayer.timeUntil && (
                   <Text style={[styles.timeUntil, { color: theme.colors.onPrimary }]}>
@@ -61,7 +108,7 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
               </Text>
               <View style={[styles.nextIndicator, { backgroundColor: 'rgba(255, 255, 255, 0.2)' }]}>
                 <Text style={[styles.nextText, { color: theme.colors.onPrimary }]}>
-                  Следующий
+                  {t('nextPrayer')}
                 </Text>
               </View>
             </View>
@@ -86,7 +133,7 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
           <Text style={styles.icon}>{getPrayerIcon(prayer.name)}</Text>
           <View style={styles.textContainer}>
             <Text style={[styles.prayerName, { color: theme.colors.onSurface }]}>
-              {prayer.name}
+              {translatedPrayerName}
             </Text>
           </View>
         </View>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import { Button, List, Searchbar, Text, useTheme } from 'react-native-paper';
 import citiesData from '../data/cities.json';
+import { useTranslation } from '../utils/i18n';
 import { City } from '../utils/prayerTimes';
 import { saveSelectedCity } from '../utils/storage';
 
@@ -15,6 +16,7 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
   onClose,
 }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredCities, setFilteredCities] = useState<City[]>(citiesData);
 
@@ -36,7 +38,7 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
       onCitySelected(city);
       onClose();
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось сохранить выбранный город');
+      Alert.alert(t('error'), 'Не удалось сохранить выбранный город');
     }
   };
 
@@ -59,10 +61,10 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
     >
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.onBackground }]}>
-          Выберите город
+          {t('selectCity')}
         </Text>
         <Button mode="text" onPress={onClose} icon="close">
-          Закрыть
+          {t('close')}
         </Button>
       </View>
 
