@@ -9,74 +9,114 @@
   },
   {
     "id": 2,
-    "name": "Москва",
-    "country": "Россия",
-    "latitude": 55.7558,
-    "longitude": 37.6176,
-    "timezone": "Europe/Moscow"
+    "name": "Худжанд",
+    "country": "Таджикистан",
+    "latitude": 40.2833,
+    "longitude": 69.6333,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 3,
-    "name": "Санкт-Петербург",
-    "country": "Россия",
-    "latitude": 59.9311,
-    "longitude": 30.3609,
-    "timezone": "Europe/Moscow"
+    "name": "Куляб",
+    "country": "Таджикистан",
+    "latitude": 37.9094,
+    "longitude": 69.7819,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 4,
-    "name": "Казань",
-    "country": "Россия",
-    "latitude": 55.8304,
-    "longitude": 49.0661,
-    "timezone": "Europe/Moscow"
+    "name": "Курган-Тюбе",
+    "country": "Таджикистан",
+    "latitude": 37.8333,
+    "longitude": 68.7833,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 5,
-    "name": "Уфа",
-    "country": "Россия",
-    "latitude": 54.7388,
-    "longitude": 55.9721,
-    "timezone": "Asia/Yekaterinburg"
+    "name": "Истаравшан",
+    "country": "Таджикистан",
+    "latitude": 39.9167,
+    "longitude": 69.0000,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 6,
-    "name": "Ташкент",
-    "country": "Узбекистан",
-    "latitude": 41.2995,
-    "longitude": 69.2401,
-    "timezone": "Asia/Tashkent"
+    "name": "Вахдат",
+    "country": "Таджикистан",
+    "latitude": 38.5563,
+    "longitude": 69.0135,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 7,
-    "name": "Алматы",
-    "country": "Казахстан",
-    "latitude": 43.2220,
-    "longitude": 76.8512,
-    "timezone": "Asia/Almaty"
+    "name": "Турсунзаде",
+    "country": "Таджикистан",
+    "latitude": 38.5128,
+    "longitude": 68.2317,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 8,
-    "name": "Бишкек",
-    "country": "Кыргызстан",
-    "latitude": 42.8746,
-    "longitude": 74.5698,
-    "timezone": "Asia/Bishkek"
+    "name": "Исфара",
+    "country": "Таджикистан",
+    "latitude": 40.1167,
+    "longitude": 70.6333,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 9,
-    "name": "Ашхабад",
-    "country": "Туркменистан",
-    "latitude": 37.9601,
-    "longitude": 58.3261,
-    "timezone": "Asia/Ashgabat"
+    "name": "Пенджикент",
+    "country": "Таджикистан",
+    "latitude": 39.5000,
+    "longitude": 67.6167,
+    "timezone": "Asia/Dushanbe"
   },
   {
     "id": 10,
-    "name": "Баку",
-    "country": "Азербайджан",
-    "latitude": 40.4093,
-    "longitude": 49.8671,
-    "timezone": "Asia/Baku"
+    "name": "Бустон",
+    "country": "Таджикистан",
+    "latitude": 37.8478,
+    "longitude": 68.8314,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 11,
+    "name": "Нурек",
+    "country": "Таджикистан",
+    "latitude": 38.3889,
+    "longitude": 69.3247,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 12,
+    "name": "Гиссар",
+    "country": "Таджикистан",
+    "latitude": 38.5333,
+    "longitude": 68.5500,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 13,
+    "name": "Рогун",
+    "country": "Таджикистан",
+    "latitude": 38.7833,
+    "longitude": 69.8833,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 14,
+    "name": "Хорог",
+    "country": "Таджикистан",
+    "latitude": 37.4833,
+    "longitude": 71.5500,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 15,
+    "name": "Мургаб",
+    "country": "Таджикистан",
+    "latitude": 38.1667,
+    "longitude": 73.9667,
+    "timezone": "Asia/Dushanbe"
   }
 ] 

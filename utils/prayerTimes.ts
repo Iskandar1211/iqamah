@@ -1,6 +1,4 @@
 import { CalculationMethod, Coordinates, PrayerTimes } from 'adhan';
-import { addDays, format } from 'date-fns';
-import { ru } from 'date-fns/locale';
 
 export interface City {
   id: number;
@@ -62,7 +60,7 @@ export function getCalculationMethod(method: string): CalculationMethod {
 export function calculatePrayerTimes(
   city: City,
   date: Date = new Date(),
-  method: string = 'ISNA'
+  method: string = 'MuslimWorldLeague'
 ): PrayerTime[] {
   const coordinates = new Coordinates(city.latitude, city.longitude);
   const calculationMethod = getCalculationMethod(method);
@@ -91,7 +89,8 @@ export function calculatePrayerTimes(
 
   // Если все намазы прошли, следующий - завтрашний Фаджр
   if (nextPrayerIndex === -1) {
-    const tomorrow = addDays(date, 1);
+    const tomorrow = new Date(date);
+    tomorrow.setDate(tomorrow.getDate() + 1);
     const tomorrowPrayerTimes = new PrayerTimes(coordinates, tomorrow, calculationMethod);
     prayers[0] = { name: 'fajr', time: tomorrowPrayerTimes.fajr };
     nextPrayerIndex = 0;
@@ -104,10 +103,18 @@ export function calculatePrayerTimes(
     return {
       name: PRAYER_NAMES[prayer.name as keyof typeof PRAYER_NAMES],
       time: prayer.time,
-      formattedTime: format(prayer.time, 'HH:mm'),
+      formattedTime: formatTime(prayer.time),
       isNext,
       timeUntil
     };
+  });
+}
+
+export function formatTime(date: Date): string {
+  return date.toLocaleTimeString('ru-RU', {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
   });
 }
 
@@ -128,7 +135,13 @@ export function getTimeUntil(targetTime: Date): string {
 }
 
 export function formatDate(date: Date): string {
-  return format(date, 'EEEE, d MMMM yyyy', { locale: ru });
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  };
+  return date.toLocaleDateString('ru-RU', options);
 }
 
 export function getHijriDate(date: Date): string {
