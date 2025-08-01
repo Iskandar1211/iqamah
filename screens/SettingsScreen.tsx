@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Alert, Animated, ScrollView, StyleSheet, View } from 'react-native';
 import {
   ActivityIndicator,
@@ -37,7 +37,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     'auto'
   );
   const [loading, setLoading] = useState(true);
-  const fadeAnim = new Animated.Value(0);
+  const fadeAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     loadSettings();
@@ -289,9 +289,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 title={t('prayerNotifications')}
                 description={t('prayerNotificationsDescription')}
                 left={props => (
-                  <List.Icon 
-                    {...props} 
-                    icon="bell" 
+                  <List.Icon
+                    {...props}
+                    icon="bell"
                     color={theme.colors.primary}
                     style={styles.listIcon}
                   />
@@ -396,9 +396,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 title={t('version')}
                 description="1.0.0"
                 left={props => (
-                  <List.Icon 
-                    {...props} 
-                    icon="information" 
+                  <List.Icon
+                    {...props}
+                    icon="information"
                     color={theme.colors.primary}
                     style={styles.listIcon}
                   />
@@ -412,9 +412,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 title={t('developer')}
                 description={t('developerName')}
                 left={props => (
-                  <List.Icon 
-                    {...props} 
-                    icon="account" 
+                  <List.Icon
+                    {...props}
+                    icon="account"
                     color={theme.colors.primary}
                     style={styles.listIcon}
                   />
