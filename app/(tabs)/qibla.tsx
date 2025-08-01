@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Card, MD3LightTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
-import { getSelectedCity } from '../../utils/storage';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { getSelectedCity } from '../../utils/storage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function QiblaScreenWrapper() {
+const QiblaScreenWrapper = () => {
   const theme = {
     ...MD3LightTheme,
     colors: {
@@ -277,4 +277,6 @@ export default function QiblaScreenWrapper() {
       <QiblaScreen />
     </PaperProvider>
   );
-} 
+};
+
+export default QiblaScreenWrapper; 
