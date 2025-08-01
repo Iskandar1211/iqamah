@@ -26,10 +26,11 @@ const MAPPING = {
   'prayer.fill': 'mosque',
   'qibla.fill': 'explore',
   'settings.fill': 'settings',
-  'clock.fill': 'schedule',
+  'clock.fill': 'access-time',
   'calendar.fill': 'event',
   'moon.fill': 'dark-mode',
   'sun.fill': 'light-mode',
+  'namaz.fill': 'access-time',
 } as IconMapping;
 
 /**

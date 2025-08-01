@@ -17,7 +17,7 @@ export function AnimatedTabIcon({ name, color, focused, size = 28 }: AnimatedTab
     if (focused) {
       Animated.parallel([
         Animated.spring(scaleAnim, {
-          toValue: 1.1,
+          toValue: 1.2,
           useNativeDriver: true,
           tension: 100,
           friction: 8,
@@ -37,7 +37,7 @@ export function AnimatedTabIcon({ name, color, focused, size = 28 }: AnimatedTab
           friction: 8,
         }),
         Animated.timing(opacityAnim, {
-          toValue: 0.7,
+          toValue: 0.6,
           duration: 200,
           useNativeDriver: true,
         }),
@@ -50,11 +50,13 @@ export function AnimatedTabIcon({ name, color, focused, size = 28 }: AnimatedTab
       style={{
         transform: [{ scale: scaleAnim }],
         opacity: opacityAnim,
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <IconSymbol
         name={name as any}
-        size={focused ? size + 4 : size}
+        size={focused ? size + 2 : size}
         color={color}
       />
     </Animated.View>

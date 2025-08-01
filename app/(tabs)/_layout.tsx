@@ -26,6 +26,7 @@ export default function TabLayout() {
             paddingBottom: 20,
             paddingTop: 8,
             borderTopWidth: 0,
+            backgroundColor: Colors[colorScheme ?? 'light'].background,
             shadowColor: '#000',
             shadowOffset: {
               width: 0,
@@ -34,12 +35,15 @@ export default function TabLayout() {
             shadowOpacity: 0.1,
             shadowRadius: 8,
             elevation: 10,
+            alignItems: 'center',
           },
           android: {
             height: 70,
             paddingBottom: 8,
+            borderWidth: 1,
             paddingTop: 8,
             borderTopWidth: 0,
+            backgroundColor: Colors[colorScheme ?? 'light'].background,
             elevation: 8,
             shadowColor: '#000',
             shadowOffset: {
@@ -48,21 +52,31 @@ export default function TabLayout() {
             },
             shadowOpacity: 0.1,
             shadowRadius: 8,
+            // alignItems: 'center',
           },
           default: {
             height: 70,
             paddingBottom: 8,
             paddingTop: 8,
             borderTopWidth: 0,
+            backgroundColor: Colors[colorScheme ?? 'light'].background,
+            // alignItems: 'center',
           },
         }),
         tabBarLabelStyle: {
-          fontSize: 12,
+          fontSize: 11,
           fontWeight: '600',
           marginTop: 4,
+          textTransform: 'none',
+          textAlign: 'center',
+          alignSelf:'center',
         },
         tabBarIconStyle: {
           marginBottom: 2,
+          flexDirection:'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          alignSelf:'center',
         },
       }}
     >
@@ -72,10 +86,10 @@ export default function TabLayout() {
           title: 'Намаз',
           tabBarIcon: ({ color, focused }) => (
             <AnimatedTabIcon 
-              name="clock.fill" 
+              name="namaz.fill" 
               color={color} 
               focused={focused}
-              size={28}
+              size={26}
             />
           ),
         }}
@@ -89,7 +103,7 @@ export default function TabLayout() {
               name="location.north.fill" 
               color={color} 
               focused={focused}
-              size={28}
+              size={26}
             />
           ),
         }}
@@ -103,7 +117,7 @@ export default function TabLayout() {
               name="gearshape.fill" 
               color={color} 
               focused={focused}
-              size={28}
+              size={26}
             />
           ),
         }}
