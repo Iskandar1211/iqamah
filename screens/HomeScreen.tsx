@@ -15,7 +15,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
   const [showCitySelection, setShowCitySelection] = useState(false);
-  
+
   const {
     prayerTimes,
     selectedCity,
@@ -24,7 +24,7 @@ export const HomeScreen: React.FC = () => {
     updateCity,
     updateCalculationMethod,
     getNextPrayer,
-    getTimeUntilNextPrayer
+    getTimeUntilNextPrayer,
   } = usePrayerTimes();
 
   // Инициализация с городом Душанбе при первом запуске
@@ -76,9 +76,16 @@ export const HomeScreen: React.FC = () => {
 
   if (loading) {
     return (
-      <View style={[styles.loadingContainer, { backgroundColor: theme.colors.background }]}>
+      <View
+        style={[
+          styles.loadingContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
         <ActivityIndicator size="large" color={theme.colors.primary} />
-        <Text style={[styles.loadingText, { color: theme.colors.onBackground }]}>
+        <Text
+          style={[styles.loadingText, { color: theme.colors.onBackground }]}
+        >
           Загрузка времени намаза...
         </Text>
       </View>
@@ -89,34 +96,71 @@ export const HomeScreen: React.FC = () => {
   const timeUntilNext = getTimeUntilNextPrayer();
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <Header />
-      
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Информация о городе */}
         <View style={styles.citySection}>
-          <Text style={[styles.cityTitle, { color: theme.colors.onBackground }]}>
+          <Text
+            style={[styles.cityTitle, { color: theme.colors.onBackground }]}
+          >
             {selectedCity?.name}, {selectedCity?.country}
           </Text>
-          <Text style={[styles.methodText, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            style={[
+              styles.methodText,
+              { color: theme.colors.onSurfaceVariant },
+            ]}
+          >
             Метод расчета: Ханафийский (Muslim World League)
           </Text>
         </View>
 
         {/* Следующий намаз */}
         {nextPrayer && (
-          <View style={[styles.nextPrayerSection, { backgroundColor: theme.colors.primaryContainer }]}>
-            <Text style={[styles.nextPrayerTitle, { color: theme.colors.onPrimaryContainer }]}>
+          <View
+            style={[
+              styles.nextPrayerSection,
+              { backgroundColor: theme.colors.primaryContainer },
+            ]}
+          >
+            <Text
+              style={[
+                styles.nextPrayerTitle,
+                { color: theme.colors.onPrimaryContainer },
+              ]}
+            >
               Следующий намаз
             </Text>
-            <Text style={[styles.nextPrayerName, { color: theme.colors.onPrimaryContainer }]}>
+            <Text
+              style={[
+                styles.nextPrayerName,
+                { color: theme.colors.onPrimaryContainer },
+              ]}
+            >
               {nextPrayer.name}
             </Text>
-            <Text style={[styles.nextPrayerTime, { color: theme.colors.onPrimaryContainer }]}>
+            <Text
+              style={[
+                styles.nextPrayerTime,
+                { color: theme.colors.onPrimaryContainer },
+              ]}
+            >
               {nextPrayer.formattedTime}
             </Text>
             {timeUntilNext && (
-              <Text style={[styles.timeUntilText, { color: theme.colors.onPrimaryContainer }]}>
+              <Text
+                style={[
+                  styles.timeUntilText,
+                  { color: theme.colors.onPrimaryContainer },
+                ]}
+              >
                 Через {timeUntilNext}
               </Text>
             )}
@@ -126,11 +170,11 @@ export const HomeScreen: React.FC = () => {
         {/* Хадис дня */}
         <HadithCard />
 
-
-
         {/* Список всех намазов */}
         <View style={styles.prayerListSection}>
-          <Text style={[styles.sectionTitle, { color: theme.colors.onBackground }]}>
+          <Text
+            style={[styles.sectionTitle, { color: theme.colors.onBackground }]}
+          >
             Время намазов на сегодня
           </Text>
           {prayerTimes.map((prayer, index) => (
@@ -148,7 +192,7 @@ export const HomeScreen: React.FC = () => {
           >
             Выбрать город
           </Button>
-          
+
           <Button
             mode="outlined"
             onPress={handleLocationPress}
@@ -157,9 +201,6 @@ export const HomeScreen: React.FC = () => {
           >
             Определить местоположение
           </Button>
-          
-
-          
         </View>
       </ScrollView>
 
@@ -174,8 +215,6 @@ export const HomeScreen: React.FC = () => {
           onClose={handleCloseCitySelection}
         />
       </Modal>
-
-
     </SafeAreaView>
   );
 };
@@ -251,4 +290,4 @@ const styles = StyleSheet.create({
   button: {
     marginBottom: 12,
   },
-}); 
+});

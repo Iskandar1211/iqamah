@@ -19,4 +19,4 @@ export default function SettingsScreenWrapper() {
       <SettingsScreen />
     </PaperProvider>
   );
-} 
+}

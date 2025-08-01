@@ -1,12 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { schedulePrayerNotifications } from '../utils/notifications';
-import { City, PrayerTime, calculatePrayerTimes, getTimeUntil } from '../utils/prayerTimes';
+import {
+  City,
+  PrayerTime,
+  calculatePrayerTimes,
+  getTimeUntil,
+} from '../utils/prayerTimes';
 import { getCalculationMethod, getSelectedCity } from '../utils/storage';
 
 export function usePrayerTimes() {
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const [calculationMethod, setCalculationMethod] = useState<string>('MuslimWorldLeague');
+  const [calculationMethod, setCalculationMethod] =
+    useState<string>('MuslimWorldLeague');
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
 
@@ -35,9 +41,9 @@ export function usePrayerTimes() {
     try {
       const [city, method] = await Promise.all([
         getSelectedCity(),
-        getCalculationMethod()
+        getCalculationMethod(),
       ]);
-      
+
       setSelectedCity(city);
       setCalculationMethod(method);
     } catch (error) {
@@ -50,7 +56,11 @@ export function usePrayerTimes() {
   const updatePrayerTimes = useCallback(() => {
     if (!selectedCity) return;
 
-    const times = calculatePrayerTimes(selectedCity, currentTime, calculationMethod);
+    const times = calculatePrayerTimes(
+      selectedCity,
+      currentTime,
+      calculationMethod
+    );
     setPrayerTimes(times);
 
     // Планируем уведомления
@@ -86,6 +96,6 @@ export function usePrayerTimes() {
     updateCalculationMethod,
     getNextPrayer,
     getTimeUntilNextPrayer,
-    updatePrayerTimes
+    updatePrayerTimes,
   };
-} 
+}

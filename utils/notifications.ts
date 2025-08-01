@@ -28,19 +28,20 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   }
 
   try {
-    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    const { status: existingStatus } =
+      await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
-    
+
     if (existingStatus !== 'granted') {
       const { status } = await Notifications.requestPermissionsAsync();
       finalStatus = status;
     }
-    
+
     if (finalStatus !== 'granted') {
       console.log('Notification permissions not granted');
       return false;
     }
-    
+
     return true;
   } catch (error) {
     console.log('Error requesting notification permissions:', error);
@@ -48,7 +49,9 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   }
 }
 
-export async function schedulePrayerNotifications(prayerTimes: PrayerTime[]): Promise<void> {
+export async function schedulePrayerNotifications(
+  prayerTimes: PrayerTime[]
+): Promise<void> {
   if (!isNotificationsSupported()) {
     console.log('Notifications not supported in this environment');
     return;
@@ -57,15 +60,15 @@ export async function schedulePrayerNotifications(prayerTimes: PrayerTime[]): Pr
   try {
     // Сначала отменяем все существующие уведомления
     await Notifications.cancelAllScheduledNotificationsAsync();
-    
+
     const hasPermission = await requestNotificationPermissions();
     if (!hasPermission) {
       console.log('No notification permissions');
       return;
     }
-    
+
     const now = new Date();
-    
+
     for (const prayer of prayerTimes) {
       // В Expo Go SDK 53+ планирование уведомлений ограничено
       // Отправляем немедленное уведомление для тестирования
@@ -96,7 +99,9 @@ export async function cancelAllNotifications(): Promise<void> {
   }
 }
 
-export async function getScheduledNotifications(): Promise<Notifications.NotificationRequest[]> {
+export async function getScheduledNotifications(): Promise<
+  Notifications.NotificationRequest[]
+> {
   if (!isNotificationsSupported()) {
     return [];
   }
@@ -122,7 +127,7 @@ export async function sendTestNotification(): Promise<void> {
       console.log('No notification permissions');
       return;
     }
-    
+
     await Notifications.scheduleNotificationAsync({
       content: {
         title: 'Тестовое уведомление',
@@ -134,4 +139,4 @@ export async function sendTestNotification(): Promise<void> {
   } catch (error) {
     console.log('Error sending test notification:', error);
   }
-} 
+}

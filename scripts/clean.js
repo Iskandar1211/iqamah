@@ -13,7 +13,7 @@ const dirsToClean = [
   'dist',
   'web-build',
   'coverage',
-  '.nyc_output'
+  '.nyc_output',
 ];
 
 // Files to clean
@@ -21,7 +21,7 @@ const filesToClean = [
   'npm-debug.log*',
   'yarn-debug.log*',
   'yarn-error.log*',
-  '.DS_Store'
+  '.DS_Store',
 ];
 
 try {
@@ -48,4 +48,4 @@ try {
 } catch (error) {
   console.error('❌ Error cleaning project:', error.message);
   process.exit(1);
-} 
+}

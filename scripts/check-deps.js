@@ -24,7 +24,9 @@ try {
   execSync('npm audit', { stdio: 'inherit' });
 } catch (error) {
   if (error.status === 1) {
-    console.log('⚠️  Security vulnerabilities found. Run "npm audit fix" to fix them.');
+    console.log(
+      '⚠️  Security vulnerabilities found. Run "npm audit fix" to fix them.'
+    );
   } else {
     console.error('❌ Error checking security:', error.message);
   }
@@ -33,22 +35,27 @@ try {
 try {
   // Check package.json for common issues
   console.log('\n📋 Checking package.json...');
-  const packageJson = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8'));
-  
+  const packageJson = JSON.parse(
+    fs.readFileSync(path.join(process.cwd(), 'package.json'), 'utf8')
+  );
+
   const issues = [];
-  
+
   if (!packageJson.scripts) {
     issues.push('No scripts section found');
   }
-  
+
   if (!packageJson.dependencies && !packageJson.devDependencies) {
     issues.push('No dependencies found');
   }
-  
-  if (packageJson.dependencies && Object.keys(packageJson.dependencies).length === 0) {
+
+  if (
+    packageJson.dependencies &&
+    Object.keys(packageJson.dependencies).length === 0
+  ) {
     issues.push('No production dependencies found');
   }
-  
+
   if (issues.length === 0) {
     console.log('✅ Package.json looks good!');
   } else {
@@ -57,4 +64,4 @@ try {
   }
 } catch (error) {
   console.error('❌ Error reading package.json:', error.message);
-} 
+}

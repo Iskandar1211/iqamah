@@ -35,9 +35,11 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
       style={[
         styles.card,
         {
-          backgroundColor: prayer.isNext ? theme.colors.primaryContainer : theme.colors.surface,
+          backgroundColor: prayer.isNext
+            ? theme.colors.primaryContainer
+            : theme.colors.surface,
           borderColor: prayer.isNext ? theme.colors.primary : 'transparent',
-        }
+        },
       ]}
       onPress={onPress}
     >
@@ -45,10 +47,16 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
         <View style={styles.leftSection}>
           <Text style={styles.icon}>{getPrayerIcon(prayer.name)}</Text>
           <View style={styles.textContainer}>
-            <Text style={[
-              styles.prayerName,
-              { color: prayer.isNext ? theme.colors.primary : theme.colors.onSurface }
-            ]}>
+            <Text
+              style={[
+                styles.prayerName,
+                {
+                  color: prayer.isNext
+                    ? theme.colors.primary
+                    : theme.colors.onSurface,
+                },
+              ]}
+            >
               {prayer.name}
             </Text>
             {prayer.isNext && prayer.timeUntil && (
@@ -58,17 +66,30 @@ export const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onPress }) => {
             )}
           </View>
         </View>
-        
+
         <View style={styles.rightSection}>
-          <Text style={[
-            styles.time,
-            { color: prayer.isNext ? theme.colors.primary : theme.colors.onSurface }
-          ]}>
+          <Text
+            style={[
+              styles.time,
+              {
+                color: prayer.isNext
+                  ? theme.colors.primary
+                  : theme.colors.onSurface,
+              },
+            ]}
+          >
             {prayer.formattedTime}
           </Text>
           {prayer.isNext && (
-            <View style={[styles.nextIndicator, { backgroundColor: theme.colors.primary }]}>
-              <Text style={[styles.nextText, { color: theme.colors.onPrimary }]}>
+            <View
+              style={[
+                styles.nextIndicator,
+                { backgroundColor: theme.colors.primary },
+              ]}
+            >
+              <Text
+                style={[styles.nextText, { color: theme.colors.onPrimary }]}
+              >
                 Следующий
               </Text>
             </View>
@@ -138,4 +159,4 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     textTransform: 'uppercase',
   },
-}); 
+});

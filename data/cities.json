@@ -36,7 +36,7 @@
     "name": "Истаравшан",
     "country": "Таджикистан",
     "latitude": 39.9167,
-    "longitude": 69.0000,
+    "longitude": 69.0,
     "timezone": "Asia/Dushanbe"
   },
   {
@@ -67,7 +67,7 @@
     "id": 9,
     "name": "Пенджикент",
     "country": "Таджикистан",
-    "latitude": 39.5000,
+    "latitude": 39.5,
     "longitude": 67.6167,
     "timezone": "Asia/Dushanbe"
   },
@@ -92,7 +92,7 @@
     "name": "Гиссар",
     "country": "Таджикистан",
     "latitude": 38.5333,
-    "longitude": 68.5500,
+    "longitude": 68.55,
     "timezone": "Asia/Dushanbe"
   },
   {
@@ -108,7 +108,7 @@
     "name": "Хорог",
     "country": "Таджикистан",
     "latitude": 37.4833,
-    "longitude": 71.5500,
+    "longitude": 71.55,
     "timezone": "Asia/Dushanbe"
   },
   {
@@ -119,4 +119,4 @@
     "longitude": 73.9667,
     "timezone": "Asia/Dushanbe"
   }
-] 
+]

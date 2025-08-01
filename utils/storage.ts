@@ -5,7 +5,7 @@ const STORAGE_KEYS = {
   SELECTED_CITY: 'selected_city',
   CALCULATION_METHOD: 'calculation_method',
   NOTIFICATIONS_ENABLED: 'notifications_enabled',
-  THEME: 'theme'
+  THEME: 'theme',
 };
 
 export interface AppSettings {
@@ -17,7 +17,10 @@ export interface AppSettings {
 
 export async function saveSelectedCity(city: City): Promise<void> {
   try {
-    await AsyncStorage.setItem(STORAGE_KEYS.SELECTED_CITY, JSON.stringify(city));
+    await AsyncStorage.setItem(
+      STORAGE_KEYS.SELECTED_CITY,
+      JSON.stringify(city)
+    );
   } catch (error) {
     console.error('Error saving selected city:', error);
   }
@@ -43,16 +46,24 @@ export async function saveCalculationMethod(method: string): Promise<void> {
 
 export async function getCalculationMethod(): Promise<string> {
   try {
-    return await AsyncStorage.getItem(STORAGE_KEYS.CALCULATION_METHOD) || 'MuslimWorldLeague';
+    return (
+      (await AsyncStorage.getItem(STORAGE_KEYS.CALCULATION_METHOD)) ||
+      'MuslimWorldLeague'
+    );
   } catch (error) {
     console.error('Error getting calculation method:', error);
     return 'MuslimWorldLeague';
   }
 }
 
-export async function saveNotificationsEnabled(enabled: boolean): Promise<void> {
+export async function saveNotificationsEnabled(
+  enabled: boolean
+): Promise<void> {
   try {
-    await AsyncStorage.setItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED, JSON.stringify(enabled));
+    await AsyncStorage.setItem(
+      STORAGE_KEYS.NOTIFICATIONS_ENABLED,
+      JSON.stringify(enabled)
+    );
   } catch (error) {
     console.error('Error saving notifications setting:', error);
   }
@@ -60,7 +71,9 @@ export async function saveNotificationsEnabled(enabled: boolean): Promise<void> 
 
 export async function getNotificationsEnabled(): Promise<boolean> {
   try {
-    const enabled = await AsyncStorage.getItem(STORAGE_KEYS.NOTIFICATIONS_ENABLED);
+    const enabled = await AsyncStorage.getItem(
+      STORAGE_KEYS.NOTIFICATIONS_ENABLED
+    );
     return enabled ? JSON.parse(enabled) : true;
   } catch (error) {
     console.error('Error getting notifications setting:', error);
@@ -68,7 +81,9 @@ export async function getNotificationsEnabled(): Promise<boolean> {
   }
 }
 
-export async function saveTheme(theme: 'light' | 'dark' | 'auto'): Promise<void> {
+export async function saveTheme(
+  theme: 'light' | 'dark' | 'auto'
+): Promise<void> {
   try {
     await AsyncStorage.setItem(STORAGE_KEYS.THEME, theme);
   } catch (error) {
@@ -78,7 +93,12 @@ export async function saveTheme(theme: 'light' | 'dark' | 'auto'): Promise<void>
 
 export async function getTheme(): Promise<'light' | 'dark' | 'auto'> {
   try {
-    return (await AsyncStorage.getItem(STORAGE_KEYS.THEME)) as 'light' | 'dark' | 'auto' || 'auto';
+    return (
+      ((await AsyncStorage.getItem(STORAGE_KEYS.THEME)) as
+        | 'light'
+        | 'dark'
+        | 'auto') || 'auto'
+    );
   } catch (error) {
     console.error('Error getting theme:', error);
     return 'auto';
@@ -86,18 +106,19 @@ export async function getTheme(): Promise<'light' | 'dark' | 'auto'> {
 }
 
 export async function getAllSettings(): Promise<AppSettings> {
-  const [selectedCity, calculationMethod, notificationsEnabled, theme] = await Promise.all([
-    getSelectedCity(),
-    getCalculationMethod(),
-    getNotificationsEnabled(),
-    getTheme()
-  ]);
+  const [selectedCity, calculationMethod, notificationsEnabled, theme] =
+    await Promise.all([
+      getSelectedCity(),
+      getCalculationMethod(),
+      getNotificationsEnabled(),
+      getTheme(),
+    ]);
 
   return {
     selectedCity,
     calculationMethod,
     notificationsEnabled,
-    theme
+    theme,
   };
 }
 
@@ -107,4 +128,4 @@ export async function clearAllSettings(): Promise<void> {
   } catch (error) {
     console.error('Error clearing settings:', error);
   }
-} 
+}

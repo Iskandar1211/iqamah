@@ -18,24 +18,35 @@ export const QiblaDirection: React.FC = () => {
             🕋 Направление Киблы
           </Text>
         </View>
-        
+
         <View style={styles.content}>
           <View style={styles.compassContainer}>
-            <View style={[styles.compass, { borderColor: theme.colors.primary }]}>
-              <Text style={[styles.compassText, { color: theme.colors.primary }]}>
+            <View
+              style={[styles.compass, { borderColor: theme.colors.primary }]}
+            >
+              <Text
+                style={[styles.compassText, { color: theme.colors.primary }]}
+              >
                 🕋
               </Text>
             </View>
-            <Text style={[styles.directionText, { color: theme.colors.onSurface }]}>
+            <Text
+              style={[styles.directionText, { color: theme.colors.onSurface }]}
+            >
               Юго-Запад
             </Text>
           </View>
-          
-          <Text style={[styles.description, { color: theme.colors.onSurfaceVariant }]}>
+
+          <Text
+            style={[
+              styles.description,
+              { color: theme.colors.onSurfaceVariant },
+            ]}
+          >
             Направление к Каабе в Мекке
           </Text>
         </View>
-        
+
         <Button
           mode="outlined"
           onPress={handleQiblaPress}
@@ -101,4 +112,4 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 8,
   },
-}); 
+});

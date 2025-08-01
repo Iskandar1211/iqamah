@@ -22,11 +22,11 @@ export interface AppSettings {
   theme: 'light' | 'dark' | 'auto';
 }
 
-export type CalculationMethod = 
+export type CalculationMethod =
   | 'ISNA'
   | 'MuslimWorldLeague'
   | 'Egyptian'
   | 'Makkah'
   | 'Karachi'
   | 'Tehran'
-  | 'Jafari'; 
+  | 'Jafari';

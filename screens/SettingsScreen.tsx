@@ -7,7 +7,7 @@ import {
   RadioButton,
   Switch,
   Text,
-  useTheme
+  useTheme,
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { CALCULATION_METHODS } from '../utils/prayerTimes';
@@ -17,7 +17,7 @@ import {
   getTheme,
   saveCalculationMethod,
   saveNotificationsEnabled,
-  saveTheme
+  saveTheme,
 } from '../utils/storage';
 
 interface SettingsScreenProps {
@@ -25,12 +25,15 @@ interface SettingsScreenProps {
 }
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
-  onSettingsChanged
+  onSettingsChanged,
 }) => {
   const theme = useTheme();
-  const [calculationMethod, setCalculationMethod] = useState('MuslimWorldLeague');
+  const [calculationMethod, setCalculationMethod] =
+    useState('MuslimWorldLeague');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark' | 'auto'>('auto');
+  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark' | 'auto'>(
+    'auto'
+  );
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -42,9 +45,9 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       const [method, notifications, theme] = await Promise.all([
         getCalculationMethod(),
         getNotificationsEnabled(),
-        getTheme()
+        getTheme(),
       ]);
-      
+
       setCalculationMethod(method);
       setNotificationsEnabled(notifications);
       setSelectedTheme(theme);
@@ -88,21 +91,28 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   const getMethodDisplayName = (method: string): string => {
     const methodNames: { [key: string]: string } = {
-      'MuslimWorldLeague': 'Ханафийский (Muslim World League)',
-      'ISNA': 'ISNA (Islamic Society of North America)',
-      'Egyptian': 'Египетский',
-      'Makkah': 'Мекканский',
-      'Karachi': 'Карачинский',
-      'Tehran': 'Тегеранский',
-      'Jafari': 'Джафари'
+      MuslimWorldLeague: 'Ханафийский (Muslim World League)',
+      ISNA: 'ISNA (Islamic Society of North America)',
+      Egyptian: 'Египетский',
+      Makkah: 'Мекканский',
+      Karachi: 'Карачинский',
+      Tehran: 'Тегеранский',
+      Jafari: 'Джафари',
     };
     return methodNames[method] || method;
   };
 
   if (loading) {
     return (
-      <View style={[styles.loadingContainer, { backgroundColor: theme.colors.background }]}>
-        <Text style={[styles.loadingText, { color: theme.colors.onBackground }]}>
+      <View
+        style={[
+          styles.loadingContainer,
+          { backgroundColor: theme.colors.background },
+        ]}
+      >
+        <Text
+          style={[styles.loadingText, { color: theme.colors.onBackground }]}
+        >
           Загрузка настроек...
         </Text>
       </View>
@@ -110,19 +120,34 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   }
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
+      <ScrollView
+        style={styles.scrollView}
+        showsVerticalScrollIndicator={false}
+      >
         {/* Метод расчета */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Card.Content>
-            <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
+            <Text
+              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+            >
               Метод расчета времени намаза
             </Text>
-            <Text style={[styles.sectionDescription, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              style={[
+                styles.sectionDescription,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
               Выберите метод расчета, соответствующий вашему мазхабу
             </Text>
-            
-            <RadioButton.Group onValueChange={handleMethodChange} value={calculationMethod}>
+
+            <RadioButton.Group
+              onValueChange={handleMethodChange}
+              value={calculationMethod}
+            >
               {Object.entries(CALCULATION_METHODS).map(([key, value]) => (
                 <RadioButton.Item
                   key={key}
@@ -141,17 +166,24 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         {/* Уведомления */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Card.Content>
-            <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
+            <Text
+              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+            >
               Уведомления
             </Text>
-            <Text style={[styles.sectionDescription, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              style={[
+                styles.sectionDescription,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
               Получать уведомления за 10 минут до намаза
             </Text>
-            
+
             <List.Item
               title="Уведомления о намазе"
               description="Уведомления за 10 минут до каждого намаза"
-              left={(props) => <List.Icon {...props} icon="bell" />}
+              left={props => <List.Icon {...props} icon="bell" />}
               right={() => (
                 <Switch
                   value={notificationsEnabled}
@@ -170,14 +202,26 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         {/* Тема */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Card.Content>
-            <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
+            <Text
+              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+            >
               Внешний вид
             </Text>
-            <Text style={[styles.sectionDescription, { color: theme.colors.onSurfaceVariant }]}>
+            <Text
+              style={[
+                styles.sectionDescription,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
               Выберите тему приложения
             </Text>
-            
-            <RadioButton.Group onValueChange={(value) => handleThemeChange(value as 'light' | 'dark' | 'auto')} value={selectedTheme}>
+
+            <RadioButton.Group
+              onValueChange={value =>
+                handleThemeChange(value as 'light' | 'dark' | 'auto')
+              }
+              value={selectedTheme}
+            >
               <RadioButton.Item
                 label="Автоматически"
                 value="auto"
@@ -205,22 +249,24 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
         {/* Информация */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
           <Card.Content>
-            <Text style={[styles.sectionTitle, { color: theme.colors.onSurface }]}>
+            <Text
+              style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
+            >
               О приложении
             </Text>
-            
+
             <List.Item
               title="Версия"
               description="1.0.0"
-              left={(props) => <List.Icon {...props} icon="information" />}
+              left={props => <List.Icon {...props} icon="information" />}
               titleStyle={{ color: theme.colors.onSurface }}
               descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
             />
-            
+
             <List.Item
               title="Разработчик"
               description="Iqamah Team"
-              left={(props) => <List.Icon {...props} icon="account" />}
+              left={props => <List.Icon {...props} icon="account" />}
               titleStyle={{ color: theme.colors.onSurface }}
               descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
             />
@@ -262,4 +308,4 @@ const styles = StyleSheet.create({
   divider: {
     marginHorizontal: 16,
   },
-}); 
+});

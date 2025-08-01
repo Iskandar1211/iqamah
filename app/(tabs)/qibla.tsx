@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
-import { Card, MD3LightTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
+import { StyleSheet, Text, View } from 'react-native';
+import {
+  Card,
+  MD3LightTheme,
+  Provider as PaperProvider,
+  useTheme,
+} from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { getSelectedCity } from '../../utils/storage';
 
-const { width, height } = Dimensions.get('window');
+// const { width, height } = Dimensions.get('window');
 
 const QiblaScreen: React.FC = () => {
   const theme = useTheme();
@@ -20,7 +25,7 @@ const QiblaScreen: React.FC = () => {
     try {
       const city = await getSelectedCity();
       setSelectedCity(city);
-      
+
       // Простой расчет направления Киблы для Таджикистана
       // В реальном приложении здесь будет точный расчет
       if (city) {
@@ -33,72 +38,123 @@ const QiblaScreen: React.FC = () => {
     }
   };
 
-  const calculateQiblaDirection = (lat: number, lng: number) => {
-    // Координаты Каабы в Мекке
-    const kaabaLat = 21.4225;
-    const kaabaLng = 39.8262;
-    
-    // Расчет направления Киблы
-    const deltaLng = kaabaLng - lng;
-    const y = Math.sin(deltaLng) * Math.cos(kaabaLat);
-    const x = Math.cos(lat) * Math.sin(kaabaLat) - Math.sin(lat) * Math.cos(kaabaLat) * Math.cos(deltaLng);
-    const qiblaAngle = Math.atan2(y, x) * 180 / Math.PI;
-    
-    return (qiblaAngle + 360) % 360;
-  };
+  // const calculateQiblaDirection = (lat: number, lng: number) => {
+  //   // Координаты Каабы в Мекке
+  //   const kaabaLat = 21.4225;
+  //   const kaabaLng = 39.8262;
 
-  const getDirectionName = (angle: number): string => {
-    const directions = [
-      'Север', 'Северо-Восток', 'Восток', 'Юго-Восток',
-      'Юг', 'Юго-Запад', 'Запад', 'Северо-Запад'
-    ];
-    const index = Math.round(angle / 45) % 8;
-    return directions[index];
-  };
+  //   // Расчет направления Киблы
+  //   const deltaLng = kaabaLng - lng;
+  //   const y = Math.sin(deltaLng) * Math.cos(kaabaLat);
+  //   const x =
+  //     Math.cos(lat) * Math.sin(kaabaLat) -
+  //     Math.sin(lat) * Math.cos(kaabaLat) * Math.cos(deltaLng);
+  //   const qiblaAngle = (Math.atan2(y, x) * 180) / Math.PI;
+
+  //   return (qiblaAngle + 360) % 360;
+  // };
+
+  // const getDirectionName = (angle: number): string => {
+  //   const directions = [
+  //     'Север',
+  //     'Северо-Восток',
+  //     'Восток',
+  //     'Юго-Восток',
+  //     'Юг',
+  //     'Юго-Запад',
+  //     'Запад',
+  //     'Северо-Запад',
+  //   ];
+  //   const index = Math.round(angle / 45) % 8;
+  //   return directions[index];
+  // };
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       {/* Заголовок */}
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.onBackground }]}>
           🕋 Направление Киблы
         </Text>
-        <Text style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}>
+        <Text
+          style={[styles.subtitle, { color: theme.colors.onSurfaceVariant }]}
+        >
           Направление к Каабе в Мекке
         </Text>
       </View>
 
       {/* Компас */}
-      <Card style={[styles.compassCard, { backgroundColor: theme.colors.surface }]}>
+      <Card
+        style={[styles.compassCard, { backgroundColor: theme.colors.surface }]}
+      >
         <Card.Content style={styles.compassContent}>
           <View style={styles.compassContainer}>
-            <View style={[styles.compass, { borderColor: theme.colors.primary }]}>
-              <View style={[styles.compassNeedle, { transform: [{ rotate: `${qiblaAngle}deg` }] }]}>
-                <Text style={[styles.compassArrow, { color: theme.colors.primary }]}>
+            <View
+              style={[styles.compass, { borderColor: theme.colors.primary }]}
+            >
+              <View
+                style={[
+                  styles.compassNeedle,
+                  { transform: [{ rotate: `${qiblaAngle}deg` }] },
+                ]}
+              >
+                <Text
+                  style={[styles.compassArrow, { color: theme.colors.primary }]}
+                >
                   🕋
                 </Text>
               </View>
-              
+
               {/* Маркеры направлений */}
-              <Text style={[styles.directionMarker, styles.north, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                style={[
+                  styles.directionMarker,
+                  styles.north,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
                 С
               </Text>
-              <Text style={[styles.directionMarker, styles.east, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                style={[
+                  styles.directionMarker,
+                  styles.east,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
                 В
               </Text>
-              <Text style={[styles.directionMarker, styles.south, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                style={[
+                  styles.directionMarker,
+                  styles.south,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
                 Ю
               </Text>
-              <Text style={[styles.directionMarker, styles.west, { color: theme.colors.onSurfaceVariant }]}>
+              <Text
+                style={[
+                  styles.directionMarker,
+                  styles.west,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
                 З
               </Text>
             </View>
           </View>
-          
-          <Text style={[styles.directionText, { color: theme.colors.onSurface }]}>
+
+          <Text
+            style={[styles.directionText, { color: theme.colors.onSurface }]}
+          >
             {qiblaDirection}
           </Text>
-          <Text style={[styles.angleText, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            style={[styles.angleText, { color: theme.colors.onSurfaceVariant }]}
+          >
             {qiblaAngle}° от севера
           </Text>
         </Card.Content>
@@ -106,7 +162,9 @@ const QiblaScreen: React.FC = () => {
 
       {/* Информация о городе */}
       {selectedCity && (
-        <Card style={[styles.infoCard, { backgroundColor: theme.colors.surface }]}>
+        <Card
+          style={[styles.infoCard, { backgroundColor: theme.colors.surface }]}
+        >
           <Card.Content>
             <Text style={[styles.infoTitle, { color: theme.colors.onSurface }]}>
               Ваше местоположение
@@ -114,20 +172,41 @@ const QiblaScreen: React.FC = () => {
             <Text style={[styles.cityText, { color: theme.colors.onSurface }]}>
               {selectedCity.name}, {selectedCity.country}
             </Text>
-            <Text style={[styles.coordinatesText, { color: theme.colors.onSurfaceVariant }]}>
-              Координаты: {selectedCity.latitude.toFixed(4)}, {selectedCity.longitude.toFixed(4)}
+            <Text
+              style={[
+                styles.coordinatesText,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
+              Координаты: {selectedCity.latitude.toFixed(4)},{' '}
+              {selectedCity.longitude.toFixed(4)}
             </Text>
           </Card.Content>
         </Card>
       )}
 
       {/* Инструкции */}
-      <Card style={[styles.instructionsCard, { backgroundColor: theme.colors.surface }]}>
+      <Card
+        style={[
+          styles.instructionsCard,
+          { backgroundColor: theme.colors.surface },
+        ]}
+      >
         <Card.Content>
-          <Text style={[styles.instructionsTitle, { color: theme.colors.onSurface }]}>
+          <Text
+            style={[
+              styles.instructionsTitle,
+              { color: theme.colors.onSurface },
+            ]}
+          >
             Как определить направление Киблы
           </Text>
-          <Text style={[styles.instructionText, { color: theme.colors.onSurfaceVariant }]}>
+          <Text
+            style={[
+              styles.instructionText,
+              { color: theme.colors.onSurfaceVariant },
+            ]}
+          >
             1. Встаньте лицом к северу{'\n'}
             2. Повернитесь в направлении стрелки{'\n'}
             3. Теперь вы смотрите в сторону Каабы{'\n'}
@@ -138,8 +217,11 @@ const QiblaScreen: React.FC = () => {
 
       {/* Примечание */}
       <View style={styles.noteContainer}>
-        <Text style={[styles.noteText, { color: theme.colors.onSurfaceVariant }]}>
-          💡 Для более точного определения направления используйте компас или GPS
+        <Text
+          style={[styles.noteText, { color: theme.colors.onSurfaceVariant }]}
+        >
+          💡 Для более точного определения направления используйте компас или
+          GPS
         </Text>
       </View>
     </SafeAreaView>
@@ -279,4 +361,4 @@ const QiblaScreenWrapper = () => {
   );
 };
 
-export default QiblaScreenWrapper; 
+export default QiblaScreenWrapper;

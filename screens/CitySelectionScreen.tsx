@@ -12,7 +12,7 @@ interface CitySelectionScreenProps {
 
 export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
   onCitySelected,
-  onClose
+  onClose,
 }) => {
   const theme = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
@@ -44,29 +44,24 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
     <List.Item
       title={item.name}
       description={item.country}
-      left={(props) => <List.Icon {...props} icon="city" />}
-      right={(props) => <List.Icon {...props} icon="chevron-right" />}
+      left={props => <List.Icon {...props} icon="city" />}
+      right={props => <List.Icon {...props} icon="chevron-right" />}
       onPress={() => handleCityPress(item)}
-      style={[
-        styles.cityItem,
-        { backgroundColor: theme.colors.surface }
-      ]}
+      style={[styles.cityItem, { backgroundColor: theme.colors.surface }]}
       titleStyle={{ color: theme.colors.onSurface }}
       descriptionStyle={{ color: theme.colors.onSurfaceVariant }}
     />
   );
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.background }]}
+    >
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.onBackground }]}>
           Выберите город
         </Text>
-        <Button
-          mode="text"
-          onPress={onClose}
-          icon="close"
-        >
+        <Button mode="text" onPress={onClose} icon="close">
           Закрыть
         </Button>
       </View>
@@ -82,16 +77,23 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
       <FlatList
         data={filteredCities}
         renderItem={renderCityItem}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={item => item.id.toString()}
         style={styles.list}
         showsVerticalScrollIndicator={false}
         ItemSeparatorComponent={() => (
-          <View style={[styles.separator, { backgroundColor: theme.colors.outline }]} />
+          <View
+            style={[
+              styles.separator,
+              { backgroundColor: theme.colors.outline },
+            ]}
+          />
         )}
       />
 
       <View style={styles.footer}>
-        <Text style={[styles.footerText, { color: theme.colors.onSurfaceVariant }]}>
+        <Text
+          style={[styles.footerText, { color: theme.colors.onSurfaceVariant }]}
+        >
           Всего городов: {filteredCities.length}
         </Text>
       </View>
@@ -139,4 +141,4 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 14,
   },
-}); 
+});

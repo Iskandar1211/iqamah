@@ -30,12 +30,14 @@ export const Header: React.FC = () => {
           {formatTime(currentTime)}
         </Text>
       </View>
-      
+
       <View style={styles.dateContainer}>
         <Text style={[styles.gregorianDate, { color: theme.colors.onSurface }]}>
           {formatDate(currentTime)}
         </Text>
-        <Text style={[styles.hijriDate, { color: theme.colors.onSurfaceVariant }]}>
+        <Text
+          style={[styles.hijriDate, { color: theme.colors.onSurfaceVariant }]}
+        >
           {getHijriDate(currentTime)}
         </Text>
       </View>
@@ -73,4 +75,4 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     textAlign: 'center',
   },
-}); 
+});
