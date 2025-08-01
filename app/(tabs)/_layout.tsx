@@ -2,8 +2,8 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 import { Platform } from 'react-native';
 
+import { AnimatedTabIcon } from '@/components/AnimatedTabIcon';
 import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
 import TabBarBackground from '@/components/ui/TabBarBackground';
 import { Colors } from '@/constants/Colors';
 import { useColorScheme } from '@/hooks/useColorScheme';
@@ -15,24 +15,68 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarInactiveTintColor: Colors[colorScheme ?? 'light'].tabIconDefault,
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
-            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
+            height: 88,
+            paddingBottom: 20,
+            paddingTop: 8,
+            borderTopWidth: 0,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: -2,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 8,
+            elevation: 10,
           },
-          default: {},
+          android: {
+            height: 70,
+            paddingBottom: 8,
+            paddingTop: 8,
+            borderTopWidth: 0,
+            elevation: 8,
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: -2,
+            },
+            shadowOpacity: 0.1,
+            shadowRadius: 8,
+          },
+          default: {
+            height: 70,
+            paddingBottom: 8,
+            paddingTop: 8,
+            borderTopWidth: 0,
+          },
         }),
+        tabBarLabelStyle: {
+          fontSize: 12,
+          fontWeight: '600',
+          marginTop: 4,
+        },
+        tabBarIconStyle: {
+          marginBottom: 2,
+        },
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           title: 'Намаз',
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <AnimatedTabIcon 
+              name="clock.fill" 
+              color={color} 
+              focused={focused}
+              size={28}
+            />
           ),
         }}
       />
@@ -40,8 +84,13 @@ export default function TabLayout() {
         name="qibla"
         options={{
           title: 'Кибла',
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="location.north.fill" color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <AnimatedTabIcon 
+              name="location.north.fill" 
+              color={color} 
+              focused={focused}
+              size={28}
+            />
           ),
         }}
       />
@@ -49,8 +98,13 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Настройки',
-          tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="gearshape.fill" color={color} />
+          tabBarIcon: ({ color, focused }) => (
+            <AnimatedTabIcon 
+              name="gearshape.fill" 
+              color={color} 
+              focused={focused}
+              size={28}
+            />
           ),
         }}
       />

@@ -15,22 +15,10 @@ export const Header: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatTime = (date: Date): string => {
-    return date.toLocaleTimeString('ru-RU', {
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit',
-    });
-  };
+
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
-      <View style={styles.timeContainer}>
-        <Text style={[styles.currentTime, { color: theme.colors.onSurface }]}>
-          {formatTime(currentTime)}
-        </Text>
-      </View>
-
       <View style={styles.dateContainer}>
         <Text style={[styles.gregorianDate, { color: theme.colors.onSurface }]}>
           {formatDate(currentTime)}
