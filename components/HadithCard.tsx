@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Card, useTheme, ActivityIndicator } from 'react-native-paper';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, Card, useTheme } from 'react-native-paper';
 
 interface Hadith {
   text: string;
@@ -83,19 +84,21 @@ export const HadithCard: React.FC = () => {
 
   if (loading) {
     return (
-      <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-        <Card.Content style={styles.loadingContainer}>
-          <ActivityIndicator size="small" color={theme.colors.primary} />
-          <Text
-            style={[
-              styles.loadingText,
-              { color: theme.colors.onSurfaceVariant },
-            ]}
-          >
-            Загрузка хадиса...
-          </Text>
-        </Card.Content>
-      </Card>
+      <View style={styles.cardContainer}>
+        <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
+          <Card.Content style={styles.loadingContainer}>
+            <ActivityIndicator size="small" color={theme.colors.primary} />
+            <Text
+              style={[
+                styles.loadingText,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
+              Загрузка хадиса...
+            </Text>
+          </Card.Content>
+        </Card>
+      </View>
     );
   }
 
@@ -104,46 +107,73 @@ export const HadithCard: React.FC = () => {
   }
 
   return (
-    <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
-      <Card.Content>
-        <View style={styles.header}>
-          <Text style={[styles.title, { color: theme.colors.primary }]}>
-            🕌 Хадис дня
-          </Text>
-        </View>
+    <View style={styles.cardContainer}>
+      <LinearGradient
+        colors={[theme.colors.secondaryContainer, theme.colors.tertiaryContainer]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={styles.gradientCard}
+      >
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text style={[styles.title, { color: theme.colors.onSecondaryContainer }]}>
+              🕌 Хадис дня
+            </Text>
+          </View>
 
-        <Text style={[styles.hadithText, { color: theme.colors.onSurface }]}>
-          &ldquo;{hadith.text}&rdquo;
-        </Text>
+          <Text style={[styles.hadithText, { color: theme.colors.onSecondaryContainer }]}>
+            &ldquo;{hadith.text}&rdquo;
+          </Text>
 
-        <View style={styles.footer}>
-          <Text
-            style={[styles.narrator, { color: theme.colors.onSurfaceVariant }]}
-          >
-            Передал: {hadith.narrator}
-          </Text>
-          <Text style={[styles.source, { color: theme.colors.primary }]}>
-            {hadith.source}
-          </Text>
+          <View style={styles.footer}>
+            <Text
+              style={[styles.narrator, { color: theme.colors.onSecondaryContainer }]}
+            >
+              Передал: {hadith.narrator}
+            </Text>
+            <View style={[styles.sourceContainer, { backgroundColor: 'rgba(255, 255, 255, 0.2)' }]}>
+              <Text style={[styles.source, { color: theme.colors.onSecondaryContainer }]}>
+                {hadith.source}
+              </Text>
+            </View>
+          </View>
         </View>
-      </Card.Content>
-    </Card>
+      </LinearGradient>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  card: {
+  cardContainer: {
     marginHorizontal: 16,
     marginVertical: 8,
-    borderRadius: 12,
-    elevation: 2,
+    borderRadius: 20,
+    elevation: 4,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.1,
-    shadowRadius: 3.84,
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+  },
+  gradientCard: {
+    borderRadius: 20,
+    padding: 24,
+  },
+  card: {
+    borderRadius: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+  },
+  content: {
+    flex: 1,
   },
   loadingContainer: {
     alignItems: 'center',
@@ -154,17 +184,20 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   header: {
-    marginBottom: 12,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: 18,
+    fontWeight: '700',
+    textAlign: 'center',
   },
   hadithText: {
-    fontSize: 15,
-    lineHeight: 22,
+    fontSize: 16,
+    lineHeight: 24,
     fontStyle: 'italic',
-    marginBottom: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+    fontWeight: '500',
   },
   footer: {
     flexDirection: 'row',
@@ -172,11 +205,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   narrator: {
-    fontSize: 12,
+    fontSize: 13,
     fontStyle: 'italic',
+    flex: 1,
+    marginRight: 12,
+  },
+  sourceContainer: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 12,
   },
   source: {
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: '700',
   },
 });

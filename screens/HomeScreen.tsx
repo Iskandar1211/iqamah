@@ -1,6 +1,8 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { Alert, Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Text, useTheme } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { HadithCard } from '../components/HadithCard';
 import { Header } from '../components/Header';
 import { PrayerCard } from '../components/PrayerCard';
@@ -10,7 +12,6 @@ import { getCurrentCity } from '../utils/location';
 import { sendTestNotification } from '../utils/notifications';
 import { saveSelectedCity } from '../utils/storage';
 import { CitySelectionScreen } from './CitySelectionScreen';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
@@ -104,66 +105,75 @@ export const HomeScreen: React.FC = () => {
       <ScrollView
         style={styles.scrollView}
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
       >
         {/* Информация о городе */}
         <View style={styles.citySection}>
-          <Text
-            style={[styles.cityTitle, { color: theme.colors.onBackground }]}
-          >
-            {selectedCity?.name}, {selectedCity?.country}
-          </Text>
-          <Text
-            style={[
-              styles.methodText,
-              { color: theme.colors.onSurfaceVariant },
-            ]}
-          >
-            Метод расчета: Ханафийский (Muslim World League)
-          </Text>
+          <View style={[styles.cityCard, { backgroundColor: theme.colors.surface }]}>
+            <Text
+              style={[styles.cityTitle, { color: theme.colors.onSurface }]}
+            >
+              {selectedCity?.name}, {selectedCity?.country}
+            </Text>
+            <Text
+              style={[
+                styles.methodText,
+                { color: theme.colors.onSurfaceVariant },
+              ]}
+            >
+              Метод расчета: Ханафийский (Muslim World League)
+            </Text>
+          </View>
         </View>
 
         {/* Следующий намаз */}
         {nextPrayer && (
-          <View
-            style={[
-              styles.nextPrayerSection,
-              { backgroundColor: theme.colors.primaryContainer },
-            ]}
-          >
-            <Text
-              style={[
-                styles.nextPrayerTitle,
-                { color: theme.colors.onPrimaryContainer },
-              ]}
+          <View style={styles.nextPrayerContainer}>
+            <LinearGradient
+              colors={[theme.colors.primary, theme.colors.primaryContainer]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.nextPrayerSection}
             >
-              Следующий намаз
-            </Text>
-            <Text
-              style={[
-                styles.nextPrayerName,
-                { color: theme.colors.onPrimaryContainer },
-              ]}
-            >
-              {nextPrayer.name}
-            </Text>
-            <Text
-              style={[
-                styles.nextPrayerTime,
-                { color: theme.colors.onPrimaryContainer },
-              ]}
-            >
-              {nextPrayer.formattedTime}
-            </Text>
-            {timeUntilNext && (
-              <Text
-                style={[
-                  styles.timeUntilText,
-                  { color: theme.colors.onPrimaryContainer },
-                ]}
-              >
-                Через {timeUntilNext}
-              </Text>
-            )}
+              <View style={styles.nextPrayerContent}>
+                <Text
+                  style={[
+                    styles.nextPrayerTitle,
+                    { color: theme.colors.onPrimary },
+                  ]}
+                >
+                  Следующий намаз
+                </Text>
+                <Text
+                  style={[
+                    styles.nextPrayerName,
+                    { color: theme.colors.onPrimary },
+                  ]}
+                >
+                  {nextPrayer.name}
+                </Text>
+                <Text
+                  style={[
+                    styles.nextPrayerTime,
+                    { color: theme.colors.onPrimary },
+                  ]}
+                >
+                  {nextPrayer.formattedTime}
+                </Text>
+                {timeUntilNext && (
+                  <View style={styles.timeUntilContainer}>
+                    <Text
+                      style={[
+                        styles.timeUntilText,
+                        { color: theme.colors.onPrimary },
+                      ]}
+                    >
+                      Через {timeUntilNext}
+                    </Text>
+                  </View>
+                )}
+              </View>
+            </LinearGradient>
           </View>
         )}
 
@@ -185,9 +195,11 @@ export const HomeScreen: React.FC = () => {
         {/* Кнопки управления */}
         <View style={styles.buttonsSection}>
           <Button
-            mode="outlined"
+            mode="contained"
             onPress={handleCityPress}
-            style={styles.button}
+            style={[styles.button, { backgroundColor: theme.colors.primary }]}
+            contentStyle={styles.buttonContent}
+            labelStyle={styles.buttonLabel}
             icon="city"
           >
             Выбрать город
@@ -196,7 +208,9 @@ export const HomeScreen: React.FC = () => {
           <Button
             mode="outlined"
             onPress={handleLocationPress}
-            style={styles.button}
+            style={[styles.button, { borderColor: theme.colors.primary }]}
+            contentStyle={styles.buttonContent}
+            labelStyle={[styles.buttonLabel, { color: theme.colors.primary }]}
             icon="crosshairs-gps"
           >
             Определить местоположение
@@ -235,59 +249,116 @@ const styles = StyleSheet.create({
   scrollView: {
     flex: 1,
   },
+  scrollContent: {
+    paddingBottom: 20,
+  },
   citySection: {
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 16,
+  },
+  cityCard: {
+    padding: 16,
+    borderRadius: 16,
     alignItems: 'center',
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
   },
   cityTitle: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 20,
+    fontWeight: '700',
     marginBottom: 4,
+    textAlign: 'center',
   },
   methodText: {
     fontSize: 14,
+    textAlign: 'center',
+    opacity: 0.8,
+  },
+  nextPrayerContainer: {
+    paddingHorizontal: 16,
+    marginBottom: 16,
   },
   nextPrayerSection: {
-    marginHorizontal: 16,
-    marginVertical: 16,
-    padding: 20,
-    borderRadius: 16,
+    borderRadius: 20,
+    padding: 24,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+  },
+  nextPrayerContent: {
     alignItems: 'center',
   },
   nextPrayerTitle: {
-    fontSize: 14,
-    fontWeight: '500',
-    marginBottom: 8,
-  },
-  nextPrayerName: {
-    fontSize: 24,
-    fontWeight: '700',
-    marginBottom: 4,
-  },
-  nextPrayerTime: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: '600',
     marginBottom: 8,
+    opacity: 0.9,
+  },
+  nextPrayerName: {
+    fontSize: 28,
+    fontWeight: '800',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  nextPrayerTime: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  timeUntilContainer: {
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
   },
   timeUntilText: {
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '600',
+    textAlign: 'center',
   },
   prayerListSection: {
-    marginTop: 16,
+    marginTop: 8,
   },
   sectionTitle: {
-    fontSize: 18,
-    fontWeight: '600',
+    fontSize: 20,
+    fontWeight: '700',
     marginHorizontal: 16,
-    marginBottom: 12,
+    marginBottom: 16,
+    marginTop: 8,
   },
   buttonsSection: {
     paddingHorizontal: 16,
-    paddingVertical: 20,
+    paddingVertical: 24,
+    gap: 12,
   },
   button: {
-    marginBottom: 12,
+    borderRadius: 12,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 3.84,
+  },
+  buttonContent: {
+    paddingVertical: 8,
+  },
+  buttonLabel: {
+    fontSize: 16,
+    fontWeight: '600',
   },
 });

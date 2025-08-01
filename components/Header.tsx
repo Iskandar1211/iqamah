@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import React, { useEffect, useState } from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
 import { formatDate, getHijriDate } from '../utils/prayerTimes';
 
@@ -15,52 +16,74 @@ export const Header: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
-
+  const formatTime = (date: Date): string => {
+    return date.toLocaleTimeString('ru-RU', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
+  };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
-      <View style={styles.dateContainer}>
-        <Text style={[styles.gregorianDate, { color: theme.colors.onSurface }]}>
-          {formatDate(currentTime)}
-        </Text>
-        <Text
-          style={[styles.hijriDate, { color: theme.colors.onSurfaceVariant }]}
-        >
-          {getHijriDate(currentTime)}
-        </Text>
+    <LinearGradient
+      colors={[theme.colors.primary, theme.colors.primaryContainer]}
+      start={{ x: 0, y: 0 }}
+      end={{ x: 1, y: 1 }}
+      style={styles.container}
+    >
+      <View style={styles.content}>
+        <View style={styles.timeContainer}>
+          <Text style={[styles.currentTime, { color: theme.colors.onPrimary }]}>
+            {formatTime(currentTime)}
+          </Text>
+        </View>
+        
+        <View style={styles.dateContainer}>
+          <Text style={[styles.gregorianDate, { color: theme.colors.onPrimary }]}>
+            {formatDate(currentTime)}
+          </Text>
+          <Text
+            style={[styles.hijriDate, { color: theme.colors.onPrimary }]}
+          >
+            {getHijriDate(currentTime)}
+          </Text>
+        </View>
       </View>
-    </View>
+    </LinearGradient>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
     paddingHorizontal: 16,
+  },
+  content: {
     alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
   },
   timeContainer: {
-    marginBottom: 8,
+    marginBottom: 12,
   },
   currentTime: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: '700',
     textAlign: 'center',
+    letterSpacing: 1,
   },
   dateContainer: {
     alignItems: 'center',
   },
   gregorianDate: {
-    fontSize: 16,
-    fontWeight: '500',
+    fontSize: 18,
+    fontWeight: '600',
     textAlign: 'center',
     marginBottom: 4,
   },
   hijriDate: {
-    fontSize: 14,
-    fontWeight: '400',
+    fontSize: 16,
+    fontWeight: '500',
     textAlign: 'center',
+    opacity: 0.9,
   },
 });
