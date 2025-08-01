@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { Card, MD3LightTheme, Provider as PaperProvider, useTheme } from 'react-native-paper';
 import { getSelectedCity } from '../../utils/storage';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const { width, height } = Dimensions.get('window');
 
@@ -56,7 +57,7 @@ const QiblaScreen: React.FC = () => {
   };
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {/* Заголовок */}
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.colors.onBackground }]}>
@@ -141,7 +142,7 @@ const QiblaScreen: React.FC = () => {
           💡 Для более точного определения направления используйте компас или GPS
         </Text>
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 

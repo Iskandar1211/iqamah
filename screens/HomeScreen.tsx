@@ -10,6 +10,7 @@ import { getCurrentCity } from '../utils/location';
 import { sendTestNotification } from '../utils/notifications';
 import { saveSelectedCity } from '../utils/storage';
 import { CitySelectionScreen } from './CitySelectionScreen';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
@@ -88,7 +89,7 @@ export const HomeScreen: React.FC = () => {
   const timeUntilNext = getTimeUntilNextPrayer();
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <Header />
       
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
@@ -175,7 +176,7 @@ export const HomeScreen: React.FC = () => {
       </Modal>
 
 
-    </View>
+    </SafeAreaView>
   );
 };
 

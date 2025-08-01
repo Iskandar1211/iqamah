@@ -1,32 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { View, ScrollView, StyleSheet, Alert } from 'react-native';
-import { 
-  Text, 
-  List, 
-  Switch, 
-  useTheme, 
-  Button, 
+import React, { useEffect, useState } from 'react';
+import { Alert, ScrollView, StyleSheet, View } from 'react-native';
+import {
+  Card,
   Divider,
+  List,
   RadioButton,
-  Card
+  Switch,
+  Text,
+  useTheme
 } from 'react-native-paper';
-import { 
-  saveCalculationMethod, 
-  saveNotificationsEnabled, 
-  saveTheme,
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { CALCULATION_METHODS } from '../utils/prayerTimes';
+import {
   getCalculationMethod,
   getNotificationsEnabled,
-  getTheme
+  getTheme,
+  saveCalculationMethod,
+  saveNotificationsEnabled,
+  saveTheme
 } from '../utils/storage';
-import { CALCULATION_METHODS } from '../utils/prayerTimes';
 
 interface SettingsScreenProps {
-  onClose?: () => void;
   onSettingsChanged?: () => void;
 }
 
 export const SettingsScreen: React.FC<SettingsScreenProps> = ({
-  onClose,
   onSettingsChanged
 }) => {
   const theme = useTheme();
@@ -112,18 +110,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      {onClose && (
-        <View style={styles.header}>
-          <Text style={[styles.title, { color: theme.colors.onBackground }]}>
-            Настройки
-          </Text>
-          <Button mode="text" onPress={onClose} icon="close">
-            Закрыть
-          </Button>
-        </View>
-      )}
-
+    <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
         {/* Метод расчета */}
         <Card style={[styles.card, { backgroundColor: theme.colors.surface }]}>
@@ -190,7 +177,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
               Выберите тему приложения
             </Text>
             
-            <RadioButton.Group onValueChange={handleThemeChange} value={selectedTheme}>
+            <RadioButton.Group onValueChange={(value) => handleThemeChange(value as 'light' | 'dark' | 'auto')} value={selectedTheme}>
               <RadioButton.Item
                 label="Автоматически"
                 value="auto"
@@ -240,7 +227,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
           </Card.Content>
         </Card>
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -255,19 +242,6 @@ const styles = StyleSheet.create({
   },
   loadingText: {
     fontSize: 16,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: '600',
   },
   scrollView: {
     flex: 1,

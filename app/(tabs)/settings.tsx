@@ -16,10 +16,7 @@ const theme = {
 export default function SettingsScreenWrapper() {
   return (
     <PaperProvider theme={theme}>
-      <SettingsScreen 
-        onClose={() => {}} 
-        onSettingsChanged={() => {}} 
-      />
+      <SettingsScreen />
     </PaperProvider>
   );
 } 
