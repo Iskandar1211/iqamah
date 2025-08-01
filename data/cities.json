@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "name": "Душанбе",
+    "country": "Таджикистан",
+    "latitude": 38.5358,
+    "longitude": 68.7791,
+    "timezone": "Asia/Dushanbe"
+  },
+  {
+    "id": 2,
+    "name": "Москва",
+    "country": "Россия",
+    "latitude": 55.7558,
+    "longitude": 37.6176,
+    "timezone": "Europe/Moscow"
+  },
+  {
+    "id": 3,
+    "name": "Санкт-Петербург",
+    "country": "Россия",
+    "latitude": 59.9311,
+    "longitude": 30.3609,
+    "timezone": "Europe/Moscow"
+  },
+  {
+    "id": 4,
+    "name": "Казань",
+    "country": "Россия",
+    "latitude": 55.8304,
+    "longitude": 49.0661,
+    "timezone": "Europe/Moscow"
+  },
+  {
+    "id": 5,
+    "name": "Уфа",
+    "country": "Россия",
+    "latitude": 54.7388,
+    "longitude": 55.9721,
+    "timezone": "Asia/Yekaterinburg"
+  },
+  {
+    "id": 6,
+    "name": "Ташкент",
+    "country": "Узбекистан",
+    "latitude": 41.2995,
+    "longitude": 69.2401,
+    "timezone": "Asia/Tashkent"
+  },
+  {
+    "id": 7,
+    "name": "Алматы",
+    "country": "Казахстан",
+    "latitude": 43.2220,
+    "longitude": 76.8512,
+    "timezone": "Asia/Almaty"
+  },
+  {
+    "id": 8,
+    "name": "Бишкек",
+    "country": "Кыргызстан",
+    "latitude": 42.8746,
+    "longitude": 74.5698,
+    "timezone": "Asia/Bishkek"
+  },
+  {
+    "id": 9,
+    "name": "Ашхабад",
+    "country": "Туркменистан",
+    "latitude": 37.9601,
+    "longitude": 58.3261,
+    "timezone": "Asia/Ashgabat"
+  },
+  {
+    "id": 10,
+    "name": "Баку",
+    "country": "Азербайджан",
+    "latitude": 40.4093,
+    "longitude": 49.8671,
+    "timezone": "Asia/Baku"
+  }
+] 
