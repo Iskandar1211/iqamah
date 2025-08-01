@@ -62,6 +62,34 @@ export interface Translations {
   karachiMethod: string;
   tehranMethod: string;
   jafariMethod: string;
+  dubaiMethod: string;
+  kuwaitMethod: string;
+  qatarMethod: string;
+  singaporeMethod: string;
+  turkeyMethod: string;
+  moonsightingMethod: string;
+  northAmericaMethod: string;
+  otherMethod: string;
+  
+  // Qibla
+  qiblaDirection: string;
+  qiblaDescription: string;
+  north: string;
+  northeast: string;
+  east: string;
+  southeast: string;
+  south: string;
+  southwest: string;
+  west: string;
+  northwest: string;
+  fromNorth: string;
+  yourLocation: string;
+  howToDetermineQibla: string;
+  step1Qibla: string;
+  step2Qibla: string;
+  step3Qibla: string;
+  step4Qibla: string;
+  qiblaNote: string;
   
   // Алерты
   methodChanged: string;
@@ -125,11 +153,39 @@ const translations: Record<Language, Translations> = {
     karachiMethod: 'Карачинский',
     tehranMethod: 'Тегеранский',
     jafariMethod: 'Джафари',
+    dubaiMethod: 'Дубайский',
+    kuwaitMethod: 'Кувейтский',
+    qatarMethod: 'Катарский',
+    singaporeMethod: 'Сингапурский',
+    turkeyMethod: 'Турецкий',
+    moonsightingMethod: 'Комитет наблюдения за луной',
+    northAmericaMethod: 'Северная Америка',
+    otherMethod: 'Другой',
     
     methodChanged: 'Метод расчета изменен',
     methodChangeError: 'Не удалось сохранить метод расчета',
     notificationsSaveError: 'Не удалось сохранить настройки уведомлений',
     themeSaveError: 'Не удалось сохранить тему',
+    
+    // Qibla
+    qiblaDirection: 'Направление Киблы',
+    qiblaDescription: 'Направление к Каабе в Мекке',
+    north: 'С',
+    northeast: 'СВ',
+    east: 'В',
+    southeast: 'ЮВ',
+    south: 'Ю',
+    southwest: 'ЮЗ',
+    west: 'З',
+    northwest: 'СЗ',
+    fromNorth: 'от севера',
+    yourLocation: 'Ваше местоположение',
+    howToDetermineQibla: 'Как определить направление Киблы',
+    step1Qibla: 'Встаньте лицом к северу',
+    step2Qibla: 'Повернитесь в направлении стрелки',
+    step3Qibla: 'Теперь вы смотрите в сторону Каабы',
+    step4Qibla: 'Это направление для совершения намаза',
+    qiblaNote: 'Для более точного определения направления используйте компас или GPS',
   },
   
   tg: {
@@ -186,11 +242,39 @@ const translations: Record<Language, Translations> = {
     karachiMethod: 'Карачӣ',
     tehranMethod: 'Теҳронӣ',
     jafariMethod: 'Ҷаъфарӣ',
+    dubaiMethod: 'Дубайӣ',
+    kuwaitMethod: 'Кувайтӣ',
+    qatarMethod: 'Қатарӣ',
+    singaporeMethod: 'Сингапурӣ',
+    turkeyMethod: 'Туркӣ',
+    moonsightingMethod: 'Кумитаи назорати моҳ',
+    northAmericaMethod: 'Амрикои Шимолӣ',
+    otherMethod: 'Дигар',
     
     methodChanged: 'Усули ҳисоб тағйир дода шуд',
     methodChangeError: 'Усули ҳисобро сабт карда натавонист',
     notificationsSaveError: 'Танзимоти огоҳиномаҳоро сабт карда натавонист',
     themeSaveError: 'Мавзӯро сабт карда натавонист',
+    
+    // Qibla
+    qiblaDirection: 'Роҳи қибла',
+    qiblaDescription: 'Роҳи Каъба дар Макка',
+    north: 'Ш',
+    northeast: 'ШШ',
+    east: 'Ш',
+    southeast: 'ҶШ',
+    south: 'Ҷ',
+    southwest: 'ҶҒ',
+    west: 'Ғ',
+    northwest: 'ШҒ',
+    fromNorth: 'аз шимол',
+    yourLocation: 'Ҷойгиршавии шумо',
+    howToDetermineQibla: 'Чӣ тавр роҳи қибларо муайян кардан',
+    step1Qibla: 'Ба шимол рӯ ба рӯ бистед',
+    step2Qibla: 'Ба самти тирча кунед',
+    step3Qibla: 'Ҳоло шумо ба самти Каъба мебинед',
+    step4Qibla: 'Ин роҳ барои адои намоз аст',
+    qiblaNote: 'Барои муайян кардани дақиқи роҳ компас ё GPS истифода баред',
   },
   
   en: {
@@ -247,11 +331,39 @@ const translations: Record<Language, Translations> = {
     karachiMethod: 'Karachi',
     tehranMethod: 'Tehran',
     jafariMethod: 'Jafari',
+    dubaiMethod: 'Dubai',
+    kuwaitMethod: 'Kuwait',
+    qatarMethod: 'Qatar',
+    singaporeMethod: 'Singapore',
+    turkeyMethod: 'Turkey',
+    moonsightingMethod: 'Moonsighting Committee',
+    northAmericaMethod: 'North America',
+    otherMethod: 'Other',
     
     methodChanged: 'Calculation method changed',
     methodChangeError: 'Could not save calculation method',
     notificationsSaveError: 'Could not save notification settings',
     themeSaveError: 'Could not save theme',
+    
+    // Qibla
+    qiblaDirection: 'Qibla Direction',
+    qiblaDescription: 'Direction to the Kaaba in Mecca',
+    north: 'N',
+    northeast: 'NE',
+    east: 'E',
+    southeast: 'SE',
+    south: 'S',
+    southwest: 'SW',
+    west: 'W',
+    northwest: 'NW',
+    fromNorth: 'from north',
+    yourLocation: 'Your Location',
+    howToDetermineQibla: 'How to determine Qibla direction',
+    step1Qibla: 'Face north',
+    step2Qibla: 'Turn in the direction of the arrow',
+    step3Qibla: 'Now you are facing the Kaaba',
+    step4Qibla: 'This is the direction for prayer',
+    qiblaNote: 'For more accurate direction determination, use a compass or GPS',
   },
 };
 

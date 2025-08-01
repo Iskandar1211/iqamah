@@ -116,10 +116,17 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       MuslimWorldLeague: t('hanafiMethod'),
       ISNA: t('isnaMethod'),
       Egyptian: t('egyptianMethod'),
-      Makkah: t('makkahMethod'),
+      UmmAlQura: t('makkahMethod'),
       Karachi: t('karachiMethod'),
       Tehran: t('tehranMethod'),
-      Jafari: t('jafariMethod'),
+      Dubai: t('dubaiMethod'),
+      Kuwait: t('kuwaitMethod'),
+      Qatar: t('qatarMethod'),
+      Singapore: t('singaporeMethod'),
+      Turkey: t('turkeyMethod'),
+      MoonsightingCommittee: t('moonsightingMethod'),
+      NorthAmerica: t('northAmericaMethod'),
+      Other: t('otherMethod'),
     };
     return methodNames[method] || method;
   };
