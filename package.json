@@ -15,6 +15,8 @@
     "clean:full": "node ./scripts/clean.js",
     "clear-cache": "expo start --clear",
     "check-deps": "node ./scripts/check-deps.js",
+    "build-android-apk": "cd android && ./gradlew assembleRelease && open app/build/outputs/apk/release",
+    "clean-android-gradlew": "cd android && ./gradlew clean && cd ..",
     "build:android": "expo build:android",
     "build:ios": "expo build:ios",
     "build:web": "expo build:web",
