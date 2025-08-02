@@ -99,6 +99,15 @@ export interface Translations {
   methodChangeError: string;
   notificationsSaveError: string;
   themeSaveError: string;
+  
+  // Дополнительные переводы
+  searchCity: string;
+  totalCities: string;
+  citySaveError: string;
+  languageChangeError: string;
+  hadithOfDay: string;
+  narratedBy: string;
+  methodCalculationDescription: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -172,6 +181,15 @@ const translations: Record<Language, Translations> = {
     methodChangeError: 'Не удалось сохранить метод расчета',
     notificationsSaveError: 'Не удалось сохранить настройки уведомлений',
     themeSaveError: 'Не удалось сохранить тему',
+    
+    // Дополнительные переводы
+    searchCity: 'Поиск города...',
+    totalCities: 'Всего городов',
+    citySaveError: 'Не удалось сохранить выбранный город',
+    languageChangeError: 'Не удалось изменить язык',
+    hadithOfDay: 'Хадис дня',
+    narratedBy: 'Передал',
+    methodCalculationDescription: 'Выберите метод расчета, соответствующий вашему мазхабу',
     
     // Qibla
     qiblaDirection: 'Направление Киблы',
@@ -265,6 +283,15 @@ const translations: Record<Language, Translations> = {
     notificationsSaveError: 'Танзимоти огоҳиномаҳоро сабт карда натавонист',
     themeSaveError: 'Мавзӯро сабт карда натавонист',
     
+    // Дополнительные переводы
+    searchCity: 'Ҷустуҷӯи шаҳр...',
+    totalCities: 'Ҳамаи шаҳрҳо',
+    citySaveError: 'Шаҳри интихобшударо сабт карда натавонист',
+    languageChangeError: 'Забонро тағйир дода натавонист',
+    hadithOfDay: 'Ҳадиси рӯз',
+    narratedBy: 'Ривоят кард',
+    methodCalculationDescription: 'Усули ҳисобро интихоб кунед, ки ба мазҳаби шумо мувофиқ аст',
+    
     // Qibla
     qiblaDirection: 'Роҳи қибла',
     qiblaDescription: 'Роҳи Каъба дар Макка',
@@ -356,6 +383,15 @@ const translations: Record<Language, Translations> = {
     methodChangeError: 'Could not save calculation method',
     notificationsSaveError: 'Could not save notification settings',
     themeSaveError: 'Could not save theme',
+    
+    // Дополнительные переводы
+    searchCity: 'Search city...',
+    totalCities: 'Total cities',
+    citySaveError: 'Could not save selected city',
+    languageChangeError: 'Could not change language',
+    hadithOfDay: 'Hadith of the day',
+    narratedBy: 'Narrated by',
+    methodCalculationDescription: 'Choose calculation method that corresponds to your madhhab',
     
     // Qibla
     qiblaDirection: 'Qibla Direction',

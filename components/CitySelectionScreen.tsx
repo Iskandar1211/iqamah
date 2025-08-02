@@ -38,7 +38,7 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
       onCitySelected(city);
       onClose();
     } catch (error) {
-      Alert.alert(t('error'), 'Не удалось сохранить выбранный город');
+      Alert.alert(t('error'), t('citySaveError'));
     }
   };
 
@@ -69,7 +69,7 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
       </View>
 
       <Searchbar
-        placeholder="Поиск города..."
+        placeholder={t('searchCity')}
         onChangeText={handleSearch}
         value={searchQuery}
         style={styles.searchbar}
@@ -96,7 +96,7 @@ export const CitySelectionScreen: React.FC<CitySelectionScreenProps> = ({
         <Text
           style={[styles.footerText, { color: theme.colors.onSurfaceVariant }]}
         >
-          Всего городов: {filteredCities.length}
+          {t('totalCities')}: {filteredCities.length}
         </Text>
       </View>
     </View>

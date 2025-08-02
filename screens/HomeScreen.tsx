@@ -21,6 +21,7 @@ export const HomeScreen: React.FC = () => {
   const {
     prayerTimes,
     selectedCity,
+    calculationMethod,
     loading,
     updateCity,
     getNextPrayer,
@@ -63,6 +64,26 @@ export const HomeScreen: React.FC = () => {
     } catch (error) {
       Alert.alert(t('error'), t('locationError'));
     }
+  };
+
+  const getMethodDisplayName = (method: string): string => {
+    const methodNames: { [key: string]: string } = {
+      MuslimWorldLeague: t('hanafiMethod'),
+      ISNA: t('isnaMethod'),
+      Egyptian: t('egyptianMethod'),
+      UmmAlQura: t('makkahMethod'),
+      Karachi: t('karachiMethod'),
+      Tehran: t('tehranMethod'),
+      Dubai: t('dubaiMethod'),
+      Kuwait: t('kuwaitMethod'),
+      Qatar: t('qatarMethod'),
+      Singapore: t('singaporeMethod'),
+      Turkey: t('turkeyMethod'),
+      MoonsightingCommittee: t('moonsightingMethod'),
+      NorthAmerica: t('northAmericaMethod'),
+      Other: t('otherMethod'),
+    };
+    return methodNames[method] || method;
   };
 
   if (loading) {
@@ -111,7 +132,7 @@ export const HomeScreen: React.FC = () => {
                 { color: theme.colors.onSurfaceVariant },
               ]}
             >
-              {t('calculationMethod')}: {t('hanafiMethod')}
+              {t('calculationMethod')}: {getMethodDisplayName(calculationMethod)}
             </Text>
           </View>
         </View>

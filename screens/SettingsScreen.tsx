@@ -105,7 +105,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       await setLanguage(newLanguage as any);
       onSettingsChanged?.();
     } catch (error) {
-      Alert.alert(t('error'), 'Не удалось изменить язык');
+      Alert.alert(t('error'), t('languageChangeError'));
     }
   };
 
@@ -233,7 +233,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                       { color: theme.colors.onSurfaceVariant },
                     ]}
                   >
-                    Выберите метод расчета, соответствующий вашему мазхабу
+                    {t('methodCalculationDescription')}
                   </Text>
                 </View>
               </View>

@@ -152,7 +152,7 @@ export const HadithCard: React.FC = () => {
         <View style={styles.content}>
           <View style={styles.header}>
             <Text style={[styles.title, { color: theme.colors.onSecondaryContainer }]}>
-              🕌 Хадис дня
+              🕌 {t('hadithOfDay')}
             </Text>
           </View>
 
@@ -164,7 +164,7 @@ export const HadithCard: React.FC = () => {
             <Text
               style={[styles.narrator, { color: theme.colors.onSecondaryContainer }]}
             >
-              Передал: {hadith.narrator}
+              {t('narratedBy')}: {hadith.narrator}
             </Text>
             <View style={[styles.sourceContainer, { backgroundColor: 'rgba(255, 255, 255, 0.2)' }]}>
               <Text style={[styles.source, { color: theme.colors.onSecondaryContainer }]}>
