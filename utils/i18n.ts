@@ -47,8 +47,11 @@ export interface Translations {
   appearance: string;
   appearanceDescription: string;
   autoTheme: string;
+  autoThemeDescription: string;
   lightTheme: string;
+  lightThemeDescription: string;
   darkTheme: string;
+  darkThemeDescription: string;
   about: string;
   version: string;
   developer: string;
@@ -139,8 +142,11 @@ const translations: Record<Language, Translations> = {
     appearance: 'Внешний вид',
     appearanceDescription: 'Выберите тему приложения',
     autoTheme: 'Автоматически',
+    autoThemeDescription: 'Следует системной теме',
     lightTheme: 'Светлая тема',
+    lightThemeDescription: 'Светлый интерфейс',
     darkTheme: 'Темная тема',
+    darkThemeDescription: 'Темный интерфейс',
     about: 'О приложении',
     version: 'Версия',
     developer: 'Разработчик',
@@ -228,8 +234,11 @@ const translations: Record<Language, Translations> = {
     appearance: 'Намоиш',
     appearanceDescription: 'Мавзӯи барномаро интихоб кунед',
     autoTheme: 'Худкор',
+    autoThemeDescription: 'Системаи мавзӯро пайравӣ мекунад',
     lightTheme: 'Мавзӯи равшан',
+    lightThemeDescription: 'Интерфейси равшан',
     darkTheme: 'Мавзӯи торик',
+    darkThemeDescription: 'Интерфейси торик',
     about: 'Дар бораи барнома',
     version: 'Версия',
     developer: 'Таҳиягар',
@@ -317,8 +326,11 @@ const translations: Record<Language, Translations> = {
     appearance: 'Appearance',
     appearanceDescription: 'Choose app theme',
     autoTheme: 'Auto',
+    autoThemeDescription: 'Follows system theme',
     lightTheme: 'Light Theme',
+    lightThemeDescription: 'Light interface',
     darkTheme: 'Dark Theme',
+    darkThemeDescription: 'Dark interface',
     about: 'About',
     version: 'Version',
     developer: 'Developer',

@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Alert, Animated, ScrollView, StyleSheet, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { Alert, Animated, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   ActivityIndicator,
   Card,
@@ -10,15 +10,14 @@ import {
   useTheme
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useThemeContext } from '../contexts/ThemeContext';
 import { useTranslation } from '../utils/i18n';
 import { CALCULATION_METHODS } from '../utils/prayerTimes';
 import {
   getCalculationMethod,
   getNotificationsEnabled,
-  getTheme,
   saveCalculationMethod,
   saveNotificationsEnabled,
-  saveTheme,
 } from '../utils/storage';
 
 interface SettingsScreenProps {
@@ -30,12 +29,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 }) => {
   const theme = useTheme();
   const { t, language, setLanguage, availableLanguages } = useTranslation();
+  const { selectedTheme, changeTheme } = useThemeContext();
   const [calculationMethod, setCalculationMethod] =
     useState('MuslimWorldLeague');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [selectedTheme, setSelectedTheme] = useState<'light' | 'dark' | 'auto'>(
-    'auto'
-  );
   const [loading, setLoading] = useState(true);
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -55,15 +52,13 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   const loadSettings = async () => {
     try {
-      const [method, notifications, theme] = await Promise.all([
+      const [method, notifications] = await Promise.all([
         getCalculationMethod(),
         getNotificationsEnabled(),
-        getTheme(),
       ]);
 
       setCalculationMethod(method);
       setNotificationsEnabled(notifications);
-      setSelectedTheme(theme);
     } catch (error) {
       console.error('Error loading settings:', error);
     } finally {
@@ -94,9 +89,12 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
 
   const handleThemeChange = async (theme: 'light' | 'dark' | 'auto') => {
     try {
-      await saveTheme(theme);
-      setSelectedTheme(theme);
-      onSettingsChanged?.();
+      const success = await changeTheme(theme);
+      if (success) {
+        onSettingsChanged?.();
+      } else {
+        Alert.alert(t('error'), t('themeSaveError'));
+      }
     } catch (error) {
       Alert.alert(t('error'), t('themeSaveError'));
     }
@@ -337,40 +335,71 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                 </View>
               </View>
 
-              <RadioButton.Group
-                onValueChange={value =>
-                  handleThemeChange(value as 'light' | 'dark' | 'auto')
-                }
-                value={selectedTheme}
-              >
-                <View style={styles.radioItem}>
-                  <RadioButton.Item
-                    label={t('autoTheme')}
-                    value="auto"
-                    color={theme.colors.primary}
-                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
-                    style={styles.radioButton}
-                  />
-                </View>
-                <View style={styles.radioItem}>
-                  <RadioButton.Item
-                    label={t('lightTheme')}
-                    value="light"
-                    color={theme.colors.primary}
-                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
-                    style={styles.radioButton}
-                  />
-                </View>
-                <View style={styles.radioItem}>
-                  <RadioButton.Item
-                    label={t('darkTheme')}
-                    value="dark"
-                    color={theme.colors.primary}
-                    labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
-                    style={styles.radioButton}
-                  />
-                </View>
-              </RadioButton.Group>
+              <View style={styles.themeOptionsContainer}>
+                {/* Автоматическая тема */}
+                <TouchableOpacity
+                  style={[
+                    styles.themeOption,
+                    selectedTheme === 'auto' && styles.themeOptionSelected,
+                    { borderColor: theme.colors.primary }
+                  ]}
+                  onPress={() => handleThemeChange('auto')}
+                >
+                  <View style={styles.themePreview}>
+                    <View style={[styles.themePreviewTop, { backgroundColor: '#FFFFFF' }]} />
+                    <View style={[styles.themePreviewBottom, { backgroundColor: '#121212' }]} />
+                    <View style={[styles.themePreviewDivider, { backgroundColor: theme.colors.primary }]} />
+                  </View>
+                  <Text style={[styles.themeOptionLabel, { color: theme.colors.onSurface }]}>
+                    {t('autoTheme')}
+                  </Text>
+                  <Text style={[styles.themeOptionDescription, { color: theme.colors.onSurfaceVariant }]}>
+                    {t('autoThemeDescription')}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Светлая тема */}
+                <TouchableOpacity
+                  style={[
+                    styles.themeOption,
+                    selectedTheme === 'light' && styles.themeOptionSelected,
+                    { borderColor: theme.colors.primary }
+                  ]}
+                  onPress={() => handleThemeChange('light')}
+                >
+                  <View style={styles.themePreview}>
+                    <View style={[styles.themePreviewFull, { backgroundColor: '#FFFFFF' }]} />
+                    <View style={[styles.themePreviewDot, { backgroundColor: '#1E88E5' }]} />
+                  </View>
+                  <Text style={[styles.themeOptionLabel, { color: theme.colors.onSurface }]}>
+                    {t('lightTheme')}
+                  </Text>
+                  <Text style={[styles.themeOptionDescription, { color: theme.colors.onSurfaceVariant }]}>
+                    {t('lightThemeDescription')}
+                  </Text>
+                </TouchableOpacity>
+
+                {/* Темная тема */}
+                <TouchableOpacity
+                  style={[
+                    styles.themeOption,
+                    selectedTheme === 'dark' && styles.themeOptionSelected,
+                    { borderColor: theme.colors.primary }
+                  ]}
+                  onPress={() => handleThemeChange('dark')}
+                >
+                  <View style={styles.themePreview}>
+                    <View style={[styles.themePreviewFull, { backgroundColor: '#121212' }]} />
+                    <View style={[styles.themePreviewDot, { backgroundColor: '#90CAF9' }]} />
+                  </View>
+                  <Text style={[styles.themeOptionLabel, { color: theme.colors.onSurface }]}>
+                    {t('darkTheme')}
+                  </Text>
+                  <Text style={[styles.themeOptionDescription, { color: theme.colors.onSurfaceVariant }]}>
+                    {t('darkThemeDescription')}
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </Card.Content>
           </Card>
 
@@ -516,5 +545,71 @@ const styles = StyleSheet.create({
   },
   bottomSpacer: {
     height: 20,
+  },
+  themeOptionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  themeOption: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 16,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: 'transparent',
+    backgroundColor: 'rgba(0, 0, 0, 0.02)',
+  },
+  themeOptionSelected: {
+    borderColor: '#1E88E5',
+    backgroundColor: 'rgba(30, 136, 229, 0.1)',
+  },
+  themePreview: {
+    width: 60,
+    height: 40,
+    borderRadius: 8,
+    marginBottom: 12,
+    overflow: 'hidden',
+    position: 'relative',
+  },
+  themePreviewTop: {
+    height: '50%',
+    width: '100%',
+  },
+  themePreviewBottom: {
+    height: '50%',
+    width: '100%',
+  },
+  themePreviewDivider: {
+    position: 'absolute',
+    top: '50%',
+    left: 0,
+    right: 0,
+    height: 2,
+    transform: [{ translateY: -1 }],
+  },
+  themePreviewFull: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 8,
+  },
+  themePreviewDot: {
+    position: 'absolute',
+    top: 8,
+    right: 8,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  themeOptionLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 4,
+    textAlign: 'center',
+  },
+  themeOptionDescription: {
+    fontSize: 12,
+    textAlign: 'center',
+    lineHeight: 16,
   },
 });
