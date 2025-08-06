@@ -1,4 +1,4 @@
-package com.iqamah
+package com.iskandar121191.Iqamah
 
 import android.app.Application
 import android.content.res.Configuration
