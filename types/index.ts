@@ -26,3 +26,17 @@ export type CalculationMethod =
   | 'MuslimWorldLeague'
   | 'Tehran'
   | 'Karachi';
+
+export interface Hadith {
+  id: number;
+  text: string;
+  narrator: string;
+  source: string;
+  textTg?: string;
+  textEn?: string;
+  category: string;
+}
+
+export interface HadithsData {
+  hadiths: Hadith[];
+}

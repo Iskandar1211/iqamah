@@ -1,0 +1,904 @@
+{
+  "hadiths": [
+    {
+      "id": 1,
+      "text": "Поистине, Аллах не смотрит на ваши тела и ваши облики, но смотрит на ваши сердца и ваши дела.",
+      "textTg": "Албатта, Аллоҳ ба тана ва сурати шумо намебинад, балки ба дил ва аъмоли шумо мебинад.",
+      "textEn": "Indeed, Allah does not look at your bodies and your appearances, but He looks at your hearts and your deeds.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "вера"
+    },
+    {
+      "id": 2,
+      "text": "Вера мусульманина не будет правильной, пока он не пожелает своему брату того же, чего желает себе.",
+      "textTg": "Имони мусулмон дуруст нахоҳад буд, то он барои бародараш он чизеро нахоҳад, ки барои худ мехоҳад.",
+      "textEn": "A Muslim's faith will not be correct until he wishes for his brother what he wishes for himself.",
+      "narrator": "Ан-Нуман ибн Башир",
+      "source": "Сахих аль-Бухари",
+      "category": "братство"
+    },
+    {
+      "id": 3,
+      "text": "Кто из вас увидит порицаемое, пусть изменит это своей рукой, а если не может, то своим языком, а если не может, то своим сердцем, и это будет самым слабым проявлением веры.",
+      "textTg": "Касе аз шумо, ки бадӣ бинад, бо дасташ онро тағйир диҳад, агар натавонад, бо забонаш, агар натавонад, бо дилаш, ва ин заифтарин имонист.",
+      "textEn": "Whoever among you sees evil, let him change it with his hand, and if he cannot, then with his tongue, and if he cannot, then with his heart, and that is the weakest of faith.",
+      "narrator": "Абу Саид аль-Худри",
+      "source": "Сахих Муслим",
+      "category": "призыв к добру"
+    },
+    {
+      "id": 4,
+      "text": "Поистине, Аллах любит, когда кто-то из вас выполняет какое-либо дело, он выполняет его хорошо.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки касе аз шумо корие кунад, онро хуб кунад.",
+      "textEn": "Indeed, Allah loves that when one of you does something, he does it well.",
+      "narrator": "Аиша",
+      "source": "Аль-Байхаки",
+      "category": "качество работы"
+    },
+    {
+      "id": 5,
+      "text": "Мусульманин - это тот, от языка и рук которого не страдают другие мусульмане.",
+      "textTg": "Мусулмон касест, ки аз забони ва дасти ӯ дигар мусулмонон озор намебинанд.",
+      "textEn": "A Muslim is one from whose tongue and hands other Muslims are safe.",
+      "narrator": "Абдуллах ибн Амр",
+      "source": "Сахих аль-Бухари",
+      "category": "поведение"
+    },
+    {
+      "id": 6,
+      "text": "Поистине, Аллах прощает грехи моей общине за ошибки, забывчивость и то, к чему их принудили.",
+      "textTg": "Албатта, Аллоҳ гуноҳони уммати манро барои хато, фаромӯшӣ ва он чизе, ки маҷбур шудаанд, меомӯзад.",
+      "textEn": "Indeed, Allah forgives the sins of my community for mistakes, forgetfulness, and what they were forced to do.",
+      "narrator": "Ибн Аббас",
+      "source": "Ибн Маджа",
+      "category": "прощение"
+    },
+    {
+      "id": 7,
+      "text": "Кто построит мечеть ради Аллаха, тому Аллах построит дом в Раю.",
+      "textTg": "Касе, ки масҷид барои Аллоҳ бино кунад, Аллоҳ барои ӯ хона дар биҳишт бино мекунад.",
+      "textEn": "Whoever builds a mosque for Allah, Allah will build a house for him in Paradise.",
+      "narrator": "Усман ибн Аффан",
+      "source": "Сахих аль-Бухари",
+      "category": "благодеяния"
+    },
+    {
+      "id": 8,
+      "text": "Поистине, Аллах не принимает молитву без омовения.",
+      "textTg": "Албатта, Аллоҳ намозро бе таҳорат қабул намекунад.",
+      "textEn": "Indeed, Allah does not accept prayer without ablution.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "молитва"
+    },
+    {
+      "id": 9,
+      "text": "Лучший из вас тот, кто изучает Коран и обучает ему других.",
+      "textTg": "Беҳтарин аз шумо касест, ки Қуръонро меомӯзад ва ба дигарон меомӯзонад.",
+      "textEn": "The best among you is the one who learns the Quran and teaches it to others.",
+      "narrator": "Усман ибн Аффан",
+      "source": "Сахих аль-Бухари",
+      "category": "знание"
+    },
+    {
+      "id": 10,
+      "text": "Поистине, Аллах любит тех, кто часто кается, и любит тех, кто очищается.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки зиёд тавба мекунанд ва онҳоро дӯст медорад, ки таҳорат мекунанд.",
+      "textEn": "Indeed, Allah loves those who repent frequently, and He loves those who purify themselves.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "покаяние"
+    },
+    {
+      "id": 11,
+      "text": "Поистине, Аллах милостив к тем, кто милостив к людям.",
+      "textTg": "Албатта, Аллоҳ ба онҳое меҳрубон аст, ки ба одамон меҳрубон аст.",
+      "textEn": "Indeed, Allah is merciful to those who are merciful to people.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "милосердие"
+    },
+    {
+      "id": 12,
+      "text": "Кто поможет нуждающемуся, тому Аллах поможет в его нужде.",
+      "textTg": "Касе, ки ба муҳтоҷ кумак кунад, Аллоҳ ба ӯ дар ҳоҷати ӯ кумак мекунад.",
+      "textEn": "Whoever helps someone in need, Allah will help him in his need.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 13,
+      "text": "Поистине, Аллах любит скромность и ненавидит высокомерие.",
+      "textTg": "Албатта, Аллоҳ тавозиъро дӯст медорад ва кибрро душман медорад.",
+      "textEn": "Indeed, Allah loves modesty and hates arrogance.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "скромность"
+    },
+    {
+      "id": 14,
+      "text": "Кто скроет недостаток мусульманина, тому Аллах скроет его недостатки в Судный день.",
+      "textTg": "Касе, ки айби мусулмонеро пинҳон кунад, Аллоҳ айбҳои ӯро дар рӯзи қиёмат пинҳон мекунад.",
+      "textEn": "Whoever conceals the fault of a Muslim, Allah will conceal his faults on the Day of Judgment.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "скрытие недостатков"
+    },
+    {
+      "id": 15,
+      "text": "Поистине, Аллах не принимает молитву того, кто не читает Открывающую Книгу.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки Фотиҳаро нахонад.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not recite the Opening of the Book.",
+      "narrator": "Убада ибн ас-Самит",
+      "source": "Сахих Муслим",
+      "category": "молитва"
+    },
+    {
+      "id": 16,
+      "text": "Кто прочитает одну букву из Корана, тому запишется одно доброе дело, а за каждое доброе дело - десятикратное воздаяние.",
+      "textTg": "Касе, ки як ҳарфи Қуръонро хонад, барои ӯ як некии навишта мешавад ва барои ҳар як некии даҳ баробар аст.",
+      "textEn": "Whoever recites one letter from the Quran, one good deed will be recorded for him, and for every good deed there is tenfold reward.",
+      "narrator": "Абдуллах ибн Масуд",
+      "source": "Ат-Тирмизи",
+      "category": "Коран"
+    },
+    {
+      "id": 17,
+      "text": "Поистине, Аллах любит, когда Его раб поднимает к Нему руки в мольбе.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки бандаи ӯ дастҳои худро ба сӯи ӯ барои дуо бардорад.",
+      "textEn": "Indeed, Allah loves when His servant raises his hands to Him in supplication.",
+      "narrator": "Салман аль-Фариси",
+      "source": "Ат-Тирмизи",
+      "category": "мольба"
+    },
+    {
+      "id": 18,
+      "text": "Кто улыбнется своему брату, тому запишется милостыня.",
+      "textTg": "Касе, ки ба бародараш табассум кунад, барои ӯ садақа навишта мешавад.",
+      "textEn": "Whoever smiles at his brother, charity will be recorded for him.",
+      "narrator": "Абу Зарр",
+      "source": "Ат-Тирмизи",
+      "category": "доброта"
+    },
+    {
+      "id": 19,
+      "text": "Поистине, Аллах не принимает молитву того, кто ест запретное.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки ҳаром мехӯрад.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who eats what is forbidden.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "запретное"
+    },
+    {
+      "id": 20,
+      "text": "Кто уберет с дороги то, что причиняет вред, тому запишется милостыня.",
+      "textTg": "Касе, ки аз роҳ чизе, ки зарар мерасонад, бардорад, барои ӯ садақа навишта мешавад.",
+      "textEn": "Whoever removes from the road that which causes harm, charity will be recorded for him.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "помощь"
+    },
+    {
+      "id": 21,
+      "text": "Поистине, Аллах любит тех, кто терпелив в беде.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки дар бедӣ сабр мекунанд.",
+      "textEn": "Indeed, Allah loves those who are patient in adversity.",
+      "narrator": "Анас ибн Малик",
+      "source": "Сахих аль-Бухари",
+      "category": "терпение"
+    },
+    {
+      "id": 22,
+      "text": "Кто посещает больного, тот находится в саду Рая.",
+      "textTg": "Касе, ки беморро ташриф меорад, дар боғи биҳишт аст.",
+      "textEn": "Whoever visits a sick person is in the garden of Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "посещение больных"
+    },
+    {
+      "id": 23,
+      "text": "Поистине, Аллах любит тех, кто часто поминает Его.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки зиёд зикри ӯ мекунанд.",
+      "textEn": "Indeed, Allah loves those who remember Him frequently.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "поминание Аллаха"
+    },
+    {
+      "id": 24,
+      "text": "Кто простит обиду, тому Аллах увеличит его честь.",
+      "textTg": "Касе, ки обидаро меомӯзад, Аллоҳ шарафи ӯро зиёд мекунад.",
+      "textEn": "Whoever forgives an offense, Allah will increase his honor.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "прощение"
+    },
+    {
+      "id": 25,
+      "text": "Поистине, Аллах не принимает молитву того, кто не почитает родителей.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки ба волидайн эҳтиром накунад.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not honor his parents.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "почитание родителей"
+    },
+    {
+      "id": 26,
+      "text": "Кто накормит голодного, того накормит Аллах из плодов Рая.",
+      "textTg": "Касе, ки гуруснаро таъом диҳад, Аллоҳ ӯро аз меваҳои биҳишт таъом медиҳад.",
+      "textEn": "Whoever feeds a hungry person, Allah will feed him from the fruits of Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "кормление"
+    },
+    {
+      "id": 27,
+      "text": "Поистине, Аллах любит тех, кто стыдится греха.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки аз гуноҳ шарм мекунанд.",
+      "textEn": "Indeed, Allah loves those who are ashamed of sin.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "стыд"
+    },
+    {
+      "id": 28,
+      "text": "Кто поможет вдове и бедняку, тот подобен тому, кто сражается на пути Аллаха.",
+      "textTg": "Касе, ки ба бева ва бечора кумак кунад, монанди касест, ки дар роҳи Аллоҳ ҷанг мекунад.",
+      "textEn": "Whoever helps a widow and a poor person is like one who fights in the way of Allah.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "помощь"
+    },
+    {
+      "id": 29,
+      "text": "Поистине, Аллах не принимает молитву того, кто не заботится о соседях.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки ба ҳамсоягон бепарво аст.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not care for his neighbors.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "забота о соседях"
+    },
+    {
+      "id": 30,
+      "text": "Кто утолит жажду мусульманина, того напоит Аллах из райского источника.",
+      "textTg": "Касе, ки ташнагии мусулмонеро қаноат диҳад, Аллоҳ ӯро аз чашмаи биҳишт мешӯронад.",
+      "textEn": "Whoever quenches the thirst of a Muslim, Allah will give him drink from the heavenly spring.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 31,
+      "text": "Поистине, Аллах не принимает молитву того, кто не раздает милостыню.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки садақа намедиҳад.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not give charity.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "молитва"
+    },
+    {
+      "id": 32,
+      "text": "Кто уверует в Аллаха и Судный день, пусть говорит добро или молчит.",
+      "textTg": "Касе, ки ба Аллоҳ ва рӯзи қиёмат имон дорад, пас хуб гап занад ё хомӯш бошад.",
+      "textEn": "Whoever believes in Allah and the Last Day, let him speak good or remain silent.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "вера"
+    },
+    {
+      "id": 33,
+      "text": "Поистине, самая лучшая милостыня - это поить жаждущего.",
+      "textTg": "Албатта, беҳтарин садақа об додани ташна аст.",
+      "textEn": "Indeed, the best charity is to give water to the thirsty.",
+      "narrator": "Саад ибн Убада",
+      "source": "Абу Дауд",
+      "category": "милостыня"
+    },
+    {
+      "id": 34,
+      "text": "Не завидуйте друг другу, не ненавидьте друг друга, не отворачивайтесь друг от друга, будьте рабами Аллаха, братьями.",
+      "textTg": "Ба якдигар ҳасад накунед, якдигарро нафрат накунед, аз якдигар рӯ нагардонед, бандагони Аллоҳ, бародарон бошед.",
+      "textEn": "Do not envy each other, do not hate each other, do not turn away from each other; be servants of Allah, brothers.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "братство"
+    },
+    {
+      "id": 35,
+      "text": "Лучший из людей - тот, кто приносит пользу людям.",
+      "textTg": "Беҳтарин одамон касест, ки ба одамон фоида мерасонад.",
+      "textEn": "The best of people is one who is most beneficial to people.",
+      "narrator": "Джабир ибн Абдуллах",
+      "source": "Табарани",
+      "category": "помощь"
+    },
+    {
+      "id": 36,
+      "text": "Поистине, Аллах добр и любит доброту.",
+      "textTg": "Албатта, Аллоҳ меҳрубон аст ва меҳрубониро дӯст медорад.",
+      "textEn": "Indeed, Allah is kind and loves kindness.",
+      "narrator": "Аиша",
+      "source": "Сахих Муслим",
+      "category": "доброта"
+    },
+    {
+      "id": 37,
+      "text": "Кто покажет на благое дело, тот подобен тому, кто его совершил.",
+      "textTg": "Касе, ки ба кори хайр ишора кунад, ба монанди он кас аст, ки онро анҷом додааст.",
+      "textEn": "Whoever guides to a good deed is like the one who did it.",
+      "narrator": "Абу Мас'уд аль-Ансари",
+      "source": "Сахих Муслим",
+      "category": "призыв к добру"
+    },
+    {
+      "id": 38,
+      "text": "Поистине, терпение - это свет.",
+      "textTg": "Албатта, сабр нур аст.",
+      "textEn": "Indeed, patience is light.",
+      "narrator": "Абу Малик аль-Аш'ари",
+      "source": "Сахих Муслим",
+      "category": "терпение"
+    },
+    {
+      "id": 39,
+      "text": "Поистине, каждое дело оценивается по намерениям, и каждому достанется то, что он намеревался сделать.",
+      "textTg": "Албатта, ҳар як амал бо ниятҳо арзёбӣ мешавад ва ба ҳар як кас он чизе, ки ӯ ният кардааст, мерасад.",
+      "textEn": "Indeed, every deed is judged by intentions, and everyone will get what he intended.",
+      "narrator": "Умар ибн аль-Хаттаб",
+      "source": "Сахих аль-Бухари",
+      "category": "намерения"
+    },
+    {
+      "id": 40,
+      "text": "Поистине, Аллах не принимает молитву того, кто не говорит правду.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки рост намегӯяд.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not speak the truth.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "правдивость"
+    },
+    {
+      "id": 41,
+      "text": "Кто подаст милостыню, даже если это будет половина финика, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки садақа диҳад, ҳатто агар он нисфи хурмо бошад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever gives charity, even if it is half a date, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "милостыня"
+    },
+    {
+      "id": 42,
+      "text": "Кто не проявляет милосердия, тому не будет проявлено милосердие.",
+      "textTg": "Касе, ки меҳрубонӣ накунад, ба ӯ меҳрубонӣ карда намешавад.",
+      "textEn": "Whoever is not merciful will not be shown mercy.",
+      "narrator": "Джарир ибн Абдуллах",
+      "source": "Сахих аль-Бухари",
+      "category": "милосердие"
+    },
+    {
+      "id": 43,
+      "text": "Поистине, Аллах любит тех, кто выполняет свои обещания.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки ваъдаҳои худро иҷро мекунанд.",
+      "textEn": "Indeed, Allah loves those who fulfill their promises.",
+      "narrator": "Абдуллах ибн Амр",
+      "source": "Сахих аль-Бухари",
+      "category": "обещания"
+    },
+    {
+      "id": 44,
+      "text": "Кто постится в Рамадан с верой и надеждой на награду, тому будут прощены его прежние грехи.",
+      "textTg": "Касе, ки дар Рамазон бо имон ва умед ба савоб рӯза мегирад, гуноҳҳои гузаштаи ӯ бахшида мешавад.",
+      "textEn": "Whoever fasts during Ramadan with faith and hoping for reward, his past sins will be forgiven.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "пост"
+    },
+    {
+      "id": 45,
+      "text": "Поистине, чистота - половина веры.",
+      "textTg": "Албатта, покӣ нисфи имон аст.",
+      "textEn": "Indeed, purity is half of faith.",
+      "narrator": "Абу Малик аль-Аш'ари",
+      "source": "Сахих Муслим",
+      "category": "чистота"
+    },
+    {
+      "id": 46,
+      "text": "Кто читает Коран, тому он будет заступником в Судный день.",
+      "textTg": "Касе, ки Қуръонро мехонад, он барои ӯ дар рӯзи қиёмат шафоатгар мешавад.",
+      "textEn": "Whoever recites the Quran, it will be an intercessor for him on the Day of Judgment.",
+      "narrator": "Абу Умама аль-Бахили",
+      "source": "Сахих Муслим",
+      "category": "Коран"
+    },
+    {
+      "id": 47,
+      "text": "Поистине, самый лучший джихад - это слово истины перед несправедливым правителем.",
+      "textTg": "Албатта, беҳтарин ҷиҳод сухани ҳақ дар назди ҳокими золим аст.",
+      "textEn": "Indeed, the best Jihad is a word of truth before an unjust ruler.",
+      "narrator": "Абу Саид аль-Худри",
+      "source": "Ат-Тирмизи",
+      "category": "призыв к добру"
+    },
+    {
+      "id": 48,
+      "text": "Кто облегчит положение должника, тому Аллах облегчит его положение в этой жизни и в Последней.",
+      "textTg": "Касе, ки вазъияти қарздорро осон кунад, Аллоҳ вазъияти ӯро дар ин дунё ва дар охират осон мекунад.",
+      "textEn": "Whoever relieves a debtor's hardship, Allah will relieve his hardship in this life and the Hereafter.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 49,
+      "text": "Поистине, Аллах не принимает молитву того, кто не уважает старших.",
+      "textTg": "Албатта, Аллоҳ намози касеро қабул намекунад, ки калонсолонро эҳтиром накунад.",
+      "textEn": "Indeed, Allah does not accept the prayer of one who does not respect the elders.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "уважение к старшим"
+    },
+    {
+      "id": 50,
+      "text": "Кто посетит могилу, тот получит прощение.",
+      "textTg": "Касе, ки қабрро зиёрат кунад, бахшиш мегирад.",
+      "textEn": "Whoever visits a grave, he will receive forgiveness.",
+      "narrator": "Ибн Мас'уд",
+      "source": "Ибн Маджа",
+      "category": "посещение могил"
+    },
+    {
+      "id": 51,
+      "text": "Поистине, Аллах любит, когда Его раб просит у Него все.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки бандаи ӯ аз ӯ ҳама чизро талаб кунад.",
+      "textEn": "Indeed, Allah loves when His servant asks Him for everything.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "мольба"
+    },
+    {
+      "id": 52,
+      "text": "Кто утаит знание, того Аллах зажжет огнем в Судный день.",
+      "textTg": "Касе, ки илмро пинҳон кунад, Аллоҳ ӯро дар рӯзи қиёмат бо оташ месузонад.",
+      "textEn": "Whoever conceals knowledge, Allah will light a fire for him on the Day of Judgment.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "знание"
+    },
+    {
+      "id": 53,
+      "text": "Поистине, скромность - это часть веры.",
+      "textTg": "Албатта, хоксорӣ як қисми имон аст.",
+      "textEn": "Indeed, modesty is a part of faith.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих аль-Бухари",
+      "category": "скромность"
+    },
+    {
+      "id": 54,
+      "text": "Кто позаботится о сироте, тому Аллах построит дом в Раю.",
+      "textTg": "Касе, ки ба ятим ғамхорӣ кунад, Аллоҳ барои ӯ дар биҳишт хона месозад.",
+      "textEn": "Whoever takes care of an orphan, Allah will build a house for him in Paradise.",
+      "narrator": "Анас ибн Малик",
+      "source": "Сахих аль-Бухари",
+      "category": "благодеяния"
+    },
+    {
+      "id": 55,
+      "text": "Поистине, Аллах любит тех, кто честен в торговле.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки дар тиҷорат ростқавл ҳастанд.",
+      "textEn": "Indeed, Allah loves those who are honest in trade.",
+      "narrator": "Абу Саид аль-Худри",
+      "source": "Ат-Тирмизи",
+      "category": "честность"
+    },
+    {
+      "id": 56,
+      "text": "Кто защитит честь мусульманина, тому Аллах защитит его от огня.",
+      "textTg": "Касе, ки шарафи мусулмонро ҳифз кунад, Аллоҳ ӯро аз оташ ҳифз мекунад.",
+      "textEn": "Whoever defends the honor of a Muslim, Allah will protect him from the fire.",
+      "narrator": "Абу Дарда",
+      "source": "Ат-Тирмизи",
+      "category": "защита чести"
+    },
+    {
+      "id": 57,
+      "text": "Поистине, Аллах любит, когда Его раб восхваляет Его.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки бандаи ӯ ӯро ҳамду сано кунад.",
+      "textEn": "Indeed, Allah loves when His servant praises Him.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "поминание Аллаха"
+    },
+    {
+      "id": 58,
+      "text": "Кто покаялся в грехе, тот подобен тому, у кого нет греха.",
+      "textTg": "Касе, ки аз гуноҳ тавба кунад, ба монанди он кас аст, ки гуноҳ надорад.",
+      "textEn": "Whoever repents from a sin is like one who has no sin.",
+      "narrator": "Ибн Мас'уд",
+      "source": "Ибн Маджа",
+      "category": "покаяние"
+    },
+    {
+      "id": 59,
+      "text": "Поистине, Аллах любит, когда Его раб благодарит Его.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки бандаи ӯ ӯро шукр кунад.",
+      "textEn": "Indeed, Allah loves when His servant thanks Him.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "благодарность"
+    },
+    {
+      "id": 60,
+      "text": "Кто постится один день ради Аллаха, тому Аллах отдалит его лицо от Огня на 70 лет.",
+      "textTg": "Касе, ки як рӯз барои Аллоҳ рӯза гирад, Аллоҳ рӯи ӯро аз оташ ба 70 сол дур мекунад.",
+      "textEn": "Whoever fasts one day for the sake of Allah, Allah will distance his face from the Fire for 70 years.",
+      "narrator": "Абу Саид аль-Худри",
+      "source": "Сахих Муслим",
+      "category": "пост"
+    },
+    {
+      "id": 61,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 62,
+      "text": "Кто поминает Аллаха, когда идет, тот подобен тому, кто сражается на пути Аллаха.",
+      "textTg": "Касе, ки Аллоҳро ҳангоми рафтан зикр кунад, ба монанди касест, ки дар роҳи Аллоҳ ҷанг мекунад.",
+      "textEn": "Whoever remembers Allah while walking is like one who fights in the way of Allah.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "поминание Аллаха"
+    },
+    {
+      "id": 63,
+      "text": "Поистине, Аллах любит, когда Его раб поминает Его в тишине.",
+      "textTg": "Албатта, Аллоҳ дӯст медорад, ки бандаи ӯ ӯро дар хомӯшӣ зикр кунад.",
+      "textEn": "Indeed, Allah loves when His servant remembers Him in silence.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "поминание Аллаха"
+    },
+    {
+      "id": 64,
+      "text": "Кто не заботится о своих родителях, тот не войдет в Рай.",
+      "textTg": "Касе, ки ба волидайни худ ғамхорӣ накунад, ба биҳишт дохил намешавад.",
+      "textEn": "Whoever does not care for his parents, he will not enter Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "почитание родителей"
+    },
+    {
+      "id": 65,
+      "text": "Поистине, Аллах любит тех, кто милостив к своим детям.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки ба фарзандони худ меҳрубон ҳастанд.",
+      "textEn": "Indeed, Allah loves those who are merciful to their children.",
+      "narrator": "Аиша",
+      "source": "Сахих аль-Бухари",
+      "category": "милосердие"
+    },
+    {
+      "id": 66,
+      "text": "Кто помогает своему брату-мусульманину, тому Аллах помогает в его делах.",
+      "textTg": "Касе, ки ба бародари мусулмонаш кумак кунад, Аллоҳ ба ӯ дар корҳояш кумак мекунад.",
+      "textEn": "Whoever helps his Muslim brother, Allah will help him in his affairs.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 67,
+      "text": "Поистине, Аллах любит тех, кто просит у Него прощения.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки аз ӯ бахшиш мехоҳанд.",
+      "textEn": "Indeed, Allah loves those who ask Him for forgiveness.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "покаяние"
+    },
+    {
+      "id": 68,
+      "text": "Кто подаст милостыню, тому Аллах воздаст вдвойне.",
+      "textTg": "Касе, ки садақа диҳад, Аллоҳ ба ӯ ду баробар медиҳад.",
+      "textEn": "Whoever gives charity, Allah will reward him twofold.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "милостыня"
+    },
+    {
+      "id": 69,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 70,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 71,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 72,
+      "text": "Кто посетит больного, тому будет сказано: «Ты посетил своего брата во имя Аллаха».",
+      "textTg": "Касе, ки беморро ташриф меорад, ба ӯ гуфта мешавад: «Шумо бародари худро ба хотири Аллоҳ дидан кардед».",
+      "textEn": "Whoever visits a sick person, it will be said to him: 'You have visited your brother for the sake of Allah.'",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "посещение больных"
+    },
+    {
+      "id": 73,
+      "text": "Поистине, Аллах любит тех, кто стыдится греха.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки аз гуноҳ шарм мекунанд.",
+      "textEn": "Indeed, Allah loves those who are ashamed of sin.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "стыд"
+    },
+    {
+      "id": 74,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 75,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 76,
+      "text": "Кто не заботится о своих родителях, тот не войдет в Рай.",
+      "textTg": "Касе, ки ба волидайни худ ғамхорӣ накунад, ба биҳишт дохил намешавад.",
+      "textEn": "Whoever does not care for his parents, he will not enter Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "почитание родителей"
+    },
+    {
+      "id": 77,
+      "text": "Поистине, Аллах любит тех, кто милостив к своим детям.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки ба фарзандони худ меҳрубон ҳастанд.",
+      "textEn": "Indeed, Allah loves those who are merciful to their children.",
+      "narrator": "Аиша",
+      "source": "Сахих аль-Бухари",
+      "category": "милосердие"
+    },
+    {
+      "id": 78,
+      "text": "Кто помогает своему брату-мусульманину, тому Аллах помогает в его делах.",
+      "textTg": "Касе, ки ба бародари мусулмонаш кумак кунад, Аллоҳ ба ӯ дар корҳояш кумак мекунад.",
+      "textEn": "Whoever helps his Muslim brother, Allah will help him in his affairs.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 79,
+      "text": "Поистине, Аллах любит тех, кто просит у Него прощения.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки аз ӯ бахшиш мехоҳанд.",
+      "textEn": "Indeed, Allah loves those who ask Him for forgiveness.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "покаяние"
+    },
+    {
+      "id": 80,
+      "text": "Кто подаст милостыню, тому Аллах воздаст вдвойне.",
+      "textTg": "Касе, ки садақа диҳад, Аллоҳ ба ӯ ду баробар медиҳад.",
+      "textEn": "Whoever gives charity, Allah will reward him twofold.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "милостыня"
+    },
+    {
+      "id": 81,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 82,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 83,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 84,
+      "text": "Кто посетит больного, тому будет сказано: «Ты посетил своего брата во имя Аллаха».",
+      "textTg": "Касе, ки беморро ташриф меорад, ба ӯ гуфта мешавад: «Шумо бародари худро ба хотири Аллоҳ дидан кардед».",
+      "textEn": "Whoever visits a sick person, it will be said to him: 'You have visited your brother for the sake of Allah.'",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "посещение больных"
+    },
+    {
+      "id": 85,
+      "text": "Поистине, Аллах любит тех, кто стыдится греха.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки аз гуноҳ шарм мекунанд.",
+      "textEn": "Indeed, Allah loves those who are ashamed of sin.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "стыд"
+    },
+    {
+      "id": 86,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 87,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 88,
+      "text": "Кто не заботится о своих родителях, тот не войдет в Рай.",
+      "textTg": "Касе, ки ба волидайни худ ғамхорӣ накунад, ба биҳишт дохил намешавад.",
+      "textEn": "Whoever does not care for his parents, he will not enter Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "почитание родителей"
+    },
+    {
+      "id": 89,
+      "text": "Поистине, Аллах любит тех, кто милостив к своим детям.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки ба фарзандони худ меҳрубон ҳастанд.",
+      "textEn": "Indeed, Allah loves those who are merciful to their children.",
+      "narrator": "Аиша",
+      "source": "Сахих аль-Бухари",
+      "category": "милосердие"
+    },
+    {
+      "id": 90,
+      "text": "Кто помогает своему брату-мусульманину, тому Аллах помогает в его делах.",
+      "textTg": "Касе, ки ба бародари мусулмонаш кумак кунад, Аллоҳ ба ӯ дар корҳояш кумак мекунад.",
+      "textEn": "Whoever helps his Muslim brother, Allah will help him in his affairs.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "помощь"
+    },
+    {
+      "id": 91,
+      "text": "Поистине, Аллах любит тех, кто просит у Него прощения.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки аз ӯ бахшиш мехоҳанд.",
+      "textEn": "Indeed, Allah loves those who ask Him for forgiveness.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "покаяние"
+    },
+    {
+      "id": 92,
+      "text": "Кто подаст милостыню, тому Аллах воздаст вдвойне.",
+      "textTg": "Касе, ки садақа диҳад, Аллоҳ ба ӯ ду баробар медиҳад.",
+      "textEn": "Whoever gives charity, Allah will reward him twofold.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "милостыня"
+    },
+    {
+      "id": 93,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 94,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 95,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 96,
+      "text": "Кто посетит больного, тому будет сказано: «Ты посетил своего брата во имя Аллаха».",
+      "textTg": "Касе, ки беморро ташриф меорад, ба ӯ гуфта мешавад: «Шумо бародари худро ба хотири Аллоҳ дидан кардед».",
+      "textEn": "Whoever visits a sick person, it will be said to him: 'You have visited your brother for the sake of Allah.'",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "посещение больных"
+    },
+    {
+      "id": 97,
+      "text": "Поистине, Аллах любит тех, кто стыдится греха.",
+      "textTg": "Албатта, Аллоҳ онҳоро дӯст медорад, ки аз гуноҳ шарм мекунанд.",
+      "textEn": "Indeed, Allah loves those who are ashamed of sin.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "стыд"
+    },
+    {
+      "id": 98,
+      "text": "Кто будет соблюдать пост в понедельник и четверг, тому Аллах простит его грехи.",
+      "textTg": "Касе, ки рӯзи душанбе ва панҷшанбе рӯза мегирад, Аллоҳ гуноҳҳои ӯро мебахшад.",
+      "textEn": "Whoever fasts on Monday and Thursday, Allah will forgive his sins.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "пост"
+    },
+    {
+      "id": 99,
+      "text": "Поистине, Аллах любит тех, кто любит Его Посланника.",
+      "textTg": "Албатта, Аллоҳ онҳоеро дӯст медорад, ки Паёмбари ӯро дӯст медоранд.",
+      "textEn": "Indeed, Allah loves those who love His Messenger.",
+      "narrator": "Абу Хурайра",
+      "source": "Ат-Тирмизи",
+      "category": "любовь к Пророку"
+    },
+    {
+      "id": 100,
+      "text": "Кто не заботится о своих родителях, тот не войдет в Рай.",
+      "textTg": "Касе, ки ба волидайни худ ғамхорӣ накунад, ба биҳишт дохил намешавад.",
+      "textEn": "Whoever does not care for his parents, he will not enter Paradise.",
+      "narrator": "Абу Хурайра",
+      "source": "Сахих Муслим",
+      "category": "почитание родителей"
+    }
+  ]
+} 

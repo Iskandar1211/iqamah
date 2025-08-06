@@ -56,7 +56,10 @@ export const HomeScreen: React.FC = () => {
       if (currentCity) {
         updateCity(currentCity);
         await saveSelectedCity(currentCity);
-        Alert.alert(t('success'), `${t('locationDetected')}: ${currentCity.name}`);
+        Alert.alert(
+          t('success'),
+          `${t('locationDetected')}: ${currentCity.name}`
+        );
       } else {
         Alert.alert(t('error'), t('locationError'));
       }
@@ -85,7 +88,7 @@ export const HomeScreen: React.FC = () => {
 
   const nextPrayer = getNextPrayer();
   const timeUntilNext = getTimeUntilNextPrayer();
-  
+
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -99,10 +102,10 @@ export const HomeScreen: React.FC = () => {
       >
         {/* Информация о городе */}
         <View style={styles.citySection}>
-          <View style={[styles.cityCard, { backgroundColor: theme.colors.surface }]}>
-            <Text
-              style={[styles.cityTitle, { color: theme.colors.onSurface }]}
-            >
+          <View
+            style={[styles.cityCard, { backgroundColor: theme.colors.surface }]}
+          >
+            <Text style={[styles.cityTitle, { color: theme.colors.onSurface }]}>
               {selectedCity?.name}, {selectedCity?.country}
             </Text>
             <Text
@@ -111,7 +114,7 @@ export const HomeScreen: React.FC = () => {
                 { color: theme.colors.onSurfaceVariant },
               ]}
             >
-                              {t('calculationMethod')}: {t('hanafiMethod')}
+              {t('calculationMethod')}: {t('hanafiMethod')}
             </Text>
           </View>
         </View>
