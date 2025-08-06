@@ -1,7 +1,8 @@
 import { useCompass } from '@/hooks/useCompass';
 import { useTranslation } from '@/utils/i18n';
+import { findNearestCity, getCurrentLocation } from '@/utils/location';
 import { formatDistance, getQiblaDirectionForCity, QiblaDirection } from '@/utils/qibla';
-import { getSelectedCity } from '@/utils/storage';
+import { getSelectedCity, saveSelectedCity } from '@/utils/storage';
 import React, { useEffect, useState } from 'react';
 import { Alert, Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Button, Card, useTheme } from 'react-native-paper';
@@ -14,6 +15,7 @@ const QiblaScreen: React.FC = () => {
   const [qiblaDirection, setQiblaDirection] = useState<QiblaDirection | null>(null);
   const [rotationAnim] = useState(new Animated.Value(0));
   const [isCompassActive, setIsCompassActive] = useState(false);
+  const [isDetectingLocation, setIsDetectingLocation] = useState(false);
   
   const { data: compassData, isAvailable, startCompass, stopCompass } = useCompass();
 
@@ -82,6 +84,46 @@ const QiblaScreen: React.FC = () => {
     }
   };
 
+  const detectCurrentLocation = async () => {
+    setIsDetectingLocation(true);
+    
+    try {
+      const location = await getCurrentLocation();
+      
+      if (location) {
+        const nearestCity = findNearestCity(
+          location.coords.latitude,
+          location.coords.longitude
+        );
+        
+        // Сохраняем новый город
+        await saveSelectedCity(nearestCity);
+        setSelectedCity(nearestCity);
+        
+        Alert.alert(
+          t('locationDetected'),
+          `${t('locationDetected')}: ${nearestCity.name}, ${nearestCity.country}`,
+          [{ text: t('ok'), style: 'default' }]
+        );
+      } else {
+        Alert.alert(
+          t('locationError'),
+          t('locationErrorDescription'),
+          [{ text: t('ok'), style: 'default' }]
+        );
+      }
+    } catch (error) {
+      console.error('Error detecting location:', error);
+      Alert.alert(
+        t('locationError'),
+        t('locationErrorDescription'),
+        [{ text: t('ok'), style: 'default' }]
+      );
+    } finally {
+      setIsDetectingLocation(false);
+    }
+  };
+
   const toggleCompass = () => {
     if (!isAvailable) {
       Alert.alert(
@@ -113,10 +155,11 @@ const QiblaScreen: React.FC = () => {
       // Используем реальное направление компаса
       const currentDirection = qiblaDirection.bearing - compassData.heading;
       const normalizedDirection = (currentDirection + 360) % 360;
-      return t(getDirectionFromBearing(normalizedDirection));
+      const directionKey = getDirectionFromBearing(normalizedDirection);
+      return t(directionKey as keyof typeof t);
     }
     
-    return t(qiblaDirection.direction);
+    return t(qiblaDirection.direction as keyof typeof t);
   };
 
   // Получаем угол для отображения
@@ -383,6 +426,18 @@ const QiblaScreen: React.FC = () => {
                 {selectedCity.latitude.toFixed(4)},{' '}
                 {selectedCity.longitude.toFixed(4)}
               </Text>
+              
+              {/* Location Detection Button */}
+              <Button
+                mode="outlined"
+                onPress={detectCurrentLocation}
+                icon="crosshairs-gps"
+                style={styles.locationButton}
+                loading={isDetectingLocation}
+                disabled={isDetectingLocation}
+              >
+                {isDetectingLocation ? t('detectingLocation') : t('detectLocation')}
+              </Button>
             </Card.Content>
           </Card>
         )}
@@ -729,6 +784,10 @@ const styles = StyleSheet.create({
   compassNote: {
     fontSize: 12,
     textAlign: 'center',
+  },
+  locationButton: {
+    marginTop: 15,
+    borderRadius: 10,
   },
 });
 

@@ -114,6 +114,8 @@ export interface Translations {
   hadithOfDay: string;
   narratedBy: string;
   methodCalculationDescription: string;
+  detectingLocation: string;
+  locationErrorDescription: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -302,6 +304,8 @@ const translations: Record<Language, Translations> = {
     hadithOfDay: 'Ҳадиси рӯз',
     narratedBy: 'Ривоят кард',
     methodCalculationDescription: 'Усули ҳисобро интихоб кунед, ки ба мазҳаби шумо мувофиқ аст',
+    detectingLocation: 'Муайян кардани ҷойгиршавӣ...',
+    locationErrorDescription: 'Ҷойгиршавии шуморо муайян карда натавонист. Танзимоти GPS-ро санҷед ва бори дигар кӯшиш кунед.',
     
     // Qibla
     qiblaDirection: 'Роҳи қибла',
@@ -409,6 +413,8 @@ const translations: Record<Language, Translations> = {
     hadithOfDay: 'Hadith of the day',
     narratedBy: 'Narrated by',
     methodCalculationDescription: 'Choose calculation method that corresponds to your madhhab',
+    detectingLocation: 'Detecting location...',
+    locationErrorDescription: 'Could not determine your location. Check GPS settings and try again.',
     
     // Qibla
     qiblaDirection: 'Qibla Direction',
