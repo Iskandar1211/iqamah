@@ -1,7 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { usePrayerTimes } from '@/hooks/usePrayerTimes';
+import { useTranslation } from '@/utils/i18n';
+import { sendTestNotification } from '@/utils/notifications';
+import { CALCULATION_METHODS } from '@/utils/prayerTimes';
+import {
+  saveCalculationMethod,
+  saveNotificationsEnabled,
+} from '@/utils/storage';
+import React, { useEffect, useRef } from 'react';
 import { Alert, Animated, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   ActivityIndicator,
+  Button,
   Card,
   List,
   RadioButton,
@@ -10,15 +20,6 @@ import {
   useTheme
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useThemeContext } from '@/contexts/ThemeContext';
-import { useTranslation } from '@/utils/i18n';
-import { CALCULATION_METHODS } from '@/utils/prayerTimes';
-import {
-  getCalculationMethod,
-  getNotificationsEnabled,
-  saveCalculationMethod,
-  saveNotificationsEnabled,
-} from '@/utils/storage';
 
 interface SettingsScreenProps {
   onSettingsChanged?: () => void;
@@ -30,15 +31,14 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   const theme = useTheme();
   const { t, language, setLanguage, availableLanguages } = useTranslation();
   const { selectedTheme, changeTheme } = useThemeContext();
-  const [calculationMethod, setCalculationMethod] =
-    useState('MuslimWorldLeague');
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [loading, setLoading] = useState(true);
+  const {
+    calculationMethod,
+    notificationsEnabled,
+    loading,
+    updateCalculationMethod: updateMethod,
+    updateNotificationsEnabled: updateNotifications,
+  } = usePrayerTimes();
   const fadeAnim = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    loadSettings();
-  }, []);
 
   useEffect(() => {
     if (!loading) {
@@ -50,26 +50,10 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     }
   }, [loading]);
 
-  const loadSettings = async () => {
-    try {
-      const [method, notifications] = await Promise.all([
-        getCalculationMethod(),
-        getNotificationsEnabled(),
-      ]);
-
-      setCalculationMethod(method);
-      setNotificationsEnabled(notifications);
-    } catch (error) {
-      console.error('Error loading settings:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const handleMethodChange = async (method: string) => {
     try {
       await saveCalculationMethod(method);
-      setCalculationMethod(method);
+      updateMethod(method);
       onSettingsChanged?.();
       Alert.alert(t('success'), t('methodChanged'));
     } catch (error) {
@@ -80,7 +64,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   const handleNotificationsChange = async (enabled: boolean) => {
     try {
       await saveNotificationsEnabled(enabled);
-      setNotificationsEnabled(enabled);
+      updateNotifications(enabled);
       onSettingsChanged?.();
     } catch (error) {
       Alert.alert(t('error'), t('notificationsSaveError'));

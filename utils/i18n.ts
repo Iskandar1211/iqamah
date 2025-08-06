@@ -1,5 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+import React from 'react';
+
 export type Language = 'ru' | 'tg' | 'en';
 
 export interface Translations {
@@ -105,6 +107,8 @@ export interface Translations {
   methodChangeError: string;
   notificationsSaveError: string;
   themeSaveError: string;
+  testNotificationSent: string;
+  testNotificationError: string;
   
   // Дополнительные переводы
   searchCity: string;
@@ -116,6 +120,8 @@ export interface Translations {
   methodCalculationDescription: string;
   detectingLocation: string;
   locationErrorDescription: string;
+  testNotification: string;
+  testNotificationDescription: string;
 }
 
 const translations: Record<Language, Translations> = {
@@ -189,6 +195,8 @@ const translations: Record<Language, Translations> = {
     methodChangeError: 'Не удалось сохранить метод расчета',
     notificationsSaveError: 'Не удалось сохранить настройки уведомлений',
     themeSaveError: 'Не удалось сохранить тему',
+    testNotificationSent: 'Тестовое уведомление отправлено',
+    testNotificationError: 'Ошибка при отправке тестового уведомления',
     
     // Дополнительные переводы
     searchCity: 'Поиск города...',
@@ -198,6 +206,10 @@ const translations: Record<Language, Translations> = {
     hadithOfDay: 'Хадис дня',
     narratedBy: 'Передал',
     methodCalculationDescription: 'Выберите метод расчета, соответствующий вашему мазхабу',
+    detectingLocation: 'Определение местоположения...',
+    locationErrorDescription: 'Не удалось определить ваше местоположение. Проверьте настройки GPS и попробуйте снова.',
+    testNotification: 'Тестировать уведомления',
+    testNotificationDescription: 'Отправить тестовое уведомление для проверки работы',
     
     // Qibla
     qiblaDirection: 'Направление Киблы',
@@ -211,6 +223,7 @@ const translations: Record<Language, Translations> = {
     west: 'З',
     northwest: 'СЗ',
     fromNorth: 'от севера',
+    toKaaba: 'к Каабе',
     yourLocation: 'Ваше местоположение',
     howToDetermineQibla: 'Как определить направление Киблы',
     step1Qibla: 'Встаньте лицом к северу',
@@ -295,6 +308,8 @@ const translations: Record<Language, Translations> = {
     methodChangeError: 'Усули ҳисобро сабт карда натавонист',
     notificationsSaveError: 'Танзимоти огоҳиномаҳоро сабт карда натавонист',
     themeSaveError: 'Мавзӯро сабт карда натавонист',
+    testNotificationSent: 'Огоҳиномаи санҷишӣ фиристода шуд',
+    testNotificationError: 'Хато дар фиристодани огоҳиномаи санҷишӣ',
     
     // Дополнительные переводы
     searchCity: 'Ҷустуҷӯи шаҳр...',
@@ -306,6 +321,8 @@ const translations: Record<Language, Translations> = {
     methodCalculationDescription: 'Усули ҳисобро интихоб кунед, ки ба мазҳаби шумо мувофиқ аст',
     detectingLocation: 'Муайян кардани ҷойгиршавӣ...',
     locationErrorDescription: 'Ҷойгиршавии шуморо муайян карда натавонист. Танзимоти GPS-ро санҷед ва бори дигар кӯшиш кунед.',
+    testNotification: 'Санҷидани огоҳиномаҳо',
+    testNotificationDescription: 'Огоҳиномаи санҷиширо фиристед барои санҷидани кор',
     
     // Qibla
     qiblaDirection: 'Роҳи қибла',
@@ -404,6 +421,8 @@ const translations: Record<Language, Translations> = {
     methodChangeError: 'Could not save calculation method',
     notificationsSaveError: 'Could not save notification settings',
     themeSaveError: 'Could not save theme',
+    testNotificationSent: 'Test notification sent',
+    testNotificationError: 'Error sending test notification',
     
     // Дополнительные переводы
     searchCity: 'Search city...',
@@ -415,6 +434,8 @@ const translations: Record<Language, Translations> = {
     methodCalculationDescription: 'Choose calculation method that corresponds to your madhhab',
     detectingLocation: 'Detecting location...',
     locationErrorDescription: 'Could not determine your location. Check GPS settings and try again.',
+    testNotification: 'Test Notifications',
+    testNotificationDescription: 'Send a test notification to verify functionality',
     
     // Qibla
     qiblaDirection: 'Qibla Direction',
@@ -446,7 +467,7 @@ const translations: Record<Language, Translations> = {
 
 class I18n {
   private currentLanguage: Language = 'ru';
-  private listeners: Array<() => void> = [];
+  private listeners: (() => void)[] = [];
 
   constructor() {
     this.loadLanguage();
@@ -496,7 +517,7 @@ class I18n {
     this.listeners.forEach(listener => listener());
   }
 
-  getAvailableLanguages(): Array<{ code: Language; name: string; nativeName: string }> {
+  getAvailableLanguages(): { code: Language; name: string; nativeName: string }[] {
     return [
       { code: 'ru', name: 'Russian', nativeName: 'Русский' },
       { code: 'tg', name: 'Tajik', nativeName: 'Тоҷикӣ' },
@@ -506,8 +527,6 @@ class I18n {
 }
 
 export const i18n = new I18n();
-
-import React from 'react';
 
 // Хук для использования переводов в компонентах
 export const useTranslation = () => {

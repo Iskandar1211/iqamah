@@ -4,8 +4,6 @@ import { PrayerTime } from './prayerTimes';
 
 // Проверяем, поддерживаются ли уведомления в текущей среде
 const isNotificationsSupported = () => {
-  // В Expo Go SDK 53+ push-уведомления не поддерживаются
-  // Но локальные уведомления могут работать
   return Platform.OS !== 'web';
 };
 
@@ -28,8 +26,7 @@ export async function requestNotificationPermissions(): Promise<boolean> {
   }
 
   try {
-    const { status: existingStatus } =
-      await Notifications.getPermissionsAsync();
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
 
     if (existingStatus !== 'granted') {
@@ -68,20 +65,104 @@ export async function schedulePrayerNotifications(
     }
 
     const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
     for (const prayer of prayerTimes) {
-      // В Expo Go SDK 53+ планирование уведомлений ограничено
-      // Отправляем немедленное уведомление для тестирования
+      // Создаем дату для времени намаза сегодня
+      const prayerDate = new Date(today);
+      const [hours, minutes] = prayer.time.split(':').map(Number);
+      prayerDate.setHours(hours, minutes, 0, 0);
+
+      // Если время намаза уже прошло сегодня, планируем на завтра
+      if (prayerDate <= now) {
+        prayerDate.setDate(prayerDate.getDate() + 1);
+      }
+
+      // Планируем уведомление за 10 минут до намаза
+      const notificationDate = new Date(prayerDate.getTime() - 10 * 60 * 1000);
+      
+      // Если время уведомления еще не прошло
+      if (notificationDate > now) {
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: 'Время намаза',
+            body: `До ${prayer.name} осталось 10 минут`,
+            sound: 'default',
+            priority: Notifications.AndroidNotificationPriority.HIGH,
+            data: { prayerName: prayer.name, prayerTime: prayer.time },
+          },
+          trigger: {
+            date: notificationDate,
+            repeats: false,
+          },
+        });
+
+        console.log(`Scheduled notification for ${prayer.name} at ${notificationDate.toLocaleString()}`);
+      }
+
+      // Также планируем уведомление точно в время намаза
       await Notifications.scheduleNotificationAsync({
         content: {
           title: 'Время намаза',
-          body: `До ${prayer.name} осталось 10 минут`,
+          body: `Время ${prayer.name}`,
           sound: 'default',
           priority: Notifications.AndroidNotificationPriority.HIGH,
+          data: { prayerName: prayer.name, prayerTime: prayer.time },
         },
-        trigger: null, // Немедленное уведомление для тестирования
+        trigger: {
+          date: prayerDate,
+          repeats: false,
+        },
       });
+
+      console.log(`Scheduled notification for ${prayer.name} at ${prayerDate.toLocaleString()}`);
     }
+
+    // Планируем уведомления на следующие 7 дней
+    for (let day = 1; day <= 7; day++) {
+      const futureDate = new Date(today);
+      futureDate.setDate(futureDate.getDate() + day);
+
+      for (const prayer of prayerTimes) {
+        const [hours, minutes] = prayer.time.split(':').map(Number);
+        const futurePrayerDate = new Date(futureDate);
+        futurePrayerDate.setHours(hours, minutes, 0, 0);
+
+        // Уведомление за 10 минут
+        const futureNotificationDate = new Date(futurePrayerDate.getTime() - 10 * 60 * 1000);
+        
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: 'Время намаза',
+            body: `До ${prayer.name} осталось 10 минут`,
+            sound: 'default',
+            priority: Notifications.AndroidNotificationPriority.HIGH,
+            data: { prayerName: prayer.name, prayerTime: prayer.time },
+          },
+          trigger: {
+            date: futureNotificationDate,
+            repeats: false,
+          },
+        });
+
+        // Уведомление точно в время
+        await Notifications.scheduleNotificationAsync({
+          content: {
+            title: 'Время намаза',
+            body: `Время ${prayer.name}`,
+            sound: 'default',
+            priority: Notifications.AndroidNotificationPriority.HIGH,
+            data: { prayerName: prayer.name, prayerTime: prayer.time },
+          },
+          trigger: {
+            date: futurePrayerDate,
+            repeats: false,
+          },
+        });
+      }
+    }
+
+    console.log('All prayer notifications scheduled successfully');
   } catch (error) {
     console.log('Error scheduling prayer notifications:', error);
   }
@@ -94,6 +175,7 @@ export async function cancelAllNotifications(): Promise<void> {
 
   try {
     await Notifications.cancelAllScheduledNotificationsAsync();
+    console.log('All notifications cancelled');
   } catch (error) {
     console.log('Error canceling notifications:', error);
   }
@@ -138,5 +220,38 @@ export async function sendTestNotification(): Promise<void> {
     });
   } catch (error) {
     console.log('Error sending test notification:', error);
+  }
+}
+
+// Функция для планирования уведомления на конкретное время
+export async function scheduleNotificationAtTime(
+  title: string,
+  body: string,
+  date: Date
+): Promise<void> {
+  if (!isNotificationsSupported()) {
+    return;
+  }
+
+  try {
+    const hasPermission = await requestNotificationPermissions();
+    if (!hasPermission) {
+      return;
+    }
+
+    await Notifications.scheduleNotificationAsync({
+      content: {
+        title,
+        body,
+        sound: 'default',
+        priority: Notifications.AndroidNotificationPriority.HIGH,
+      },
+      trigger: {
+        date,
+        repeats: false,
+      },
+    });
+  } catch (error) {
+    console.log('Error scheduling notification:', error);
   }
 }
