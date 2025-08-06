@@ -1,17 +1,13 @@
 import { useThemeContext } from '@/contexts/ThemeContext';
 import { usePrayerTimes } from '@/hooks/usePrayerTimes';
 import { useTranslation } from '@/utils/i18n';
-import { sendTestNotification } from '@/utils/notifications';
-import { CALCULATION_METHODS } from '@/utils/prayerTimes';
 import {
-  saveCalculationMethod,
   saveNotificationsEnabled,
 } from '@/utils/storage';
 import React, { useEffect, useRef } from 'react';
 import { Alert, Animated, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import {
   ActivityIndicator,
-  Button,
   Card,
   List,
   RadioButton,
@@ -32,10 +28,8 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
   const { t, language, setLanguage, availableLanguages } = useTranslation();
   const { selectedTheme, changeTheme } = useThemeContext();
   const {
-    calculationMethod,
     notificationsEnabled,
     loading,
-    updateCalculationMethod: updateMethod,
     updateNotificationsEnabled: updateNotifications,
   } = usePrayerTimes();
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -49,17 +43,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
       }).start();
     }
   }, [loading]);
-
-  const handleMethodChange = async (method: string) => {
-    try {
-      await saveCalculationMethod(method);
-      updateMethod(method);
-      onSettingsChanged?.();
-      Alert.alert(t('success'), t('methodChanged'));
-    } catch (error) {
-      Alert.alert(t('error'), t('methodChangeError'));
-    }
-  };
 
   const handleNotificationsChange = async (enabled: boolean) => {
     try {
@@ -93,25 +76,7 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
     }
   };
 
-  const getMethodDisplayName = (method: string): string => {
-    const methodNames: { [key: string]: string } = {
-      MuslimWorldLeague: t('hanafiMethod'),
-      ISNA: t('isnaMethod'),
-      Egyptian: t('egyptianMethod'),
-      UmmAlQura: t('makkahMethod'),
-      Karachi: t('karachiMethod'),
-      Tehran: t('tehranMethod'),
-      Dubai: t('dubaiMethod'),
-      Kuwait: t('kuwaitMethod'),
-      Qatar: t('qatarMethod'),
-      Singapore: t('singaporeMethod'),
-      Turkey: t('turkeyMethod'),
-      MoonsightingCommittee: t('moonsightingMethod'),
-      NorthAmerica: t('northAmericaMethod'),
-      Other: t('otherMethod'),
-    };
-    return methodNames[method] || method;
-  };
+
 
   if (loading) {
     return (
@@ -186,51 +151,6 @@ export const SettingsScreen: React.FC<SettingsScreenProps> = ({
                     <RadioButton.Item
                       label={`${lang.nativeName} (${lang.name})`}
                       value={lang.code}
-                      color={theme.colors.primary}
-                      labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
-                      style={styles.radioButton}
-                    />
-                  </View>
-                ))}
-              </RadioButton.Group>
-            </Card.Content>
-          </Card>
-
-          {/* Метод расчета */}
-          <Card style={[styles.card, { backgroundColor: theme.colors.surface }]} elevation={2}>
-            <Card.Content style={styles.cardContent}>
-              <View style={styles.sectionHeader}>
-                <View style={[styles.iconContainer, { backgroundColor: theme.colors.primaryContainer }]}>
-                  <Text style={[styles.sectionIcon, { color: theme.colors.onPrimaryContainer }]}>
-                    🕌
-                  </Text>
-                </View>
-                <View style={styles.sectionTextContainer}>
-                  <Text
-                    style={[styles.sectionTitle, { color: theme.colors.onSurface }]}
-                  >
-                    {t('calculationMethod')}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.sectionDescription,
-                      { color: theme.colors.onSurfaceVariant },
-                    ]}
-                  >
-                    {t('methodCalculationDescription')}
-                  </Text>
-                </View>
-              </View>
-
-              <RadioButton.Group
-                onValueChange={handleMethodChange}
-                value={calculationMethod}
-              >
-                {Object.entries(CALCULATION_METHODS).map(([key, value]) => (
-                  <View key={key} style={styles.radioItem}>
-                    <RadioButton.Item
-                      label={getMethodDisplayName(value)}
-                      value={value}
                       color={theme.colors.primary}
                       labelStyle={[styles.radioLabel, { color: theme.colors.onSurface }]}
                       style={styles.radioButton}

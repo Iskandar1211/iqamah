@@ -1,18 +1,16 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
-import { schedulePrayerNotifications, cancelAllNotifications } from '../utils/notifications';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { cancelAllNotifications, schedulePrayerNotifications } from '../utils/notifications';
 import {
-  City,
-  PrayerTime,
-  calculatePrayerTimes,
-  getTimeUntil,
+    City,
+    PrayerTime,
+    calculatePrayerTimes,
+    getTimeUntil,
 } from '../utils/prayerTimes';
-import { getCalculationMethod, getSelectedCity, getNotificationsEnabled } from '../utils/storage';
+import { getNotificationsEnabled, getSelectedCity } from '../utils/storage';
 
 export function usePrayerTimes() {
   const [prayerTimes, setPrayerTimes] = useState<PrayerTime[]>([]);
   const [selectedCity, setSelectedCity] = useState<City | null>(null);
-  const [calculationMethod, setCalculationMethod] =
-    useState<string>('MuslimWorldLeague');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [loading, setLoading] = useState(true);
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -20,7 +18,6 @@ export function usePrayerTimes() {
   // Используем ref для отслеживания последнего планирования уведомлений
   const lastNotificationSchedule = useRef<{
     cityId: string;
-    method: string;
     date: string;
     notificationsEnabled: boolean;
   } | null>(null);
@@ -39,23 +36,21 @@ export function usePrayerTimes() {
     return () => clearInterval(interval);
   }, []);
 
-  // Обновление времени намаза при изменении города или метода
+  // Обновление времени намаза при изменении города
   useEffect(() => {
     if (selectedCity) {
       updatePrayerTimes();
     }
-  }, [selectedCity, calculationMethod, currentTime, notificationsEnabled]);
+  }, [selectedCity, currentTime, notificationsEnabled]);
 
   const loadSettings = async () => {
     try {
-      const [city, method, notifications] = await Promise.all([
+      const [city, notifications] = await Promise.all([
         getSelectedCity(),
-        getCalculationMethod(),
         getNotificationsEnabled(),
       ]);
 
       setSelectedCity(city);
-      setCalculationMethod(method);
       setNotificationsEnabled(notifications);
     } catch (error) {
       console.error('Error loading settings:', error);
@@ -67,27 +62,21 @@ export function usePrayerTimes() {
   const updatePrayerTimes = useCallback(() => {
     if (!selectedCity) return;
 
-    const times = calculatePrayerTimes(
-      selectedCity,
-      currentTime,
-      calculationMethod
-    );
+    const times = calculatePrayerTimes(selectedCity, currentTime);
     setPrayerTimes(times);
 
     // Проверяем, нужно ли перепланировать уведомления
     const today = new Date().toDateString();
     const currentSchedule = {
-      cityId: selectedCity.id,
-      method: calculationMethod,
+      cityId: selectedCity.id.toString(),
       date: today,
       notificationsEnabled,
     };
 
-    // Планируем уведомления только если изменился город, метод, день или настройка уведомлений
+    // Планируем уведомления только если изменился город, день или настройка уведомлений
     if (
       !lastNotificationSchedule.current ||
       lastNotificationSchedule.current.cityId !== currentSchedule.cityId ||
-      lastNotificationSchedule.current.method !== currentSchedule.method ||
       lastNotificationSchedule.current.date !== currentSchedule.date ||
       lastNotificationSchedule.current.notificationsEnabled !== currentSchedule.notificationsEnabled
     ) {
@@ -101,14 +90,10 @@ export function usePrayerTimes() {
       
       lastNotificationSchedule.current = currentSchedule;
     }
-  }, [selectedCity, calculationMethod, currentTime, notificationsEnabled]);
+  }, [selectedCity, currentTime, notificationsEnabled]);
 
   const updateCity = useCallback((city: City) => {
     setSelectedCity(city);
-  }, []);
-
-  const updateCalculationMethod = useCallback((method: string) => {
-    setCalculationMethod(method);
   }, []);
 
   const updateNotificationsEnabled = useCallback((enabled: boolean) => {
@@ -129,12 +114,10 @@ export function usePrayerTimes() {
   return {
     prayerTimes,
     selectedCity,
-    calculationMethod,
     notificationsEnabled,
     loading,
     currentTime,
     updateCity,
-    updateCalculationMethod,
     updateNotificationsEnabled,
     getNextPrayer,
     getTimeUntilNextPrayer,

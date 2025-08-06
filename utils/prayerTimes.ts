@@ -27,64 +27,30 @@ export const PRAYER_NAMES = {
 };
 
 export const CALCULATION_METHODS = {
-  ISNA: 'ISNA',
   MuslimWorldLeague: 'MuslimWorldLeague',
-  Egyptian: 'Egyptian',
-  UmmAlQura: 'UmmAlQura',
-  Karachi: 'Karachi',
   Tehran: 'Tehran',
-  Dubai: 'Dubai',
-  Kuwait: 'Kuwait',
-  Qatar: 'Qatar',
-  Singapore: 'Singapore',
-  Turkey: 'Turkey',
-  MoonsightingCommittee: 'MoonsightingCommittee',
-  NorthAmerica: 'NorthAmerica',
-  Other: 'Other',
+  Karachi: 'Karachi',
 };
 
 export function getCalculationMethod(method: string): any {
   switch (method) {
-    case 'ISNA':
-      return CalculationMethod.NorthAmerica();
     case 'MuslimWorldLeague':
       return CalculationMethod.MuslimWorldLeague();
-    case 'Egyptian':
-      return CalculationMethod.Egyptian();
-    case 'UmmAlQura':
-      return CalculationMethod.UmmAlQura();
-    case 'Karachi':
-      return CalculationMethod.Karachi();
     case 'Tehran':
       return CalculationMethod.Tehran();
-    case 'Dubai':
-      return CalculationMethod.Dubai();
-    case 'Kuwait':
-      return CalculationMethod.Kuwait();
-    case 'Qatar':
-      return CalculationMethod.Qatar();
-    case 'Singapore':
-      return CalculationMethod.Singapore();
-    case 'Turkey':
-      return CalculationMethod.Turkey();
-    case 'MoonsightingCommittee':
-      return CalculationMethod.MoonsightingCommittee();
-    case 'NorthAmerica':
-      return CalculationMethod.NorthAmerica();
-    case 'Other':
-      return CalculationMethod.Other();
+    case 'Karachi':
+      return CalculationMethod.Karachi();
     default:
-      return CalculationMethod.NorthAmerica();
+      return CalculationMethod.MuslimWorldLeague();
   }
 }
 
 export function calculatePrayerTimes(
   city: City,
-  date: Date = new Date(),
-  method: string = 'MuslimWorldLeague'
+  date: Date = new Date()
 ): PrayerTime[] {
   const coordinates = new Coordinates(city.latitude, city.longitude);
-  const calculationMethod = getCalculationMethod(method);
+  const calculationMethod = CalculationMethod.MuslimWorldLeague();
 
   const prayerTimes = new PrayerTimes(coordinates, date, calculationMethod);
 

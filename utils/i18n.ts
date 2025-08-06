@@ -61,20 +61,8 @@ export interface Translations {
   
   // Методы расчета
   hanafiMethod: string;
-  isnaMethod: string;
-  egyptianMethod: string;
-  makkahMethod: string;
   karachiMethod: string;
   tehranMethod: string;
-  jafariMethod: string;
-  dubaiMethod: string;
-  kuwaitMethod: string;
-  qatarMethod: string;
-  singaporeMethod: string;
-  turkeyMethod: string;
-  moonsightingMethod: string;
-  northAmericaMethod: string;
-  otherMethod: string;
   
   // Qibla
   qiblaDirection: string;
@@ -176,20 +164,8 @@ const translations: Record<Language, Translations> = {
     developerName: 'Просто раб аллаха',
     
     hanafiMethod: 'Ханафийский (Muslim World League)',
-    isnaMethod: 'ISNA (Islamic Society of North America)',
-    egyptianMethod: 'Египетский',
-    makkahMethod: 'Мекканский',
     karachiMethod: 'Карачинский',
     tehranMethod: 'Тегеранский',
-    jafariMethod: 'Джафари',
-    dubaiMethod: 'Дубайский',
-    kuwaitMethod: 'Кувейтский',
-    qatarMethod: 'Катарский',
-    singaporeMethod: 'Сингапурский',
-    turkeyMethod: 'Турецкий',
-    moonsightingMethod: 'Комитет наблюдения за луной',
-    northAmericaMethod: 'Северная Америка',
-    otherMethod: 'Другой',
     
     methodChanged: 'Метод расчета изменен',
     methodChangeError: 'Не удалось сохранить метод расчета',
@@ -289,20 +265,8 @@ const translations: Record<Language, Translations> = {
     developerName: 'Фақат бандаи Аллоҳ',
     
     hanafiMethod: 'Ҳанафӣ (Muslim World League)',
-    isnaMethod: 'ISNA (Islamic Society of North America)',
-    egyptianMethod: 'Мисрӣ',
-    makkahMethod: 'Маккӣ',
     karachiMethod: 'Карачӣ',
     tehranMethod: 'Теҳронӣ',
-    jafariMethod: 'Ҷаъфарӣ',
-    dubaiMethod: 'Дубайӣ',
-    kuwaitMethod: 'Кувайтӣ',
-    qatarMethod: 'Қатарӣ',
-    singaporeMethod: 'Сингапурӣ',
-    turkeyMethod: 'Туркӣ',
-    moonsightingMethod: 'Кумитаи назорати моҳ',
-    northAmericaMethod: 'Амрикои Шимолӣ',
-    otherMethod: 'Дигар',
     
     methodChanged: 'Усули ҳисоб тағйир дода шуд',
     methodChangeError: 'Усули ҳисобро сабт карда натавонист',
@@ -402,20 +366,8 @@ const translations: Record<Language, Translations> = {
     developerName: 'Just a servant of Allah',
     
     hanafiMethod: 'Hanafi (Muslim World League)',
-    isnaMethod: 'ISNA (Islamic Society of North America)',
-    egyptianMethod: 'Egyptian',
-    makkahMethod: 'Makkah',
     karachiMethod: 'Karachi',
     tehranMethod: 'Tehran',
-    jafariMethod: 'Jafari',
-    dubaiMethod: 'Dubai',
-    kuwaitMethod: 'Kuwait',
-    qatarMethod: 'Qatar',
-    singaporeMethod: 'Singapore',
-    turkeyMethod: 'Turkey',
-    moonsightingMethod: 'Moonsighting Committee',
-    northAmericaMethod: 'North America',
-    otherMethod: 'Other',
     
     methodChanged: 'Calculation method changed',
     methodChangeError: 'Could not save calculation method',

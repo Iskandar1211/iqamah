@@ -23,10 +23,6 @@ export interface AppSettings {
 }
 
 export type CalculationMethod =
-  | 'ISNA'
   | 'MuslimWorldLeague'
-  | 'Egyptian'
-  | 'Makkah'
-  | 'Karachi'
   | 'Tehran'
-  | 'Jafari';
+  | 'Karachi';

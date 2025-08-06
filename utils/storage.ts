@@ -3,14 +3,12 @@ import { City } from './prayerTimes';
 
 const STORAGE_KEYS = {
   SELECTED_CITY: 'selected_city',
-  CALCULATION_METHOD: 'calculation_method',
   NOTIFICATIONS_ENABLED: 'notifications_enabled',
   THEME: 'theme',
 };
 
 export interface AppSettings {
   selectedCity: City | null;
-  calculationMethod: string;
   notificationsEnabled: boolean;
   theme: 'light' | 'dark' | 'auto';
 }
@@ -33,26 +31,6 @@ export async function getSelectedCity(): Promise<City | null> {
   } catch (error) {
     console.error('Error getting selected city:', error);
     return null;
-  }
-}
-
-export async function saveCalculationMethod(method: string): Promise<void> {
-  try {
-    await AsyncStorage.setItem(STORAGE_KEYS.CALCULATION_METHOD, method);
-  } catch (error) {
-    console.error('Error saving calculation method:', error);
-  }
-}
-
-export async function getCalculationMethod(): Promise<string> {
-  try {
-    return (
-      (await AsyncStorage.getItem(STORAGE_KEYS.CALCULATION_METHOD)) ||
-      'MuslimWorldLeague'
-    );
-  } catch (error) {
-    console.error('Error getting calculation method:', error);
-    return 'MuslimWorldLeague';
   }
 }
 
@@ -106,17 +84,15 @@ export async function getTheme(): Promise<'light' | 'dark' | 'auto'> {
 }
 
 export async function getAllSettings(): Promise<AppSettings> {
-  const [selectedCity, calculationMethod, notificationsEnabled, theme] =
+  const [selectedCity, notificationsEnabled, theme] =
     await Promise.all([
       getSelectedCity(),
-      getCalculationMethod(),
       getNotificationsEnabled(),
       getTheme(),
     ]);
 
   return {
     selectedCity,
-    calculationMethod,
     notificationsEnabled,
     theme,
   };
