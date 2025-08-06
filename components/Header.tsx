@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useTheme } from 'react-native-paper';
-import { formatDate, getHijriDate } from '../utils/prayerTimes';
+import { formatDate, getHijriDate } from '@/utils/prayerTimes';
 
 export const Header: React.FC = () => {
   const theme = useTheme();

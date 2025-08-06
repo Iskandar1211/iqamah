@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Animated, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Card, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTranslation } from '../../utils/i18n';
-import { getSelectedCity } from '../../utils/storage';
+import { useTranslation } from '@/utils/i18n';
+import { getSelectedCity } from '@/utils/storage';
 
 const QiblaScreen: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [selectedCity, setSelectedCity] = useState<any>(null);
-  const [qiblaDirection, setQiblaDirection] = useState(t('southwest'));
-  const [qiblaAngle, setQiblaAngle] = useState(225);
   const [rotationAnim] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -30,20 +28,10 @@ const QiblaScreen: React.FC = () => {
     try {
       const city = await getSelectedCity();
       setSelectedCity(city);
-
-      if (city) {
-        setQiblaDirection(t('southwest'));
-        setQiblaAngle(225);
-      }
     } catch (error) {
       console.error('Error loading city data:', error);
     }
   };
-
-  const spin = rotationAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg'],
-  });
 
   return (
     <SafeAreaView
@@ -51,36 +39,63 @@ const QiblaScreen: React.FC = () => {
     >
       <ScrollView>
         {/* Gradient Header */}
-        <View style={[styles.headerContainer, { backgroundColor: theme.colors.primary }]}>
+        <View
+          style={[
+            styles.headerContainer,
+            { backgroundColor: theme.colors.primary },
+          ]}
+        >
           <View style={styles.headerGradient}>
             <Text style={styles.headerTitle}>🕋</Text>
-            <Text style={[styles.headerSubtitle, { color: theme.colors.onPrimary }]}>
+            <Text
+              style={[styles.headerSubtitle, { color: theme.colors.onPrimary }]}
+            >
               {t('qiblaDirection')}
             </Text>
-            <Text style={[styles.headerDescription, { color: theme.colors.onPrimary }]}>
+            <Text
+              style={[
+                styles.headerDescription,
+                { color: theme.colors.onPrimary },
+              ]}
+            >
               {t('qiblaDescription')}
             </Text>
           </View>
         </View>
 
         {/* Main Compass Card */}
-        <Card style={[styles.mainCompassCard, { backgroundColor: theme.colors.surface }]}>
+        <Card
+          style={[
+            styles.mainCompassCard,
+            { backgroundColor: theme.colors.surface },
+          ]}
+        >
           <Card.Content style={styles.compassContent}>
-            <View style={[styles.compassOuterRing, { borderColor: theme.colors.primaryContainer }]}>
+            <View
+              style={[
+                styles.compassOuterRing,
+                { borderColor: theme.colors.primaryContainer },
+              ]}
+            >
               <Animated.View
                 style={[
                   styles.compassInnerRing,
-                  { 
+                  {
                     borderColor: theme.colors.primary,
-                    backgroundColor: theme.colors.surface
+                    backgroundColor: theme.colors.surface,
                   },
                 ]}
               >
-                <View style={[styles.compassCenter, { backgroundColor: theme.colors.primary }]}>
+                <View
+                  style={[
+                    styles.compassCenter,
+                    { backgroundColor: theme.colors.primary },
+                  ]}
+                >
                   <View
                     style={[
                       styles.compassNeedle,
-                      { transform: [{ rotate: `${qiblaAngle}deg` }] },
+                      { transform: [{ rotate: `${225}deg` }] },
                     ]}
                   >
                     <Text style={styles.compassArrow}>🕋</Text>
@@ -88,39 +103,94 @@ const QiblaScreen: React.FC = () => {
                 </View>
 
                 {/* Direction Markers */}
-                <Text style={[styles.directionMarker, styles.north, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.north,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('north')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.northeast, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.northeast,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('northeast')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.east, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.east,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('east')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.southeast, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.southeast,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('southeast')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.south, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.south,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('south')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.southwest, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.southwest,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('southwest')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.west, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.west,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('west')}
                 </Text>
-                <Text style={[styles.directionMarker, styles.northwest, { color: theme.colors.primary }]}>
+                <Text
+                  style={[
+                    styles.directionMarker,
+                    styles.northwest,
+                    { color: theme.colors.primary },
+                  ]}
+                >
                   {t('northwest')}
                 </Text>
               </Animated.View>
             </View>
 
             <View style={styles.directionInfo}>
-              <Text style={[styles.directionText, { color: theme.colors.primary }]}>
-                {qiblaDirection}
+              <Text
+                style={[styles.directionText, { color: theme.colors.primary }]}
+              >
+                {t('southwest')}
               </Text>
-              <Text style={[styles.angleText, { color: theme.colors.onSurfaceVariant }]}>
-                {qiblaAngle}° {t('fromNorth')}
+              <Text
+                style={[
+                  styles.angleText,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
+                225° {t('fromNorth')}
               </Text>
             </View>
           </Card.Content>
@@ -128,63 +198,135 @@ const QiblaScreen: React.FC = () => {
 
         {/* Location Info Card */}
         {selectedCity && (
-          <Card style={[styles.infoCard, { backgroundColor: theme.colors.surface }]}>
+          <Card
+            style={[styles.infoCard, { backgroundColor: theme.colors.surface }]}
+          >
             <Card.Content style={styles.infoContent}>
               <View style={styles.infoHeader}>
                 <Text style={styles.infoIcon}>📍</Text>
-                <Text style={[styles.infoTitle, { color: theme.colors.onSurface }]}>
+                <Text
+                  style={[styles.infoTitle, { color: theme.colors.onSurface }]}
+                >
                   {t('yourLocation')}
                 </Text>
               </View>
               <Text style={[styles.cityText, { color: theme.colors.primary }]}>
                 {selectedCity.name}, {selectedCity.country}
               </Text>
-              <Text style={[styles.coordinatesText, { color: theme.colors.onSurfaceVariant }]}>
-                {selectedCity.latitude.toFixed(4)}, {selectedCity.longitude.toFixed(4)}
+              <Text
+                style={[
+                  styles.coordinatesText,
+                  { color: theme.colors.onSurfaceVariant },
+                ]}
+              >
+                {selectedCity.latitude.toFixed(4)},{' '}
+                {selectedCity.longitude.toFixed(4)}
               </Text>
             </Card.Content>
           </Card>
         )}
 
         {/* Instructions Card */}
-        <Card style={[styles.instructionsCard, { backgroundColor: theme.colors.surface }]}>
+        <Card
+          style={[
+            styles.instructionsCard,
+            { backgroundColor: theme.colors.surface },
+          ]}
+        >
           <Card.Content>
             <View style={styles.instructionsHeader}>
               <Text style={styles.instructionsIcon}>📋</Text>
-              <Text style={[styles.instructionsTitle, { color: theme.colors.onSurface }]}>
+              <Text
+                style={[
+                  styles.instructionsTitle,
+                  { color: theme.colors.onSurface },
+                ]}
+              >
                 {t('howToDetermineQibla')}
               </Text>
             </View>
             <View style={styles.instructionSteps}>
               <View style={styles.instructionStep}>
-                <Text style={[styles.stepNumber, { backgroundColor: theme.colors.primary, color: theme.colors.onPrimary }]}>
+                <Text
+                  style={[
+                    styles.stepNumber,
+                    {
+                      backgroundColor: theme.colors.primary,
+                      color: theme.colors.onPrimary,
+                    },
+                  ]}
+                >
                   1
                 </Text>
-                <Text style={[styles.stepText, { color: theme.colors.onSurfaceVariant }]}>
+                <Text
+                  style={[
+                    styles.stepText,
+                    { color: theme.colors.onSurfaceVariant },
+                  ]}
+                >
                   {t('step1Qibla')}
                 </Text>
               </View>
               <View style={styles.instructionStep}>
-                <Text style={[styles.stepNumber, { backgroundColor: theme.colors.primary, color: theme.colors.onPrimary }]}>
+                <Text
+                  style={[
+                    styles.stepNumber,
+                    {
+                      backgroundColor: theme.colors.primary,
+                      color: theme.colors.onPrimary,
+                    },
+                  ]}
+                >
                   2
                 </Text>
-                <Text style={[styles.stepText, { color: theme.colors.onSurfaceVariant }]}>
+                <Text
+                  style={[
+                    styles.stepText,
+                    { color: theme.colors.onSurfaceVariant },
+                  ]}
+                >
                   {t('step2Qibla')}
                 </Text>
               </View>
               <View style={styles.instructionStep}>
-                <Text style={[styles.stepNumber, { backgroundColor: theme.colors.primary, color: theme.colors.onPrimary }]}>
+                <Text
+                  style={[
+                    styles.stepNumber,
+                    {
+                      backgroundColor: theme.colors.primary,
+                      color: theme.colors.onPrimary,
+                    },
+                  ]}
+                >
                   3
                 </Text>
-                <Text style={[styles.stepText, { color: theme.colors.onSurfaceVariant }]}>
+                <Text
+                  style={[
+                    styles.stepText,
+                    { color: theme.colors.onSurfaceVariant },
+                  ]}
+                >
                   {t('step3Qibla')}
                 </Text>
               </View>
               <View style={styles.instructionStep}>
-                <Text style={[styles.stepNumber, { backgroundColor: theme.colors.primary, color: theme.colors.onPrimary }]}>
+                <Text
+                  style={[
+                    styles.stepNumber,
+                    {
+                      backgroundColor: theme.colors.primary,
+                      color: theme.colors.onPrimary,
+                    },
+                  ]}
+                >
                   4
                 </Text>
-                <Text style={[styles.stepText, { color: theme.colors.onSurfaceVariant }]}>
+                <Text
+                  style={[
+                    styles.stepText,
+                    { color: theme.colors.onSurfaceVariant },
+                  ]}
+                >
                   {t('step4Qibla')}
                 </Text>
               </View>
@@ -193,8 +335,18 @@ const QiblaScreen: React.FC = () => {
         </Card>
 
         {/* Note */}
-        <View style={[styles.noteContainer, { backgroundColor: theme.colors.secondaryContainer }]}>
-          <Text style={[styles.noteText, { color: theme.colors.onSecondaryContainer }]}>
+        <View
+          style={[
+            styles.noteContainer,
+            { backgroundColor: theme.colors.secondaryContainer },
+          ]}
+        >
+          <Text
+            style={[
+              styles.noteText,
+              { color: theme.colors.onSecondaryContainer },
+            ]}
+          >
             💡 {t('qiblaNote')}
           </Text>
         </View>

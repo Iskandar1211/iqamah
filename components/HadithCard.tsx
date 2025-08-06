@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator, Card, useTheme } from 'react-native-paper';
-import { useTranslation } from '../utils/i18n';
+import { useTranslation } from '@/utils/i18n';
 
 interface Hadith {
   text: string;

@@ -1,17 +1,17 @@
 import { CitySelectionScreen } from '@/components/CitySelectionScreen';
+import { HadithCard } from '@/components/HadithCard';
+import { Header } from '@/components/Header';
+import { PrayerCard } from '@/components/PrayerCard';
+import { usePrayerTimes } from '@/hooks/usePrayerTimes';
+import { useTranslation } from '@/utils/i18n';
+import { getCurrentCity } from '@/utils/location';
+import { saveSelectedCity } from '@/utils/storage';
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { Alert, Modal, ScrollView, StyleSheet, View } from 'react-native';
 import { ActivityIndicator, Button, Text, useTheme } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { HadithCard } from '../components/HadithCard';
-import { Header } from '../components/Header';
-import { PrayerCard } from '../components/PrayerCard';
 import citiesData from '../data/cities.json';
-import { usePrayerTimes } from '../hooks/usePrayerTimes';
-import { useTranslation } from '../utils/i18n';
-import { getCurrentCity } from '../utils/location';
-import { saveSelectedCity } from '../utils/storage';
 
 export const HomeScreen: React.FC = () => {
   const theme = useTheme();
@@ -106,7 +106,7 @@ export const HomeScreen: React.FC = () => {
 
   const nextPrayer = getNextPrayer();
   const timeUntilNext = getTimeUntilNextPrayer();
-
+  
   return (
     <SafeAreaView
       style={[styles.container, { backgroundColor: theme.colors.background }]}

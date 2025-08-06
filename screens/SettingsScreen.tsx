@@ -10,15 +10,15 @@ import {
   useTheme
 } from 'react-native-paper';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useThemeContext } from '../contexts/ThemeContext';
-import { useTranslation } from '../utils/i18n';
-import { CALCULATION_METHODS } from '../utils/prayerTimes';
+import { useThemeContext } from '@/contexts/ThemeContext';
+import { useTranslation } from '@/utils/i18n';
+import { CALCULATION_METHODS } from '@/utils/prayerTimes';
 import {
   getCalculationMethod,
   getNotificationsEnabled,
   saveCalculationMethod,
   saveNotificationsEnabled,
-} from '../utils/storage';
+} from '@/utils/storage';
 
 interface SettingsScreenProps {
   onSettingsChanged?: () => void;

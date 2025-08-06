@@ -1,8 +1,8 @@
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs';
 import { PlatformPressable } from '@react-navigation/elements';
 import * as Haptics from 'expo-haptics';
-import { Animated, Pressable } from 'react-native';
-import { useRef, useEffect } from 'react';
+import { Animated } from 'react-native';
+import { useRef } from 'react';
 
 export function HapticTab(props: BottomTabBarButtonProps) {
   const scaleAnim = useRef(new Animated.Value(1)).current;
@@ -11,7 +11,7 @@ export function HapticTab(props: BottomTabBarButtonProps) {
     if (process.env.EXPO_OS === 'ios') {
       Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }
-    
+
     Animated.spring(scaleAnim, {
       toValue: 0.9,
       useNativeDriver: true,
@@ -33,11 +33,11 @@ export function HapticTab(props: BottomTabBarButtonProps) {
     <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
       <PlatformPressable
         {...props}
-        onPressIn={(ev) => {
+        onPressIn={ev => {
           handlePressIn();
           props.onPressIn?.(ev);
         }}
-        onPressOut={(ev) => {
+        onPressOut={ev => {
           handlePressOut();
           props.onPressOut?.(ev);
         }}

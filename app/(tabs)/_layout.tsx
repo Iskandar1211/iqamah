@@ -40,7 +40,7 @@ export default function TabLayout() {
             alignItems: 'center',
           },
           android: {
-            height: 70,
+            height: 88,
             paddingBottom: 8,
             borderWidth: 1,
             paddingTop: 8,
@@ -87,9 +87,9 @@ export default function TabLayout() {
         options={{
           title: t('home'),
           tabBarIcon: ({ color, focused }) => (
-            <AnimatedTabIcon 
-              name="namaz.fill" 
-              color={color} 
+            <AnimatedTabIcon
+              name="namaz.fill"
+              color={color}
               focused={focused}
               size={26}
             />
@@ -101,9 +101,9 @@ export default function TabLayout() {
         options={{
           title: t('qibla'),
           tabBarIcon: ({ color, focused }) => (
-            <AnimatedTabIcon 
-              name="location.north.fill" 
-              color={color} 
+            <AnimatedTabIcon
+              name="location.north.fill"
+              color={color}
               focused={focused}
               size={26}
             />
@@ -115,9 +115,9 @@ export default function TabLayout() {
         options={{
           title: t('settings'),
           tabBarIcon: ({ color, focused }) => (
-            <AnimatedTabIcon 
-              name="gearshape.fill" 
-              color={color} 
+            <AnimatedTabIcon
+              name="gearshape.fill"
+              color={color}
               focused={focused}
               size={26}
             />
