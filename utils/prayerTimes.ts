@@ -42,11 +42,10 @@ export async function calculatePrayerTimes(
     const officialData = await getOfficialPrayerTimeForDate(city, date);
     
     if (officialData) {
-      console.log('Using official prayer times from Islamic Center of Tajikistan');
       return convertOfficialToPrayerTimes(officialData, city, date);
     }
   } catch (error) {
-    console.warn('Failed to get official prayer times, falling back to calculations:', error);
+    console.warn('Failed to get prayer times from Aladhan API, falling back to calculations:', error);
   }
 
   // Fallback: используем расчеты adhan

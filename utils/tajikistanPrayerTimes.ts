@@ -1,23 +1,25 @@
 import { City, OfficialPrayerTime, PrayerTime } from '../types/prayerTimes';
 
 // Кэш для хранения официальных данных
-const prayerTimesCache = new Map<string, OfficialPrayerTime[]>();
+const prayerTimesCache = new Map<string, OfficialPrayerTime>();
 
-// URL для получения официальных данных (замените на реальный URL)
-const OFFICIAL_API_URL = 'https://api.islamic-center.tj/prayer-times';
+// URL для получения данных от Aladhan API (временное решение)
+const ALADHAN_API = 'https://api.aladhan.com/v1/timingsByCity';
 
-// Флаг для использования примерных данных (установите false для реального API)
-const USE_MOCK_DATA = true;
+// Флаг для использования Aladhan API (установите false для примерных данных)
+const USE_ALADHAN_API = true;
 
 /**
- * Получает официальные времена намаза от Исламского центра Республики Таджикистан
+ * Получает времена намаза от Aladhan API для конкретной даты
  */
-export async function fetchOfficialPrayerTimes(
+export async function fetchPrayerTimesForDate(
   city: City,
-  year: number,
-  month: number
-): Promise<OfficialPrayerTime[]> {
-  const cacheKey = `${city.id}-${year}-${month}`;
+  date: Date
+): Promise<OfficialPrayerTime | null> {
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const cacheKey = `${city.id}-${year}-${month}-${day}`;
   
   // Проверяем кэш
   if (prayerTimesCache.has(cacheKey)) {
@@ -25,9 +27,10 @@ export async function fetchOfficialPrayerTimes(
   }
 
   try {
-    // Здесь должен быть реальный API запрос к Исламскому центру
-    // Пока используем заглушку с примерными данными
-    const response = await fetch(`${OFFICIAL_API_URL}?city=${city.id}&year=${year}&month=${month}`);
+    // Получаем данные от Aladhan API для конкретной даты
+    const response = await fetch(
+      `${ALADHAN_API}?city=${encodeURIComponent(city.name)}&country=${encodeURIComponent(city.country)}&method=4&date=${day.toString().padStart(2, '0')}-${month.toString().padStart(2, '0')}-${year}`
+    );
     
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -35,14 +38,28 @@ export async function fetchOfficialPrayerTimes(
     
     const data = await response.json();
     
-    // Кэшируем данные
-    prayerTimesCache.set(cacheKey, data);
+    if (data.code !== 200 || !data.data) {
+      throw new Error('Invalid response from Aladhan API');
+    }
     
-    return data;
+    // Конвертируем данные Aladhan в наш формат
+    const prayerTime: OfficialPrayerTime = {
+      date: data.data.date.readable,
+      fajr: data.data.timings.Fajr,
+      sunrise: data.data.timings.Sunrise,
+      dhuhr: data.data.timings.Dhuhr,
+      asr: data.data.timings.Asr,
+      maghrib: data.data.timings.Maghrib,
+      isha: data.data.timings.Isha
+    };
+    
+    // Кэшируем данные
+    prayerTimesCache.set(cacheKey, prayerTime);
+    
+    return prayerTime;
   } catch (error) {
-    console.warn('Failed to fetch official prayer times:', error);
-    // Возвращаем пустой массив, чтобы использовать fallback
-    return [];
+    console.warn('Failed to fetch prayer times from Aladhan API:', error);
+    return null;
   }
 }
 
@@ -53,34 +70,22 @@ export async function getOfficialPrayerTimeForDate(
   city: City,
   date: Date
 ): Promise<OfficialPrayerTime | null> {
-  // Если включены примерные данные, используем их
-  if (USE_MOCK_DATA) {
-    // Временные данные для тестирования
-    const mockData: OfficialPrayerTime = {
-      date: date.toISOString().split('T')[0],
-      fajr: '05:45',
-      sunrise: '07:15',
-      dhuhr: '12:15',
-      asr: '15:00',
-      maghrib: '17:30',
-      isha: '19:00'
-    };
-    return Promise.resolve(mockData);
+  // Если включен Aladhan API, используем его
+  if (USE_ALADHAN_API) {
+    return await fetchPrayerTimesForDate(city, date);
   }
 
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-  
-  const monthlyData = await fetchOfficialPrayerTimes(city, year, month);
-  
-  if (monthlyData.length === 0) {
-    return null;
-  }
-  
-  // Ищем данные для конкретной даты
-  const targetDate = date.toISOString().split('T')[0]; // YYYY-MM-DD формат
-  return monthlyData.find(prayer => prayer.date === targetDate) || null;
+  // Fallback на примерные данные
+  const mockData: OfficialPrayerTime = {
+    date: date.toISOString().split('T')[0],
+    fajr: '05:45',
+    sunrise: '07:15',
+    dhuhr: '12:15',
+    asr: '15:00',
+    maghrib: '17:30',
+    isha: '19:00'
+  };
+  return Promise.resolve(mockData);
 }
 
 /**
