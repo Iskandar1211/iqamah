@@ -1,6 +1,6 @@
 import * as Notifications from 'expo-notifications';
 import { Platform } from 'react-native';
-import { PrayerTime } from './prayerTimes';
+import { PrayerTime } from '../types/prayerTimes';
 
 // Проверяем, поддерживаются ли уведомления в текущей среде
 const isNotificationsSupported = () => {

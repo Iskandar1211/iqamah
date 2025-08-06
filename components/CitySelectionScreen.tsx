@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Alert, FlatList, StyleSheet, View } from 'react-native';
 import { Button, List, Searchbar, Text, useTheme } from 'react-native-paper';
 import citiesData from '../data/cities.json';
+import { City } from '../types/prayerTimes';
 import { useTranslation } from '../utils/i18n';
-import { City } from '../utils/prayerTimes';
 import { saveSelectedCity } from '../utils/storage';
 
 interface CitySelectionScreenProps {

@@ -1,21 +1,9 @@
 import { CalculationMethod, Coordinates, PrayerTimes } from 'adhan';
-
-export interface City {
-  id: number;
-  name: string;
-  country: string;
-  latitude: number;
-  longitude: number;
-  timezone: string;
-}
-
-export interface PrayerTime {
-  name: string;
-  time: Date;
-  formattedTime: string;
-  isNext: boolean;
-  timeUntil: string;
-}
+import { 
+  getOfficialPrayerTimeForDate, 
+  convertOfficialToPrayerTimes
+} from './tajikistanPrayerTimes';
+import { City, PrayerTime } from '../types/prayerTimes';
 
 export const PRAYER_NAMES = {
   fajr: 'Фаджр',
@@ -45,7 +33,31 @@ export function getCalculationMethod(method: string): any {
   }
 }
 
-export function calculatePrayerTimes(
+export async function calculatePrayerTimes(
+  city: City,
+  date: Date = new Date()
+): Promise<PrayerTime[]> {
+  // Сначала пытаемся получить официальные данные от Исламского центра
+  try {
+    const officialData = await getOfficialPrayerTimeForDate(city, date);
+    
+    if (officialData) {
+      console.log('Using official prayer times from Islamic Center of Tajikistan');
+      return convertOfficialToPrayerTimes(officialData, city, date);
+    }
+  } catch (error) {
+    console.warn('Failed to get official prayer times, falling back to calculations:', error);
+  }
+
+  // Fallback: используем расчеты adhan
+  console.log('Using adhan calculations as fallback');
+  return calculatePrayerTimesWithAdhan(city, date);
+}
+
+/**
+ * Расчет времени намаза с использованием библиотеки adhan (fallback)
+ */
+function calculatePrayerTimesWithAdhan(
   city: City,
   date: Date = new Date()
 ): PrayerTime[] {

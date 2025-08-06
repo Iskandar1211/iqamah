@@ -1,9 +1,9 @@
+import { PrayerTime } from '@/types/prayerTimes';
+import { useTranslation } from '@/utils/i18n';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Card, useTheme } from 'react-native-paper';
-import { useTranslation } from '@/utils/i18n';
-import { PrayerTime } from '@/utils/prayerTimes';
 
 interface PrayerCardProps {
   prayer: PrayerTime;

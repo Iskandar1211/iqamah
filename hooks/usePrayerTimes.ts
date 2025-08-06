@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { City, PrayerTime } from '../types/prayerTimes';
 import { cancelAllNotifications, schedulePrayerNotifications } from '../utils/notifications';
 import {
-    City,
-    PrayerTime,
     calculatePrayerTimes,
     getTimeUntil,
 } from '../utils/prayerTimes';
@@ -59,11 +58,18 @@ export function usePrayerTimes() {
     }
   };
 
-  const updatePrayerTimes = useCallback(() => {
+  const updatePrayerTimes = useCallback(async () => {
     if (!selectedCity) return;
 
-    const times = calculatePrayerTimes(selectedCity, currentTime);
-    setPrayerTimes(times);
+    let times: PrayerTime[] = [];
+    
+    try {
+      times = await calculatePrayerTimes(selectedCity, currentTime);
+      setPrayerTimes(times);
+    } catch (error) {
+      console.error('Error calculating prayer times:', error);
+      return; // Выходим, если не удалось получить время намаза
+    }
 
     // Проверяем, нужно ли перепланировать уведомления
     const today = new Date().toDateString();

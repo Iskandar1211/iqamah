@@ -1,6 +1,6 @@
 import * as Location from 'expo-location';
 import citiesData from '../data/cities.json';
-import { City } from './prayerTimes';
+import { City } from '../types/prayerTimes';
 
 export async function requestLocationPermission(): Promise<boolean> {
   const { status } = await Location.requestForegroundPermissionsAsync();

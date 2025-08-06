@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { City } from './prayerTimes';
+import { City } from '../types/prayerTimes';
 
 const STORAGE_KEYS = {
   SELECTED_CITY: 'selected_city',
