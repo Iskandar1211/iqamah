@@ -1,24 +1,73 @@
-import React, { useEffect, useState } from 'react';
-import { Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { Card, useTheme } from 'react-native-paper';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useCompass } from '@/hooks/useCompass';
 import { useTranslation } from '@/utils/i18n';
+import { formatDistance, getQiblaDirectionForCity, QiblaDirection } from '@/utils/qibla';
 import { getSelectedCity } from '@/utils/storage';
+import React, { useEffect, useState } from 'react';
+import { Alert, Animated, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Button, Card, useTheme } from 'react-native-paper';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const QiblaScreen: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation();
   const [selectedCity, setSelectedCity] = useState<any>(null);
+  const [qiblaDirection, setQiblaDirection] = useState<QiblaDirection | null>(null);
   const [rotationAnim] = useState(new Animated.Value(0));
+  const [isCompassActive, setIsCompassActive] = useState(false);
+  
+  const { data: compassData, isAvailable, startCompass, stopCompass } = useCompass();
 
   useEffect(() => {
     loadCityData();
-    animateCompass();
   }, []);
 
-  const animateCompass = () => {
+  useEffect(() => {
+    if (selectedCity) {
+      calculateQiblaDirection();
+    }
+  }, [selectedCity]);
+
+  useEffect(() => {
+    if (isCompassActive && qiblaDirection) {
+      // Рассчитываем разность между направлением компаса и направлением киблы
+      const compassHeading = compassData.heading;
+      const qiblaBearing = qiblaDirection.bearing;
+      
+      // Рассчитываем угол поворота для стрелки
+      let rotationAngle = qiblaBearing - compassHeading;
+      
+      // Нормализуем угол к диапазону 0-360
+      rotationAngle = (rotationAngle + 360) % 360;
+      
+      // Анимируем поворот стрелки
+      Animated.timing(rotationAnim, {
+        toValue: rotationAngle,
+        duration: 300,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [compassData.heading, qiblaDirection, isCompassActive]);
+
+  const calculateQiblaDirection = async () => {
+    if (!selectedCity) return;
+    
+    try {
+      const direction = await getQiblaDirectionForCity(selectedCity);
+      setQiblaDirection(direction);
+      
+      if (direction && !isCompassActive) {
+        // Показываем статическое направление
+        animateCompass(direction.bearing);
+      }
+    } catch (error) {
+      console.error('Error calculating qibla direction:', error);
+    }
+  };
+
+  const animateCompass = (bearing: number) => {
+    // Анимация поворота стрелки к правильному направлению
     Animated.timing(rotationAnim, {
-      toValue: 1,
+      toValue: bearing,
       duration: 2000,
       useNativeDriver: true,
     }).start();
@@ -31,6 +80,81 @@ const QiblaScreen: React.FC = () => {
     } catch (error) {
       console.error('Error loading city data:', error);
     }
+  };
+
+  const toggleCompass = () => {
+    if (!isAvailable) {
+      Alert.alert(
+        t('compassNotAvailable'),
+        t('compassNotAvailableDescription'),
+        [{ text: t('ok'), style: 'default' }]
+      );
+      return;
+    }
+
+    if (isCompassActive) {
+      stopCompass();
+      setIsCompassActive(false);
+      // Возвращаемся к статическому отображению
+      if (qiblaDirection) {
+        animateCompass(qiblaDirection.bearing);
+      }
+    } else {
+      startCompass();
+      setIsCompassActive(true);
+    }
+  };
+
+  // Получаем направление для отображения
+  const getDirectionText = () => {
+    if (!qiblaDirection) return t('loading');
+    
+    if (isCompassActive) {
+      // Используем реальное направление компаса
+      const currentDirection = qiblaDirection.bearing - compassData.heading;
+      const normalizedDirection = (currentDirection + 360) % 360;
+      return t(getDirectionFromBearing(normalizedDirection));
+    }
+    
+    return t(qiblaDirection.direction);
+  };
+
+  // Получаем угол для отображения
+  const getAngleText = () => {
+    if (!qiblaDirection) return '';
+    
+    if (isCompassActive) {
+      const currentAngle = qiblaDirection.bearing - compassData.heading;
+      const normalizedAngle = (currentAngle + 360) % 360;
+      return `${Math.round(normalizedAngle)}° ${t('fromNorth')}`;
+    }
+    
+    return `${Math.round(qiblaDirection.bearing)}° ${t('fromNorth')}`;
+  };
+
+  // Получаем расстояние для отображения
+  const getDistanceText = () => {
+    if (!qiblaDirection) return '';
+    return formatDistance(qiblaDirection.distance);
+  };
+
+  // Функция для получения направления из угла
+  const getDirectionFromBearing = (bearing: number): string => {
+    const directions = [
+      'north', // 0°
+      'northeast', // 45°
+      'east', // 90°
+      'southeast', // 135°
+      'south', // 180°
+      'southwest', // 225°
+      'west', // 270°
+      'northwest', // 315°
+    ];
+
+    const normalizedBearing = (bearing + 360) % 360;
+    const sector = Math.round(normalizedBearing / 45) % 8;
+    
+    return directions[sector];
   };
 
   return (
@@ -92,14 +216,23 @@ const QiblaScreen: React.FC = () => {
                     { backgroundColor: theme.colors.primary },
                   ]}
                 >
-                  <View
+                  <Animated.View
                     style={[
                       styles.compassNeedle,
-                      { transform: [{ rotate: `${225}deg` }] },
+                      {
+                        transform: [
+                          {
+                            rotate: rotationAnim.interpolate({
+                              inputRange: [0, 360],
+                              outputRange: ['0deg', '360deg'],
+                            }),
+                          },
+                        ],
+                      },
                     ]}
                   >
                     <Text style={styles.compassArrow}>🕋</Text>
-                  </View>
+                  </Animated.View>
                 </View>
 
                 {/* Direction Markers */}
@@ -182,7 +315,7 @@ const QiblaScreen: React.FC = () => {
               <Text
                 style={[styles.directionText, { color: theme.colors.primary }]}
               >
-                {t('southwest')}
+                {getDirectionText()}
               </Text>
               <Text
                 style={[
@@ -190,8 +323,36 @@ const QiblaScreen: React.FC = () => {
                   { color: theme.colors.onSurfaceVariant },
                 ]}
               >
-                225° {t('fromNorth')}
+                {getAngleText()}
               </Text>
+              {qiblaDirection && (
+                <Text
+                  style={[
+                    styles.distanceText,
+                    { color: theme.colors.onSurfaceVariant },
+                  ]}
+                >
+                  {getDistanceText()} {t('toKaaba')}
+                </Text>
+              )}
+            </View>
+
+            {/* Compass Control Button */}
+            <View style={styles.compassControl}>
+              <Button
+                mode={isCompassActive ? "contained" : "outlined"}
+                onPress={toggleCompass}
+                icon={isCompassActive ? "compass-off" : "compass"}
+                style={styles.compassButton}
+                disabled={!isAvailable}
+              >
+                {isCompassActive ? t('stopCompass') : t('startCompass')}
+              </Button>
+              {!isAvailable && (
+                <Text style={[styles.compassNote, { color: theme.colors.error }]}>
+                  {t('compassNotAvailable')}
+                </Text>
+              )}
             </View>
           </Card.Content>
         </Card>
@@ -462,6 +623,10 @@ const styles = StyleSheet.create({
   angleText: {
     fontSize: 16,
   },
+  distanceText: {
+    fontSize: 14,
+    marginTop: 4,
+  },
   infoCard: {
     margin: 20,
     marginTop: 0,
@@ -553,6 +718,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     fontStyle: 'italic',
+  },
+  compassControl: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  compassButton: {
+    marginBottom: 10,
+  },
+  compassNote: {
+    fontSize: 12,
+    textAlign: 'center',
   },
 });
 

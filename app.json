@@ -35,6 +35,22 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow Iqamah to use your location to provide accurate prayer times and qibla direction.",
+          "locationAlwaysPermission": "Allow Iqamah to use your location in the background for prayer notifications.",
+          "locationWhenInUsePermission": "Allow Iqamah to use your location to provide accurate prayer times and qibla direction.",
+          "isIosBackgroundLocationEnabled": true,
+          "isAndroidBackgroundLocationEnabled": true
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow Iqamah to access motion sensors for accurate qibla direction."
+        }
       ]
     ],
     "experiments": {

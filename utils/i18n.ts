@@ -86,6 +86,7 @@ export interface Translations {
   west: string;
   northwest: string;
   fromNorth: string;
+  toKaaba: string;
   yourLocation: string;
   howToDetermineQibla: string;
   step1Qibla: string;
@@ -93,6 +94,11 @@ export interface Translations {
   step3Qibla: string;
   step4Qibla: string;
   qiblaNote: string;
+  startCompass: string;
+  stopCompass: string;
+  compassNotAvailable: string;
+  compassNotAvailableDescription: string;
+  ok: string;
   
   // Алерты
   methodChanged: string;
@@ -210,6 +216,11 @@ const translations: Record<Language, Translations> = {
     step3Qibla: 'Теперь вы смотрите в сторону Каабы',
     step4Qibla: 'Это направление для совершения намаза',
     qiblaNote: 'Для более точного определения направления используйте компас или GPS',
+    startCompass: 'Включить компас',
+    stopCompass: 'Остановить компас',
+    compassNotAvailable: 'Компас недоступен',
+    compassNotAvailableDescription: 'Ваше устройство не поддерживает компас или датчик недоступен',
+    ok: 'ОК',
   },
   
   tg: {
@@ -295,15 +306,16 @@ const translations: Record<Language, Translations> = {
     // Qibla
     qiblaDirection: 'Роҳи қибла',
     qiblaDescription: 'Роҳи Каъба дар Макка',
-    north: 'Ш',
-    northeast: 'ШШ',
-    east: 'Ш',
-    southeast: 'ҶШ',
-    south: 'Ҷ',
-    southwest: 'ҶҒ',
-    west: 'Ғ',
-    northwest: 'ШҒ',
+    north: 'Шимол',
+    northeast: 'Шимоли шарқ',
+    east: 'Шарқ',
+    southeast: 'Ҷануби шарқ',
+    south: 'Ҷануб',
+    southwest: 'Ҷануби ғарб',
+    west: 'Ғарб',
+    northwest: 'Шимоли ғарб',
     fromNorth: 'аз шимол',
+    toKaaba: 'то Каъба',
     yourLocation: 'Ҷойгиршавии шумо',
     howToDetermineQibla: 'Чӣ тавр роҳи қибларо муайян кардан',
     step1Qibla: 'Ба шимол рӯ ба рӯ бистед',
@@ -311,6 +323,11 @@ const translations: Record<Language, Translations> = {
     step3Qibla: 'Ҳоло шумо ба самти Каъба мебинед',
     step4Qibla: 'Ин роҳ барои адои намоз аст',
     qiblaNote: 'Барои муайян кардани дақиқи роҳ компас ё GPS истифода баред',
+    startCompass: 'Компассро фаъол кунед',
+    stopCompass: 'Компассро қатъ кунед',
+    compassNotAvailable: 'Компас дастрас нест',
+    compassNotAvailableDescription: 'Дастгоҳи шумо компассро дастгирӣ намекунад ё сенсор дастрас нест',
+    ok: 'Хуб',
   },
   
   en: {
@@ -405,6 +422,7 @@ const translations: Record<Language, Translations> = {
     west: 'W',
     northwest: 'NW',
     fromNorth: 'from north',
+    toKaaba: 'to Kaaba',
     yourLocation: 'Your Location',
     howToDetermineQibla: 'How to determine Qibla direction',
     step1Qibla: 'Face north',
@@ -412,6 +430,11 @@ const translations: Record<Language, Translations> = {
     step3Qibla: 'Now you are facing the Kaaba',
     step4Qibla: 'This is the direction for prayer',
     qiblaNote: 'For more accurate direction determination, use a compass or GPS',
+    startCompass: 'Start Compass',
+    stopCompass: 'Stop Compass',
+    compassNotAvailable: 'Compass Not Available',
+    compassNotAvailableDescription: 'Your device does not support compass or sensor is not available',
+    ok: 'OK',
   },
 };
 
